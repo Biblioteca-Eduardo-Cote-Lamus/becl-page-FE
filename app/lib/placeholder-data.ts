@@ -7,6 +7,18 @@ const users = [
     email: 'user@nextmail.com',
     password: '123456',
   },
+  {
+    id: 'a309d698-3e40-4cfd-b8a9-fec4b6a6442a',
+    name: 'Anderson',
+    email: 'andersondavidpc@ufps.edu.co',
+    password: 'admin123',
+  },
+  {
+    id: '',
+    name: 'Ivon',
+    email: 'ivonnorelifb@ufps.edu.co',
+    password: '0810antonella',
+  },
 ];
 
 const customers = [
