@@ -1,0 +1,180 @@
+import { useState } from "react";
+import AcmeLogo from "../becl-logo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown
+} from "@fortawesome/free-solid-svg-icons";
+
+export default function Navbar() {
+  // Estado para manejar los dropdowns de forma independiente
+  type DropdownMenu = 'bibliotecaDigital' | 'servicios' | 'nosotros';
+
+  const [dropdownOpen, setDropdownOpen] = useState<Record<DropdownMenu, boolean>>({
+    bibliotecaDigital: false,
+    servicios: false,
+    nosotros: false,
+  });
+
+  // Función para alternar el dropdown de acuerdo al nombre
+
+  return (
+    <nav className="bg-secondaries_red-900">
+      <div className="container mx-auto flex justify-between items-center h-24">
+        <AcmeLogo/>
+
+        {/* Menú de escritorio */}
+        <div className="hidden md:flex space-x-6">
+          {/* Dropdown "Biblioteca Digital" */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setDropdownOpen({
+                  bibliotecaDigital: !dropdownOpen.bibliotecaDigital,
+                  servicios: false,
+                  nosotros: false,
+                });
+                }}
+              className="text-white hover:text-gray-300 focus:outline-none"
+            >
+              Biblioteca Digital
+              <FontAwesomeIcon icon={faAngleDown} className="ml-1"/>
+            </button>
+
+            {dropdownOpen.bibliotecaDigital && (
+              <div className="absolute right-0 mt-6 w-48 bg-white rounded-md shadow-lg">
+                <a
+                  href="https://catalogobiblioteca.ufps.edu.co/"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Catálogo en Línea
+                </a>
+                <a
+                  href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Bases de Datos
+                </a>
+                <a
+                  href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Biblioteca 3D
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* Dropdown "Servicios" */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setDropdownOpen({
+                  bibliotecaDigital: false,
+                  servicios: !dropdownOpen.servicios,
+                  nosotros: false,
+                });
+                }}
+              className="text-white hover:text-gray-300 focus:outline-none"
+            >
+              Servicios
+              <FontAwesomeIcon icon={faAngleDown} className="ml-1"/>
+            </button>
+
+            {dropdownOpen.servicios && (
+              <div className="absolute right-0 mt-6 w-48 bg-white rounded-md shadow-lg">
+                <a
+                  href="/servicios#digitales"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Servicios Digitales
+                </a>
+                <a
+                  href="/servicios#presenciales"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Servicios Presenciales
+                </a>
+                <a
+                  href="/servicios#especiales"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Servicios Especiales
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Préstamo Interbibliotecario SIES+
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* Dropdown "Nosotros" */}
+          <div className="relative">
+            <button
+              onClick={() => {
+              setDropdownOpen({
+                bibliotecaDigital: false,
+                servicios: false,
+                nosotros: !dropdownOpen.nosotros,
+              });
+              }}
+              className="text-white hover:text-gray-300 focus:outline-none"
+            >
+              Nosotros
+              <FontAwesomeIcon icon={faAngleDown} className="ml-1"/>
+            </button>
+
+            {dropdownOpen.nosotros && (
+              <div className="absolute right-0 mt-6 w-48 bg-white rounded-md shadow-lg">
+                <a
+                  href="/info#historia"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Historia
+                </a>
+                <a
+                  href="/info#mision-vision"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Misión y Visión
+                </a>
+                <a
+                  href="/bio"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Biografía
+                </a>
+                <a
+                  href="/politicas"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Políticas de Calidad
+                </a>
+                <a
+                  href="/equipo"
+                  className="block px-4 py-2 text-black hover:bg-gray-300 rounded-md"
+                >
+                  Talento Humano
+                </a>
+              </div>
+            )}
+          </div>
+
+          <a href="#" className="text-white hover:text-gray-300">Documentos</a>
+          <a href="/calendario" className="text-white hover:text-gray-300">Calendario</a>
+          <a href="/pazysalvo" className="text-white hover:text-gray-300">Paz y Salvo</a>
+        </div>
+
+        {/* Menú móvil (Hamburguer Icon) */}
+        <div className="md:hidden">
+          {/* Implementación del menú móvil opcional */}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
