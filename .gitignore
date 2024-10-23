@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-#data
-placeholder-data.ts
+# data
+/app/lib/placeholder-data.ts

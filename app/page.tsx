@@ -1,61 +1,177 @@
 // import AcmeLogo from "@/app/ui/becl-logo";
-'use client';
+"use client";
 
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import Image from "next/image";
-import { openSans } from "./ui/fonts";
+import { montserrat, openSans } from "./ui/fonts";
 import Footer from "./ui/landing/footer";
 import NavbarMenu from "./ui/landing/navbar";
+import DocumentosImportantes from "./ui/landing/documentos_importantes";
+import Carrusel from "./ui/landing/carrusel_imagenes";
+import Experiencia from "./ui/landing/experiencia";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  RiComputerLine,
+  RiBookLine,
+  RiArrowGoBackLine,
+  RiBookOpenLine,
+} from "react-icons/ri";
 
 export default function Page() {
   return (
     <>
-    <NavbarMenu/>
+      <NavbarMenu />
       <main className="flex min-h-screen flex-col p-6">
-        {/* <div className="flex h-20 shrink-0 items-end rounded-lg bg-secondaries_red-700 p-4 md:h-52">
-          <AcmeLogo />
-        </div> */}
-        <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-          <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-            <p
-              className={`${openSans.className} text-xl text-black md:text-3xl md:leading-normal`}
-            >
-              <strong>Welcome to Acme.</strong> This is the example for the{" "}
-              <a
-                href="https://nextjs.org/learn/"
-                className="text-secondaries_red-700"
+        {/* Sección de novedades */}
+        <section>
+          <h2
+            className={`text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
+          >
+            Novedades
+          </h2>
+          <div>
+            <DocumentosImportantes />
+            <div className="md:pt-9">
+              <Carrusel />
+            </div>
+          </div>
+        </section>
+        {/* Sección de explora */}
+        <section className="flex flex-col items-center md:px-16">
+          <h2
+            className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
+          >
+            Explora
+          </h2>
+          <div className="md:flex flex-row justify-center items-center">
+            <Image
+              width={450}
+              height={377}
+              alt={"Biblioteca digital"}
+              src={
+                "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/bibliotecas-virtuales-removebg.png"
+              }
+            />
+            <div>
+              <h3
+                className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 ${openSans.className}`}
               >
-                Next.js Learn Course
-              </a>
-              , brought to you by Vercel.
-            </p>
-            <Link
-              href="/login"
-              className="flex items-center gap-5 self-start rounded-lg bg-secondaries_red-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-secondaries_red-950 md:text-base"
-            >
-              <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-            </Link>
+                Biblioteca Digital
+              </h3>
+              <p className="text-xl">
+                Ingresa a la biblioteca digital Eduardo Cote Lamus y obtenga
+                información de calidad como base de datos, artículos
+                científicos, libros digitales y demás información de su interés.
+              </p>
+              <button
+                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                type="button"
+                onClick={() =>
+                  window.open(
+                    "https://login.bdbiblioteca.ufps.edu.co/public/menu.htm",
+                    "_blank"
+                  )
+                }
+              >
+                Explorar bibliotecas
+                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+          <div className="md:flex flex-row-reverse justify-center items-center">
             <Image
-              src="/hero-desktop.png"
-              width={1000}
-              height={760}
-              className="hidden md:block"
-              alt="Screenshots of the dashboard project showing desktop version"
-              priority={true}
+              width={450}
+              height={377}
+              alt={"Biblioteca digital"}
+              src={
+                "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/catalogo-en-linea-removebg-preview.png"
+              }
             />
-            <Image
-              src="/hero-mobile.png"
-              width={560 / 2}
-              height={620 / 2}
-              className="md:hidden"
-              alt="Screenshots of the dashboard project showing mobile version"
-              priority={false}
-            />
+            <div>
+              <h3
+                className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 ${openSans.className}`}
+              >
+                Catálogo en línea
+              </h3>
+              <p className="text-xl">
+                Ubique en el catálogo en línea el libro físico de su interés
+                usando nuestro sistema Koha y disfrute en cualquiera de las
+                salas disponibles su lectura
+              </p>
+              <button
+                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                type="button"
+                onClick={() =>
+                  window.open(
+                    "https://catalogobiblioteca.ufps.edu.co/",
+                    "_blank"
+                  )
+                }
+              >
+                Explorar Cátalogo
+                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+              </button>
+            </div>
           </div>
-        </div>
+        </section>
+        {/* Sección de servicios */}
+        <section className="flex flex-col items-center md:px-16">
+          <h2
+            className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
+          >
+            Servicios
+          </h2>
+          <p className="mt-6 text-xl">
+            Accede a los demás servicios que ofrece la{" "}
+            <b>Biblioteca Eduardo Cote Lamus</b>
+          </p>
+          <div className="md:flex md:flex-row my-5 items-start">
+            <div className="pt-4 text-center flex flex-col items-center">
+              <RiComputerLine className="text-6xl text-red" />
+              <h4 className="text-xl font-semibold">Sala de cómputo</h4>
+              <p>
+                Accede a un computador para realizar tus actividades de manera
+                libre.
+              </p>
+            </div>
+            <div className="pt-4 text-center flex flex-col items-center">
+              <RiBookLine className="text-6xl text-red" />
+              <h4 className="text-xl font-semibold">Préstamo de libros</h4>
+              <p>
+                ¿Sabías que puedes realizar el préstamo de un libro a la
+                biblioteca?
+              </p>
+            </div>
+            <div className="pt-4 text-center flex flex-col items-center">
+              <RiArrowGoBackLine className="text-6xl text-red" />
+              <h4 className="text-xl font-semibold">Devolución de libros</h4>
+              <p>
+                Devolver el material bibliográfico en el tiempo estipulado para
+                no generar multas.
+              </p>
+            </div>
+            <div className="pt-4 text-center flex flex-col items-center">
+              <RiBookOpenLine className="text-6xl text-red" />
+              <h4 className="text-xl font-semibold">Salas de lectura</h4>
+              <p>
+                Use las salas de lecturas disponibles para estudiar, leer o
+                realizar sus actividades.
+              </p>
+            </div>
+          </div>
+          <button
+            className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+            type="button"
+            onClick={() => window.open("/servicios", "_blank")}
+          >
+            Ver más
+            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+          </button>
+        </section>
+        {/* Sección de experiencia */}
+        <section className="mt-8 md:mx-28">
+          <Experiencia />
+        </section>
       </main>
       <Footer />
     </>

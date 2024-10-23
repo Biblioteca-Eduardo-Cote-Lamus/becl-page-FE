@@ -16,11 +16,12 @@ import Image from "next/image";
 export default function AcmeLogo() {
   return (
     <Image
-      src="/BIBLIOTECA-EDUARDO-COTE-LAMUS-min.svg"
+      src="/BIBLIOTECA-EDUARDO-COTE-LAMUS-min.png"
       width={270}
       height={125}
       alt="BECL Logo"
       className="justify-self-center self-center"
+      priority
     />
   );
 }

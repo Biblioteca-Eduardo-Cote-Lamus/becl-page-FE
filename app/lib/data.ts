@@ -9,6 +9,26 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+export async function fetchImagenesCarrusel() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/imagenescarrusel`, {
+      headers: {
+        'x-api-key': process.env.API_KEY || '',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch imágenes data.');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error('Failed to fetch imágenes data.');
+  }
+}
+
+
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
