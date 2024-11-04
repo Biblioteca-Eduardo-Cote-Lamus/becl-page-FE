@@ -165,14 +165,14 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <button
+            <button
             className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
             type="button"
-            onClick={() => window.open("/servicios", "_blank")}
-          >
+            onClick={() => window.location.href = "/servicios"}
+            >
             Ver más
             <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-          </button>
+            </button>
         </section>
         {/* Sección de experiencia */}
         <section className="mt-8 md:mx-28">

@@ -32,10 +32,10 @@ export default function Footer() {
           <a className="hover:text-black" href="#">
             Inicio
           </a>
-          <a className="hover:text-black" href="#">
+          <a className="hover:text-black" href="/info">
             Nosotros
           </a>
-          <a className="hover:text-black" href="#">
+          <a className="hover:text-black" href="/servicios">
             Servicios
           </a>
           <a className="hover:text-black" href="#">
