@@ -91,6 +91,25 @@ export async function fetchInfoMisionVision() {
   }
 }
 
+export async function fetchHitos() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hitos`, {
+      headers: {
+        'x-api-key': process.env.API_KEY || '',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch hitos data.');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error('Failed to fetch hitos data.');
+  }
+}
+
 
 export async function fetchRevenue() {
   try {

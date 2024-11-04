@@ -1,4 +1,5 @@
-import MisionVision from "@/app/ui/landing/mision_vision";
+import LineaDelTiempo from "@/app/ui/landing/info/linea_del_tiempo";
+import MisionVision from "@/app/ui/landing/info/mision_vision";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -29,18 +30,25 @@ export default function InfoPage() {
           material bibliográfico, auditorio y un amplio recurso de bases de
           datos digitales.
         </p>
+        {/* Línea del tiempo */}
+        <div>
+          <LineaDelTiempo />
+        </div>
       </section>
 
       {/* Sección de Misión y Visión */}
       <section id="mision-vision" className="mb-12">
         {/* Misión y visión */}
         <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4" id="mision-vision">
+            Misión y Visión
+          </h2>
           <MisionVision />
         </div>
       </section>
 
       {/* Sección de Valores y Objetivos */}
-      <section id="valores-objetivos" className="mb-12">
+      {/* <section id="valores-objetivos" className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Valores y Objetivos</h2>
 
         <ul className="space-y-4">
@@ -74,7 +82,7 @@ export default function InfoPage() {
             </p>
           </li>
         </ul>
-      </section>
+      </section> */}
     </main>
   );
 }
