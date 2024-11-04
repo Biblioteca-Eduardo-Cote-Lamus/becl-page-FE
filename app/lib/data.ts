@@ -9,6 +9,28 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+export async function fetchDocumentosImportancia() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/documentos_importancia`,
+      {
+        headers: {
+          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch documentos data.");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw new Error("Failed to fetch documentos data.");
+  }
+}
+
 export async function fetchImagenesCarrusel() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/imagenescarrusel`, {
@@ -25,6 +47,47 @@ export async function fetchImagenesCarrusel() {
   } catch (error) {
     console.error('API Error:', error);
     throw new Error('Failed to fetch imágenes data.');
+  }
+}
+
+export async function fetchExperiencia() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/experiencia`,
+      {
+        headers: {
+          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch imagens data.");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw new Error("Failed to fetch imagens data.");
+  }
+}
+
+export async function fetchInfoMisionVision() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/infomisionvision`, {
+      headers: {
+        'x-api-key': process.env.API_KEY || '',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch misión y visión data.');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error('Failed to fetch misión y visión data.');
   }
 }
 

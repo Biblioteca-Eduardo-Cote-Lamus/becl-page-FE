@@ -16,6 +16,8 @@ import {
   RiArrowGoBackLine,
   RiBookOpenLine,
 } from "react-icons/ri";
+import { Suspense } from "react";
+import { InvoiceSkeleton } from "./ui/skeletons";
 
 export default function Page() {
   return (
@@ -30,9 +32,13 @@ export default function Page() {
             Novedades
           </h2>
           <div>
-            <DocumentosImportantes />
+            <Suspense fallback={<InvoiceSkeleton />}>
+              <DocumentosImportantes />
+            </Suspense>
             <div className="md:pt-9">
-              <Carrusel />
+              <Suspense>
+                <Carrusel />
+              </Suspense>
             </div>
           </div>
         </section>

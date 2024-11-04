@@ -1,30 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { openSans } from "../fonts";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ImagenSkeleton } from "../skeletons";
+import { fetchExperiencia } from "../../lib/data";
 
-export async function fetchExperiencia() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/experiencia`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch imagens data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch imagens data.");
-  }
-}
+
 
 interface ImagenExp {
   id: string;
@@ -73,12 +55,11 @@ const Experiencia: React.FC = () => {
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </button>
       </div>
-      <Image
-        src={imagen?.imagenQr || ""}
-        alt="QR experiencia"
-        width={550}
-        height={550}
-      />
+      <Suspense fallback={<ImagenSkeleton/>}>
+        {imagen && (
+          <Image width={450} height={450} alt={"QR"} src={imagen.imagenQr} />
+        )}
+      </Suspense>
     </div>
   );
 };
