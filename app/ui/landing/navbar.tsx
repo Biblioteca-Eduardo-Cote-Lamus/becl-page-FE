@@ -17,7 +17,7 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <nav className="bg-secondaries_red-900">
+    <nav className="bg-secondaries_red-900 fixed top-0 w-full z-50">
       <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-24">
         <a href="/" className="max-md:hidden">
           <AcmeLogo />

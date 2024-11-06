@@ -52,7 +52,7 @@ const LineaDelTiempo = () => {
                 height={256}
                 className="w-auto h-56 object-cover rounded-lg"
               />
-              <p className="text-sm text-center sm:text-lg sm:font-bold">
+              <p className="text-sm text-center sm:text-lg sm:font-bold px-1 sm:px-0">
                 {hito.descripcion}
               </p>
             </div>

@@ -1,6 +1,7 @@
 import LineaDelTiempo from "@/app/ui/landing/info/linea_del_tiempo";
 import MisionVision from "@/app/ui/landing/info/mision_vision";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Información",
@@ -15,7 +16,7 @@ export default function InfoPage() {
 
       {/* Sección de Historia */}
       <section id="historia" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-4xl font-semibold mb-4">
           Historia de la Biblioteca
         </h2>
         <p className="text-gray-700">
@@ -32,7 +33,24 @@ export default function InfoPage() {
         </p>
         {/* Línea del tiempo */}
         <div>
+          <h3 className="text-2xl text-center font-semibold my-4">
+            Línea de tiempo Biblioteca
+          </h3>
           <LineaDelTiempo />
+        </div>
+        {/* Línea de tiempo directores */}
+        <div className="flex flex-col items-center">
+          <h3 className="text-2xl text-center font-semibold my-4">
+            Línea de tiempo directores
+          </h3>
+          <Image
+            width={856}
+            height={642}
+            alt={"Línea de tiempo directores"}
+            src={
+              "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/Grafico-de-Linea-de-Tiempo-con-Fechas-y-Etapas-Multicolor-1.jpg"
+            }
+          />
         </div>
       </section>
 
@@ -46,43 +64,6 @@ export default function InfoPage() {
           <MisionVision />
         </div>
       </section>
-
-      {/* Sección de Valores y Objetivos */}
-      {/* <section id="valores-objetivos" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Valores y Objetivos</h2>
-
-        <ul className="space-y-4">
-          <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">
-              Compromiso con la Educación
-            </h3>
-            <p className="text-gray-700">
-              Fomentar un entorno de aprendizaje dinámico y accesible para todos
-              los usuarios, asegurando la disponibilidad de recursos
-              actualizados y pertinentes.
-            </p>
-          </li>
-
-          <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">Innovación Tecnológica</h3>
-            <p className="text-gray-700">
-              Incorporar tecnologías emergentes para mejorar la experiencia del
-              usuario y facilitar el acceso a recursos digitales de calidad.
-            </p>
-          </li>
-
-          <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">
-              Inclusión y Accesibilidad
-            </h3>
-            <p className="text-gray-700">
-              Asegurar que la biblioteca sea un espacio inclusivo y accesible
-              para todos los usuarios, sin importar su condición socioeconómica
-              o capacidad.
-            </p>
-          </li>
-        </ul>
-      </section> */}
     </main>
   );
 }

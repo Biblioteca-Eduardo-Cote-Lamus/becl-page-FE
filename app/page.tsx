@@ -22,10 +22,10 @@ import { InvoiceSkeleton } from "./ui/skeletons";
 export default function Page() {
   return (
     <>
-      <NavbarMenu />
+      <NavbarMenu/>
       <main className="flex min-h-screen flex-col p-6">
         {/* Sección de novedades */}
-        <section>
+        <section className="mt-32">
           <h2
             className={`text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >

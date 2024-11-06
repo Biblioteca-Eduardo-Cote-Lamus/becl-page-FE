@@ -13,7 +13,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${openSans.className} antialiased`}>
         <NavbarMenu />
-        {children}
+        <div className="mt-32">{children}</div>
         <Footer />
       </body>
     </html>
