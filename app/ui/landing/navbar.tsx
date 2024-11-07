@@ -1,7 +1,11 @@
 import { useState } from "react";
 import AcmeLogo from "../becl-logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleUp,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   // Estado para manejar los dropdowns de forma independiente
@@ -209,87 +213,104 @@ export default function Navbar() {
               className="block py-2 px-4 text-white focus:outline-none"
             >
               Biblioteca Digital
-              <FontAwesomeIcon icon={dropdownOpen.bibliotecaDigital ? faAngleUp : faAngleDown} className="ml-1" />
+              <FontAwesomeIcon
+                icon={dropdownOpen.bibliotecaDigital ? faAngleUp : faAngleDown}
+                className="ml-1"
+              />
             </button>
-            {dropdownOpen.bibliotecaDigital && (
-              <div className="text-center">
-                <a
-                  href="https://catalogobiblioteca.ufps.edu.co/"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Catálogo en Línea
-                </a>
-                <a
-                  href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Bases de Datos
-                </a>
-                <a
-                  href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Biblioteca 3D
-                </a>
-              </div>
-            )}
+            <div
+              className={`transition-all duration-1000 ease-in-out ${
+                dropdownOpen.bibliotecaDigital
+                  ? "max-h-screen"
+                  : "max-h-0 overflow-hidden"
+              }`}
+            >
+              {dropdownOpen.bibliotecaDigital && (
+                <div className="text-center">
+                  <a
+                    href="https://catalogobiblioteca.ufps.edu.co/"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Catálogo en Línea
+                  </a>
+                  <a
+                    href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Bases de Datos
+                  </a>
+                  <a
+                    href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Biblioteca 3D
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
-          {/* Dropdown "Biblioteca Digital" en móvil */}
-          <div className="relative flex flex-col">
+          {/* Dropdown "Servicios" en móvil */}
+          <div className="relative">
             <button
               onClick={() =>
-              setDropdownOpen({
-                ...dropdownOpen,
-                servicios: !dropdownOpen.servicios,
-              })
+                setDropdownOpen({
+                  ...dropdownOpen,
+                  servicios: !dropdownOpen.servicios,
+                })
               }
-              className="flex py-2 px-4 text-white focus:outline-none"
+              className="block py-2 px-4 text-white focus:outline-none"
             >
               Servicios
               <FontAwesomeIcon
-              icon={dropdownOpen.servicios ? faAngleUp : faAngleDown}
-              className="ml-1"
+                icon={dropdownOpen.servicios ? faAngleUp : faAngleDown}
+                className="ml-1"
               />
             </button>
-            {dropdownOpen.servicios && (
-              <div className="text-center">
-                <a
-                  href="servicios#digitales"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Servicios Digitales
-                </a>
-                <a
-                  href="servicios#presenciales"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Servicios Presenciales
-                </a>
-                <a
-                  href="servicios#especiales"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Servicios Especiales
-                </a>
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Prestamo Interbibliotecario SIES+
-                </a>
-              </div>
-            )}
+            <div
+              className={`transition-all duration-1000 ease-in-out ${
+                dropdownOpen.servicios
+                  ? "max-h-screen"
+                  : "max-h-0 overflow-hidden"
+              }`}
+            >
+              {dropdownOpen.servicios && (
+                <div className="text-center">
+                  <a
+                    href="/servicios#digitales"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Servicios Digitales
+                  </a>
+                  <a
+                    href="/servicios#presenciales"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Servicios Presenciales
+                  </a>
+                  <a
+                    href="/servicios#especiales"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Servicos Especiales
+                  </a>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Prestamo Interbibliotecario SIES+
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
           {/* Dropdown "Nosotros" en móvil */}
-          <div className="relative flex flex-col">
+          <div className="relative">
             <button
               onClick={() =>
                 setDropdownOpen({
@@ -300,42 +321,47 @@ export default function Navbar() {
               className="block py-2 px-4 text-white focus:outline-none"
             >
               Nosotros
-              <FontAwesomeIcon icon={dropdownOpen.nosotros ? faAngleUp : faAngleDown} className="ml-1" />
+              <FontAwesomeIcon
+                icon={dropdownOpen.nosotros ? faAngleUp : faAngleDown}
+                className="ml-1"
+              />
             </button>
-            {dropdownOpen.nosotros && (
-              <div className="text-center">
-                <a
-                  href="/info#historia"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Historia
-                </a>
-                <a
-                  href="/info#mision-vision"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Misión y Visión
-                </a>
-                <a
-                  href="/bio"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Biografía
-                </a>
-                <a
-                  href="/politicas"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Políticas de Calidad
-                </a>
-                <a
-                  href="/equipo"
-                  className="block py-2 px-4 text-white hover:bg-gray-300"
-                >
-                  Talento Humano
-                </a>
-              </div>
-            )}
+            <div
+              className={`transition-all duration-1000 ease-in-out ${
+                dropdownOpen.nosotros
+                  ? "max-h-screen"
+                  : "max-h-0 overflow-hidden"
+              }`}
+            >
+              {dropdownOpen.nosotros && (
+                <div className="text-center">
+                  <a
+                    href="/info#historia"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Historia
+                  </a>
+                  <a
+                    href="/info#mision-vision"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Misión y Visión
+                  </a>
+                  <a
+                    href="/bio"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Biografía
+                  </a>
+                  <a
+                    href="/politicas"
+                    className="block py-2 px-4 text-white hover:bg-gray-300"
+                  >
+                    Políticas de Calidad
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
           <a href="/#documentos" className="block py-2 px-4 text-white">
             Documentos

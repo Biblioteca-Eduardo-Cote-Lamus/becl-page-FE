@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { montserrat } from "@/app/ui/fonts";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -8,12 +9,14 @@ export const metadata: Metadata = {
 export default function BioPage() {
   return (
     <main>
-      <section className="bg-secondaries_red-900 mx-2 rounded-lg p-8 flex flex-col items-center sm:flex-row">
-        <div className="text-white">
-          <p>Eduardo Cote Lamus</p>
-          <p>
-            ¡Conoce sobre la vida y obra del reconocido escritor Eduardo Cote
-            Lamus!
+      <section className="bg-secondaries_red-900 mx-2 rounded-lg p-8 flex flex-col md:justify-evenly items-center sm:flex-row">
+        <div className="text-white md:pr-11 md:w-1/2">
+            <p className={`${montserrat.className} md:mb-4`}>
+              <b>Eduardo Cote Lamus</b>
+            </p>
+          <p className="text-4xl md:mb-8">
+            <b>¡Conoce sobre la vida y obra del reconocido escritor Eduardo Cote
+            Lamus!</b>
           </p>
           <p>
             Conoce de su biografía, obras más importantes y poemas destacados
