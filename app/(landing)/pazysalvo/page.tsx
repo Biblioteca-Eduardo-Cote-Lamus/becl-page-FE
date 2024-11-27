@@ -42,7 +42,7 @@ export default function PazYSalvoPage() {
         </h2>
         <ul className="space-y-4">
           <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">
+            <h3 className="text-xl font-bold mb-2">
               Aprobación del Director de Plan de Estudios
             </h3>
             <p className="text-black">
@@ -62,7 +62,7 @@ export default function PazYSalvoPage() {
           </li>
 
           <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">
+            <h3 className="text-xl font-bold mb-2">
               Estructura en normas APA
             </h3>
             <p className="text-black">
@@ -88,7 +88,7 @@ export default function PazYSalvoPage() {
           </li>
 
           <li className="bg-white shadow-md rounded-md p-4">
-            <h3 className="text-xl font-medium mb-2">
+            <h3 className="text-xl font-bold mb-2">
               Aprobación de Derechos de Reproducción
             </h3>
             <p className="text-black">

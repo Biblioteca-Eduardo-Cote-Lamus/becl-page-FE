@@ -7,6 +7,8 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
+
+
 export default function Navbar() {
   // Estado para manejar los dropdowns de forma independiente
   type DropdownMenu = "bibliotecaDigital" | "servicios" | "nosotros";
