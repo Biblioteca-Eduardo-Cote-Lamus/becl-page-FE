@@ -37,8 +37,9 @@ export default function BioPage() {
       {/* Sección Biografía Eduardo Cote LAmus */}
       <section className="bg-gray-100 min-h-screen p-4 flex items-center justify-center">
         <div className="w-full md:w-4/5 lg:w-2/3 mx-auto bg-white p-4 md:p-6 lg:p-8 shadow-lg">
-          <div className="flex flex-col lg:flex-row lg:gap-8">
-            <div className="lg:w-2/3">
+          <div className="flex flex-col lg:flex-row lg:gap-8 justify-around">
+            {/* Contenido de texto */}
+            <div className="mb-6 lg:mb-0 lg:w-1/2 lg:flex lg:flex-col lg:justify-center ">
               <div className="flex flex-row items-center gap-2">
                 <span className="text-secondaries_red-900">
                   <hr className="w-10 border-secondaries_red-900" />
@@ -47,10 +48,10 @@ export default function BioPage() {
                   <b>Biografía</b>
                 </p>
               </div>
-              <h3 className="text-secondaries_red-900 text-xl md:text-2xl">
+              <h3 className="text-secondaries_red-900 text-xl md:text-2xl mb-4">
                 <b>Eduardo Cote Lamus</b>
               </h3>
-              <p className="text-sm md:text-base mb-4 lg:mb-0">
+              <p className="text-sm md:text-base">
                 Poeta y político colombiano. Nació el 16 de agosto de 1928 en
                 Cúcuta (Norte de Santander) y murió en accidente automovilístico
                 el 3 de agosto de 1964, en la misma ciudad. Realizó sus estudios
@@ -65,7 +66,9 @@ export default function BioPage() {
                 historia del hombre.
               </p>
             </div>
-            <div className="lg:w-1/3">
+
+            {/* Imagen */}
+            <div className=" lg:flex lg:flex-col lg:justify-center lg:w-1/2">
               <Image
                 width={384}
                 height={495}
@@ -79,7 +82,7 @@ export default function BioPage() {
           </div>
         </div>
       </section>
-      <section>
+      <section className="pb-10">
         <div>
           <div className="text-center py-10">
             <h4 className="text-3xl py-2">

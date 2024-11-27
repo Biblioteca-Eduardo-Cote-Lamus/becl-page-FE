@@ -30,7 +30,7 @@ export default function Navbar() {
         </a>
 
         {/* Menú de escritorio */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 pr-4">
           {/* Dropdown "Biblioteca Digital" */}
           <div className="relative">
             <button

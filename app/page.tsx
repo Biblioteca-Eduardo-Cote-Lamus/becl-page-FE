@@ -124,9 +124,12 @@ export default function Page() {
               </button>
             </div>
           </div>
+          
         </section>
+        <hr className="bg-secondaries_red-700 mt-10"  />
         {/* Sección de servicios */}
         <section className="flex flex-col items-center md:px-16">
+          
           <h2
             className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >

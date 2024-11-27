@@ -113,7 +113,7 @@ export type Eventos = {
   lugar: Lugar;
   fecha: string;
   hora: string;
-  enlace_facebook: string;
-  enlace_youtube: string;
-  enlace_google_meet: string;
+  enlaceFacebook: string;  
+  enlaceYoutube: string;
+  enlaceGoogleMeet: string;
 }
