@@ -1,4 +1,3 @@
-// import AcmeLogo from "@/app/ui/becl-logo";
 "use client";
 
 import { montserrat, openSans } from "./ui/fonts";
@@ -18,19 +17,25 @@ import {
 } from "react-icons/ri";
 import { Suspense } from "react";
 import { InvoiceSkeleton } from "./ui/skeletons";
+import AlertaNoticia from "./ui/landing/alerta_noticia";
+import EventosComponent from "./ui/landing/eventos";
 
 export default function Page() {
   return (
     <>
-      <NavbarMenu/>
+      <NavbarMenu />
       <main className="flex min-h-screen flex-col p-6">
+        {/* Alerta de noticia importante */}
+        <AlertaNoticia />
         {/* Sección de novedades */}
         <section className="mt-32">
           <h2
-            className={`text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
+            className={`pb-10 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >
             Novedades
           </h2>
+          {/* Componente de eventos */}
+          <EventosComponent />
           <div>
             <Suspense fallback={<InvoiceSkeleton />}>
               <DocumentosImportantes />
@@ -165,14 +170,14 @@ export default function Page() {
               </p>
             </div>
           </div>
-            <button
+          <button
             className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
             type="button"
-            onClick={() => window.location.href = "/servicios"}
-            >
+            onClick={() => (window.location.href = "/servicios")}
+          >
             Ver más
             <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-            </button>
+          </button>
         </section>
         {/* Sección de experiencia */}
         <section className="mt-8 md:mx-28">

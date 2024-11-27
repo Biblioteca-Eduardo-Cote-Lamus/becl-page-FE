@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
+    return user.rows[0]; // Return the first user found
   } catch (error) {
     console.error("Failed to fetch user:", error);
     throw new Error("Failed to fetch user.");

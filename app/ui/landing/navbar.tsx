@@ -197,7 +197,7 @@ export default function Navbar() {
       </div>
       {/* Menú móvil desplegable */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-secondaries_red-900 flex flex-col items-center">
+        <div className="md:hidden bg-secondaries_red-900 flex flex-col items-center h-auto">
           <a href="/" className="block py-2 px-4 text-white">
             Inicio
           </a>
