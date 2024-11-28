@@ -11,8 +11,15 @@ import { formatCurrency } from "./utils";
 
 export async function fetchEventos() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos`, {
-      headers: {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/eventos`, {
+        next: {
+          // Revalidar cada 5 minutos
+          revalidate: 300,
+          // O usar tags para invalidación manual
+          tags: ['eventos']
+        },
+        headers: {
         "x-api-key": process.env.API_KEY || "",
         "Content-Type": "application/json",
       },
@@ -26,7 +33,7 @@ export async function fetchEventos() {
     console.error("API Error:", error);
     throw new Error("Failed to fetch eventos data.");
   }
-}
+};
 
 export async function fetchNoticias() {
   try {

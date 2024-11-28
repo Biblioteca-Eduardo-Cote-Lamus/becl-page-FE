@@ -4,7 +4,13 @@ const nextConfig = {
     ppr: "incremental",
   },
   images: {
-    domains: ['biblioteca.ufps.edu.co'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'biblioteca.ufps.edu.co',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

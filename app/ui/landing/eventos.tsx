@@ -115,10 +115,23 @@ const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
 };
 
 import { fetchEventos } from "@/app/lib/data";
-
 const EventosComponent = async () => {
-  const eventos = await fetchEventos();
-  return <EventosList eventos={eventos} />;
+  try {
+    const eventos = await fetchEventos();
+    
+    if (!eventos || eventos.length === 0) {
+      return <div className="text-center p-4">No hay eventos disponibles.</div>;
+    }
+    
+    return <EventosList eventos={eventos} />;
+  } catch (error) {
+    console.error("Error rendering EventosComponent:", error);
+    return (
+      <div className="text-center p-4 text-red-600">
+        Error al cargar los eventos. Por favor, intenta más tarde.
+      </div>
+    );
+  }
 };
 
 export default EventosComponent;
