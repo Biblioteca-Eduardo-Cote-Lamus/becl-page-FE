@@ -8,13 +8,15 @@ export const metadata: Metadata = {
   title: 'Edit Invoice',
 };
 
-interface PageProps {
+// Definir la interfaz correctamente para las props de la página
+type Props = {
   params: {
     id: string;
   };
-}
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: Props) {
   const id = params.id;
   const [invoice, customers] = await Promise.all([
     fetchInvoiceById(id),
