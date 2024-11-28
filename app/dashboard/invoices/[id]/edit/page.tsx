@@ -4,17 +4,18 @@ import { fetchInvoiceById, fetchCustomers } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Invoice, Customer } from '@/app/lib/definitions'; 
+import { PageProps } from "@/.next/types/app/page";
 
 export const metadata: Metadata = {
   title: "Edit Invoice",
 };
 
 // Definir la interfaz correctamente para las props de la página
-type Props = {
+
+type Props = PageProps & {
   params: {
     id: string;
   };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default async function Page({ params }: Props) {
