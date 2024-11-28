@@ -188,7 +188,7 @@ export default function Page() {
         </section>
       </main>
       <Footer />
-      <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> 
+      {/* <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>  */}
     </>
   );
 }

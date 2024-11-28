@@ -15,7 +15,7 @@ export default function RootLayout({
         <NavbarMenu />
         <div className="mt-32">{children}</div>
         <Footer />
-        {/* <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> */}
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
       </body>
     </html>
   );
