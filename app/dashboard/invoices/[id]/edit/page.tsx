@@ -2,10 +2,11 @@ import Form from "@/app/ui/invoices/edit-form";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import { fetchInvoiceById, fetchCustomers } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-import { Metadata } from 'next';
+import { Metadata } from "next";
+import { Invoice, Customer } from '@/app/lib/definitions'; 
 
 export const metadata: Metadata = {
-  title: 'Edit Invoice',
+  title: "Edit Invoice",
 };
 
 // Definir la interfaz correctamente para las props de la página
@@ -18,10 +19,10 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const id = params.id;
-  const [invoice, customers] = await Promise.all([
+  const [invoice, customers] = (await Promise.all([
     fetchInvoiceById(id),
     fetchCustomers(),
-  ]);
+  ])) as [Invoice | undefined, Customer[]];
 
   if (!invoice) {
     notFound();
