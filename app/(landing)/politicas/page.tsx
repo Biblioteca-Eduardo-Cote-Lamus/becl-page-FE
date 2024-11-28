@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import {
-  faArrowRight,
   faArrowsRotate,
   faDesktop,
   faPassport,
