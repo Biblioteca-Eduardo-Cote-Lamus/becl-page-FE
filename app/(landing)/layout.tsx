@@ -10,8 +10,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <body className={`${openSans.className} antialiased`} suppressHydrationWarning>
+    <html lang="es">
+      <body className={`${openSans.className} antialiased`}>
         <NavbarMenu />
         <div className="mt-32">{children}</div>
         <Footer />
