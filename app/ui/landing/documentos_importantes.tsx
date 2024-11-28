@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { openSans } from "../fonts";
+// import { openSans } from "../fonts";
 import { fetchDocumentosImportancia } from "@/app/lib/data";
 // import clsx from 'clsx';
 
@@ -21,7 +21,7 @@ const DocumentosImportantes = () => {
   return (
     <div className="mt-4 flex w-full flex-col md:col-span-4" id="documentos">
       <h2
-        className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 italic ${openSans.className}`}
+        className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 italic`}
       >
         Documentos de importancia
       </h2>

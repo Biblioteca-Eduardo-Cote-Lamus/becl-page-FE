@@ -18,7 +18,7 @@ import {
 import { Suspense } from "react";
 import { InvoiceSkeleton } from "./ui/skeletons";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
-import EventosComponent from "./ui/landing/eventos";
+// import EventosComponent from "./ui/landing/eventos";
 
 export default function Page() {
   return (
@@ -35,7 +35,7 @@ export default function Page() {
             Novedades
           </h2>
           {/* Componente de eventos */}
-          <EventosComponent />
+          {/* <EventosComponent /> */}
           <div>
             <Suspense fallback={<InvoiceSkeleton />}>
               <DocumentosImportantes />
@@ -188,7 +188,7 @@ export default function Page() {
         </section>
       </main>
       <Footer />
-      {/* <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>  */}
+      <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> 
     </>
   );
 }
