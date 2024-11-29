@@ -54,8 +54,9 @@ export default function Page() {
           >
             Explora
           </h2>
-          <div className="md:flex flex-row justify-center items-center">
+          <div className="md:flex flex-row justify-center items-center ">
             <Image
+              className="transform transition-transform hover:-translate-x-2"
               width={450}
               height={377}
               alt={"Biblioteca digital"}
@@ -75,7 +76,7 @@ export default function Page() {
                 científicos, libros digitales y demás información de su interés.
               </p>
               <button
-                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                 type="button"
                 onClick={() =>
                   window.open(
@@ -89,8 +90,9 @@ export default function Page() {
               </button>
             </div>
           </div>
-          <div className="md:flex flex-row-reverse justify-center items-center">
+          <div className="md:flex flex-row-reverse justify-center items-center ">
             <Image
+              className="transform transition-transform hover:translate-x-2"
               width={450}
               height={377}
               alt={"Biblioteca digital"}
@@ -110,7 +112,7 @@ export default function Page() {
                 salas disponibles su lectura
               </p>
               <button
-                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                 type="button"
                 onClick={() =>
                   window.open(
@@ -124,12 +126,10 @@ export default function Page() {
               </button>
             </div>
           </div>
-          
         </section>
-        <hr className="bg-secondaries_red-700 mt-10"  />
+        <hr className="bg-secondaries_red-700 mt-10" />
         {/* Sección de servicios */}
         <section className="flex flex-col items-center md:px-16">
-          
           <h2
             className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >
@@ -174,7 +174,7 @@ export default function Page() {
             </div>
           </div>
           <button
-            className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+            className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
             type="button"
             onClick={() => (window.location.href = "/servicios")}
           >
@@ -188,7 +188,10 @@ export default function Page() {
         </section>
       </main>
       <Footer />
-      <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> 
+      <script
+        src="https://website-widgets.pages.dev/dist/sienna.min.js"
+        defer
+      ></script>
     </>
   );
 }

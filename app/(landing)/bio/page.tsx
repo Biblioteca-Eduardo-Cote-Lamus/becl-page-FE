@@ -72,7 +72,7 @@ export default function BioPage() {
               <Image
                 width={384}
                 height={495}
-                className="w-full object-cover"
+                className="w-full object-cover transform transition-transform hover:-translate-y-2"
                 alt="Eduardo Cote Lamus"
                 src={
                   "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/eduardo_cote_lamus-001-1.jpg"
@@ -182,7 +182,7 @@ export default function BioPage() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 w-full max-w-6xl mx-auto px-4">
-            <div className="bg-white p-4 md:p-6 shadow-lg flex-1">
+            <div className="bg-white p-4 md:p-6 shadow-lg flex-1 transform transition-transform hover:-translate-y-2">
               <Image
                 width={300}
                 height={422}
@@ -196,7 +196,7 @@ export default function BioPage() {
                 <h2 className="py-3">LA VIDA COTIDIANA</h2>
               </b>
             </div>
-            <div className="bg-white p-4 md:p-6 shadow-lg flex-1">
+            <div className="bg-white p-4 md:p-6 shadow-lg flex-1 transform transition-transform hover:-translate-y-2">
               <Image
                 width={300}
                 height={422}
@@ -210,7 +210,7 @@ export default function BioPage() {
                 <h2 className="py-3">LOS SUEÑOS</h2>
               </b>
             </div>
-            <div className="bg-white p-4 md:p-6 shadow-lg flex-1">
+            <div className="bg-white p-4 md:p-6 shadow-lg flex-1 transform transition-transform hover:-translate-y-2">
               <Image
                 width={300}
                 height={422}

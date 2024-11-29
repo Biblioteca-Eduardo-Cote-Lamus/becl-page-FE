@@ -22,7 +22,7 @@ export default function PoliticasPage() {
       <section className="flex flex-col md:flex-row md:justify-evenly items-center text-left bg-secondaries_red-900">
         <div className="text-white md:pr-11 md:w-1/2">
           <p
-            className={`${montserrat.className} md:mb-4 text-white font-extrabold`}
+            className={`${montserrat.className} md:mb-4 text-white font-extrabold   `}
           >
             #BibliotecaEduardoCoteLamus
           </p>
@@ -75,7 +75,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faArrowsRotate}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Renovar y actualizar permanentemente los recursos bibliográficos y
@@ -86,7 +86,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faDesktop}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Posibilitar el acceso a los recursos que presta la Biblioteca
@@ -97,7 +97,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faUserCheck}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Aumentar la satisfacción de los usuarios internos y externos,
@@ -110,7 +110,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faPeopleArrows}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Establecer y mantener estrategias y medios de comunicación efectivas
@@ -121,7 +121,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faPencilRuler}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Ofertar permanentemente programas de capacitación que posibiliten
@@ -133,7 +133,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faPassport}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Participar activamente en programas y redes de cooperación
@@ -149,7 +149,7 @@ export default function PoliticasPage() {
           <FontAwesomeIcon
             icon={faServer}
             style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
-            className="mb-6"
+            className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
             Renovar y actualizar permanentemente los recursos bibliográficos y

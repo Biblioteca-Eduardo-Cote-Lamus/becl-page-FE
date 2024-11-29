@@ -57,9 +57,9 @@ export default function InfoPage() {
       {/* Sección de Misión y Visión */}
       <section id="mision-vision" className="mb-12">
         {/* Misión y visión */}
-        <div className="mb-8">
+        <div className="mb-8 ">
           <h2 className="text-2xl font-semibold mb-4" id="mision-vision">
-            Misión y Visión
+            Misión y Visión de la BECL
           </h2>
           <MisionVision />
         </div>

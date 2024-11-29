@@ -44,6 +44,7 @@ export default function ServiciosPage() {
         <div className="flex flex-col-reverse items-center">
           <div className="md:flex flex-row justify-center items-center">
             <Image
+              className="transform transition-transform hover:-translate-x-2"
               width={450}
               height={377}
               alt={"Biblioteca digital"}
@@ -64,7 +65,7 @@ export default function ServiciosPage() {
               </p>
               <div className="flex justify-around">
                 <button
-                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                   type="button"
                   onClick={() =>
                     window.open(
@@ -77,7 +78,7 @@ export default function ServiciosPage() {
                   <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
                 </button>
                 <button
-                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                   type="button"
                   onClick={() =>
                     window.open(
@@ -94,6 +95,7 @@ export default function ServiciosPage() {
           </div>
           <div className="md:flex flex-row-reverse justify-center items-center">
             <Image
+              className="transform transition-transform hover:translate-x-2"
               width={450}
               height={377}
               alt={"Biblioteca digital"}
@@ -115,7 +117,7 @@ export default function ServiciosPage() {
               </p>
               <div className="flex justify-around">
                 <button
-                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                   type="button"
                   onClick={() =>
                     window.open(
@@ -128,7 +130,7 @@ export default function ServiciosPage() {
                   <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
                 </button>
                 <button
-                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center"
+                  className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
                   type="button"
                   onClick={() =>
                     window.open(
@@ -155,7 +157,7 @@ export default function ServiciosPage() {
           Servicios Presenciales
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
-          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4">
+          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
             <RiComputerLine className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Sala de cómputo
@@ -166,7 +168,7 @@ export default function ServiciosPage() {
               indicará que computador podrá usar.
             </p>
           </div>
-          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4">
+          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
             <RiBookLine className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo de material bibliográfico
@@ -178,7 +180,7 @@ export default function ServiciosPage() {
               indicado.
             </p>
           </div>
-          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4">
+          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
             <RiArrowGoBackLine className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Devolución de material bibliográfico
@@ -196,7 +198,7 @@ export default function ServiciosPage() {
               </a>
             </p>
           </div>
-          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4">
+          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
             <RiBookOpenLine className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Salas de lectura
@@ -207,7 +209,7 @@ export default function ServiciosPage() {
               libre en una de las 14 salas de lectura disponibles.
             </p>
           </div>
-          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4">
+          <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
             <RiNewspaperLine className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">Hemeroteca</h4>
             <p className="md:text-left">
@@ -266,7 +268,7 @@ export default function ServiciosPage() {
               Biblioteca.
             </p>
           </div>
-            <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
+          <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
             <RiDatabase2Line className="text-6xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Capacitaciones de Bases de Datos
@@ -274,17 +276,17 @@ export default function ServiciosPage() {
             <p className="">
               Solicita a través del correo{" "}
               <a
-              href="mailto:biblioteca@ufps.edu.co?subject=Capacitaciones%20de%20Bases%20de%20Datos"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline text-red"
+                href="mailto:biblioteca@ufps.edu.co?subject=Capacitaciones%20de%20Bases%20de%20Datos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-red"
               >
-              biblioteca@ufps.edu.co
+                biblioteca@ufps.edu.co
               </a>{" "}
               una capacitación en las bibliotecas digitales de convenio con la
               biblioteca.
             </p>
-            </div>
+          </div>
         </div>
       </section>
     </main>

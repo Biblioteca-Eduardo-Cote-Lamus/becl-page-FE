@@ -43,14 +43,14 @@ const LineaDelTiempo = () => {
           </div>
 
           {/* Contenido del hito */}
-          <div className="pr-4 w-5/12">
+          <div className="pr-4 w-5/12 transform transition-transform hover:-translate-y-2">
             <div className="bg-gray-200 shadow-md rounded-lg md:p-6 flex flex-col items-center">
               <Image
                 src={hito.imagen}
                 alt={hito.anio}
                 width={500}
                 height={256}
-                className="w-auto h-56 object-cover rounded-lg"
+                className="w-auto h-56 object-cover rounded-lg "
               />
               <p className="text-sm text-center sm:text-lg sm:font-bold px-1 sm:px-0">
                 {hito.descripcion}

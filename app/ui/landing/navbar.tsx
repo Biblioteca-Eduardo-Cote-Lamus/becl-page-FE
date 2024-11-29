@@ -11,7 +11,9 @@ import {
 export default function Navbar() {
   type DropdownMenu = "bibliotecaDigital" | "servicios" | "nosotros";
 
-  const [dropdownOpen, setDropdownOpen] = useState<Record<DropdownMenu, boolean>>({
+  const [dropdownOpen, setDropdownOpen] = useState<
+    Record<DropdownMenu, boolean>
+  >({
     bibliotecaDigital: false,
     servicios: false,
     nosotros: false,
@@ -24,12 +26,12 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMobileDropdown = (menu: DropdownMenu) => {
-    setDropdownOpen(prev => ({
+    setDropdownOpen((prev) => ({
       bibliotecaDigital: false,
       servicios: false,
       nosotros: false,
@@ -38,12 +40,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-secondaries_red-900/95 shadow-lg' : 'bg-secondaries_red-900'
-    }`}>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-secondaries_red-900/95 shadow-lg"
+          : "bg-secondaries_red-900"
+      }`}
+    >
       <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-20 px-4">
         <div className="flex items-center justify-between h-16 md:h-auto">
-          <a href="/" className="transition-transform duration-200 hover:scale-105">
+          <a
+            href="/"
+            className="transition-transform duration-200 hover:scale-105"
+          >
             <AcmeLogo />
           </a>
 
@@ -52,8 +61,8 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <FontAwesomeIcon 
-              icon={mobileMenuOpen ? faXmark : faBars} 
+            <FontAwesomeIcon
+              icon={mobileMenuOpen ? faXmark : faBars}
               className="text-2xl transition-transform duration-200"
             />
           </button>
@@ -68,13 +77,22 @@ export default function Navbar() {
               <FontAwesomeIcon icon={faAngleDown} className="ml-2" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <DropdownLink href="https://catalogobiblioteca.ufps.edu.co/" external>
+              <DropdownLink
+                href="https://catalogobiblioteca.ufps.edu.co/"
+                external
+              >
                 Catálogo en Línea
               </DropdownLink>
-              <DropdownLink href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm" external>
+              <DropdownLink
+                href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm"
+                external
+              >
                 Bases de Datos
               </DropdownLink>
-              <DropdownLink href="http://biblioteca.ufps.edu.co/biblioteca-digital/" external>
+              <DropdownLink
+                href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
+                external
+              >
                 Biblioteca 3D
               </DropdownLink>
             </div>
@@ -96,7 +114,10 @@ export default function Navbar() {
               <DropdownLink href="/servicios#especiales">
                 Servicios Especiales
               </DropdownLink>
-              <DropdownLink href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform" external>
+              <DropdownLink
+                href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform"
+                external
+              >
                 Préstamo Interbibliotecario SIES+
               </DropdownLink>
             </div>
@@ -110,9 +131,13 @@ export default function Navbar() {
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <DropdownLink href="/info#historia">Historia</DropdownLink>
-              <DropdownLink href="/info#mision-vision">Misión y Visión</DropdownLink>
+              <DropdownLink href="/info#mision-vision">
+                Misión y Visión
+              </DropdownLink>
               <DropdownLink href="/bio">Biografía</DropdownLink>
-              <DropdownLink href="/politicas">Políticas de Calidad</DropdownLink>
+              <DropdownLink href="/politicas">
+                Políticas de Calidad
+              </DropdownLink>
               <DropdownLink href="/equipo">Talento Humano</DropdownLink>
             </div>
           </div>
@@ -123,14 +148,16 @@ export default function Navbar() {
       </div>
 
       {/* Menú móvil */}
-      <div className={`md:hidden transition-all duration-300 ${
-        mobileMenuOpen ? 'block' : 'hidden'
-      }`}>
+      <div
+        className={`md:hidden transition-all duration-300 ${
+          mobileMenuOpen ? "block" : "hidden"
+        }`}
+      >
         <div className="bg-secondaries_red-800 px-4 py-2 space-y-1">
           {/* Biblioteca Digital Mobile */}
           <div className="border-b border-secondaries_red-700">
             <button
-              onClick={() => toggleMobileDropdown('bibliotecaDigital')}
+              onClick={() => toggleMobileDropdown("bibliotecaDigital")}
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Biblioteca Digital
@@ -139,16 +166,27 @@ export default function Navbar() {
                 className="transition-transform duration-200"
               />
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${
-              dropdownOpen.bibliotecaDigital ? 'max-h-48' : 'max-h-0'
-            }`}>
-              <MobileDropdownLink href="https://catalogobiblioteca.ufps.edu.co/" external>
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                dropdownOpen.bibliotecaDigital ? "max-h-48" : "max-h-0"
+              }`}
+            >
+              <MobileDropdownLink
+                href="https://catalogobiblioteca.ufps.edu.co/"
+                external
+              >
                 Catálogo en Línea
               </MobileDropdownLink>
-              <MobileDropdownLink href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm" external>
+              <MobileDropdownLink
+                href="https://login.bdbiblioteca.ufps.edu.co/public/menu.htm"
+                external
+              >
                 Bases de Datos
               </MobileDropdownLink>
-              <MobileDropdownLink href="http://biblioteca.ufps.edu.co/biblioteca-digital/" external>
+              <MobileDropdownLink
+                href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
+                external
+              >
                 Biblioteca 3D
               </MobileDropdownLink>
             </div>
@@ -157,7 +195,7 @@ export default function Navbar() {
           {/* Servicios Mobile */}
           <div className="border-b border-secondaries_red-700">
             <button
-              onClick={() => toggleMobileDropdown('servicios')}
+              onClick={() => toggleMobileDropdown("servicios")}
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Servicios
@@ -166,9 +204,11 @@ export default function Navbar() {
                 className="transition-transform duration-200"
               />
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${
-              dropdownOpen.servicios ? 'max-h-64' : 'max-h-0'
-            }`}>
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                dropdownOpen.servicios ? "max-h-64" : "max-h-0"
+              }`}
+            >
               <MobileDropdownLink href="/servicios#digitales">
                 Servicios Digitales
               </MobileDropdownLink>
@@ -178,7 +218,10 @@ export default function Navbar() {
               <MobileDropdownLink href="/servicios#especiales">
                 Servicios Especiales
               </MobileDropdownLink>
-              <MobileDropdownLink href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform" external>
+              <MobileDropdownLink
+                href="https://docs.google.com/forms/d/e/1FAIpQLSehbsIU0_ZyR09Nq-EiYbJu_0ARjh1QMhIuToV-fYlKftn3Zw/viewform"
+                external
+              >
                 Préstamo Interbibliotecario SIES+
               </MobileDropdownLink>
             </div>
@@ -187,7 +230,7 @@ export default function Navbar() {
           {/* Nosotros Mobile */}
           <div className="border-b border-secondaries_red-700">
             <button
-              onClick={() => toggleMobileDropdown('nosotros')}
+              onClick={() => toggleMobileDropdown("nosotros")}
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Nosotros
@@ -196,14 +239,24 @@ export default function Navbar() {
                 className="transition-transform duration-200"
               />
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${
-              dropdownOpen.nosotros ? 'max-h-64' : 'max-h-0'
-            }`}>
-              <MobileDropdownLink href="/info#historia">Historia</MobileDropdownLink>
-              <MobileDropdownLink href="/info#mision-vision">Misión y Visión</MobileDropdownLink>
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                dropdownOpen.nosotros ? "max-h-64" : "max-h-0"
+              }`}
+            >
+              <MobileDropdownLink href="/info#historia">
+                Historia
+              </MobileDropdownLink>
+              <MobileDropdownLink href="/info#mision-vision">
+                Misión y Visión
+              </MobileDropdownLink>
               <MobileDropdownLink href="/bio">Biografía</MobileDropdownLink>
-              <MobileDropdownLink href="/politicas">Políticas de Calidad</MobileDropdownLink>
-              <MobileDropdownLink href="/equipo">Talento Humano</MobileDropdownLink>
+              <MobileDropdownLink href="/politicas">
+                Políticas de Calidad
+              </MobileDropdownLink>
+              <MobileDropdownLink href="/equipo">
+                Talento Humano
+              </MobileDropdownLink>
             </div>
           </div>
 
@@ -215,7 +268,13 @@ export default function Navbar() {
   );
 }
 
-const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+const NavLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => (
   <a
     href={href}
     className="text-white hover:text-gray-300 px-3 py-2 rounded-md hover:bg-secondaries_red-800 transition-colors"
@@ -224,8 +283,12 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
   </a>
 );
 
-const DropdownLink = ({ href, children, external = false }: { 
-  href: string; 
+const DropdownLink = ({
+  href,
+  children,
+  external = false,
+}: {
+  href: string;
   children: React.ReactNode;
   external?: boolean;
 }) => (
@@ -238,7 +301,13 @@ const DropdownLink = ({ href, children, external = false }: {
   </a>
 );
 
-const MobileNavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+const MobileNavLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => (
   <a
     href={href}
     className="block text-white px-3 py-2 hover:bg-secondaries_red-700 transition-colors"
@@ -247,7 +316,11 @@ const MobileNavLink = ({ href, children }: { href: string; children: React.React
   </a>
 );
 
-const MobileDropdownLink = ({ href, children, external = false }: {
+const MobileDropdownLink = ({
+  href,
+  children,
+  external = false,
+}: {
   href: string;
   children: React.ReactNode;
   external?: boolean;

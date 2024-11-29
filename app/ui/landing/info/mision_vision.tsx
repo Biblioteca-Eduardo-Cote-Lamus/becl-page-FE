@@ -16,12 +16,15 @@ const MisionVision = () => {
       .catch((error) => console.error(error));
   }, []);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
       {mision_vision.map((item) => (
-      <div className="bg-white shadow-md rounded-lg p-4 mb-2" key={item.id}>
-        <h3 className="text-2xl font-semibold mb-4">{item.nombre}</h3>
-        <p>{item.descripcion}</p>
-      </div>
+        <div
+          className="bg-white shadow-md rounded-lg p-4 mb-2 transform transition-transform hover:-translate-y-2"
+          key={item.id}
+        >
+          <h3 className="text-2xl font-semibold mb-4">{item.nombre}</h3>
+          <p>{item.descripcion}</p>
+        </div>
       ))}
     </div>
   );

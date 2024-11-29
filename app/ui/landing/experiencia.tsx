@@ -6,8 +6,6 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ImagenSkeleton } from "../skeletons";
 import { fetchExperiencia } from "../../lib/data";
 
-
-
 interface ImagenExp {
   id: string;
   imagenQr: string;
@@ -47,7 +45,7 @@ const Experiencia: React.FC = () => {
           También puedes ingresar a la encuesta de satisfacción usando el botón.
         </p>
         <button
-          className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-8 flex justify-self-center items-center"
+          className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-8 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
           type="button"
           onClick={() => imagen && window.open(imagen.enlace, "_blank")}
         >
@@ -55,7 +53,7 @@ const Experiencia: React.FC = () => {
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </button>
       </div>
-      <Suspense fallback={<ImagenSkeleton/>}>
+      <Suspense fallback={<ImagenSkeleton />}>
         {imagen && (
           <Image width={450} height={450} alt={"QR"} src={imagen.imagenQr} />
         )}
