@@ -8,7 +8,14 @@ import Carrusel from "./ui/landing/carrusel_imagenes";
 import Experiencia from "./ui/landing/experiencia";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faBook,
+  faBookOpen,
+  faDesktop,
+  faRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
+
 import {
   RiComputerLine,
   RiBookLine,
@@ -18,7 +25,9 @@ import {
 import { Suspense } from "react";
 import { InvoiceSkeleton } from "./ui/skeletons";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
-// import EventosComponent from "./ui/landing/eventos";
+ import EventosComponent from "./ui/landing/eventos";
+
+ 
 
 export default function Page() {
   return (
@@ -34,8 +43,9 @@ export default function Page() {
           >
             Novedades
           </h2>
-          {/* Componente de eventos */}
-          {/* <EventosComponent /> */}
+          <main>{/* Componente de eventos*/ }</main>
+          
+          { /*<EventosComponent />*/ }
           <div>
             <Suspense fallback={<InvoiceSkeleton />}>
               <DocumentosImportantes />
@@ -48,7 +58,7 @@ export default function Page() {
           </div>
         </section>
         {/* Sección de explora */}
-        <section className="flex flex-col items-center md:px-16">
+        <section className="flex flex-col items-center md:px-16 bg-gray-100">
           <h2
             className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >
@@ -127,9 +137,9 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <hr className="bg-secondaries_red-700 mt-10" />
+
         {/* Sección de servicios */}
-        <section className="flex flex-col items-center md:px-16">
+        <section className="flex flex-col items-center md:px-16 pb-10">
           <h2
             className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >
@@ -139,33 +149,65 @@ export default function Page() {
             Accede a los demás servicios que ofrece la{" "}
             <b>Biblioteca Eduardo Cote Lamus</b>
           </p>
-          <div className="md:flex md:flex-row my-5 items-start">
+          <div className="md:flex md:flex-row my-5 items-start px-1 ">
             <div className="pt-4 text-center flex flex-col items-center">
-              <RiComputerLine className="text-6xl text-red" />
+              <FontAwesomeIcon
+                icon={faDesktop}
+                style={{
+                  width: "62.74px",
+                  height: "62.74px",
+                  color: "#a51f22",
+                }}
+                className="mb-6 transform transition-transform hover:-translate-y-2"
+              />
               <h4 className="text-xl font-semibold">Sala de cómputo</h4>
               <p>
                 Accede a un computador para realizar tus actividades de manera
                 libre.
               </p>
             </div>
-            <div className="pt-4 text-center flex flex-col items-center">
-              <RiBookLine className="text-6xl text-red" />
+            <div className="pt-4 text-center flex flex-col items-center px-1">
+              <FontAwesomeIcon
+                icon={faBook}
+                style={{
+                  width: "62.74px",
+                  height: "62.74px",
+                  color: "#a51f22",
+                }}
+                className="mb-6 transform transition-transform hover:-translate-y-2"
+              />
               <h4 className="text-xl font-semibold">Préstamo de libros</h4>
               <p>
                 ¿Sabías que puedes realizar el préstamo de un libro a la
                 biblioteca?
               </p>
             </div>
-            <div className="pt-4 text-center flex flex-col items-center">
-              <RiArrowGoBackLine className="text-6xl text-red" />
+            <div className="pt-4 text-center flex flex-col items-center px-1">
+              <FontAwesomeIcon
+                icon={faRotateLeft}
+                style={{
+                  width: "62.74px",
+                  height: "62.74px",
+                  color: "#a51f22",
+                }}
+                className="mb-6 transform transition-transform hover:-translate-y-2"
+              />
               <h4 className="text-xl font-semibold">Devolución de libros</h4>
               <p>
                 Devolver el material bibliográfico en el tiempo estipulado para
                 no generar multas.
               </p>
             </div>
-            <div className="pt-4 text-center flex flex-col items-center">
-              <RiBookOpenLine className="text-6xl text-red" />
+            <div className="pt-4 text-center flex flex-col items-center px-1">
+              <FontAwesomeIcon
+                icon={faBookOpen}
+                style={{
+                  width: "62.74px",
+                  height: "62.74px",
+                  color: "#a51f22",
+                }}
+                className="mb-6 transform transition-transform hover:-translate-y-2"
+              />
               <h4 className="text-xl font-semibold">Salas de lectura</h4>
               <p>
                 Use las salas de lecturas disponibles para estudiar, leer o
@@ -183,7 +225,7 @@ export default function Page() {
           </button>
         </section>
         {/* Sección de experiencia */}
-        <section className="mt-8 md:mx-28">
+        <section className="bg-gray-100">
           <Experiencia />
         </section>
       </main>
