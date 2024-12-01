@@ -21,7 +21,7 @@ const PrevArrow = (props: {
   const { className, onClick } = props;
   return (
     <button
-      className={`${className} !absolute !left-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group hidden md:flex`}
+      className={`${className} !absolute !left-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group md:flex`}
       onClick={onClick}
       aria-label="Anterior"
     >
@@ -51,7 +51,7 @@ const NextArrow = (props: {
   const { className, onClick } = props;
   return (
     <button
-      className={`${className} !absolute !right-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group hidden md:flex`}
+      className={`${className} !absolute !right-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group md:flex`}
       onClick={onClick}
       aria-label="Siguiente"
     >
