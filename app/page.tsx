@@ -45,11 +45,11 @@ export default function Page() {
 
           {/*<EventosComponent />*/}
           <div>
-            <div className="md:pt-9">
-              <Suspense>
+            
+              
                 <Carrusel />
-              </Suspense>
-            </div>
+              
+            
           </div>
         </section>
         {/* Sección de explora */}
