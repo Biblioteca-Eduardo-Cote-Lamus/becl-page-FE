@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import NoticiasList from '@/app/ui/dashboard/NoticiasList';
  
 export const metadata: Metadata = {
   title: 'Noticias',
@@ -7,8 +8,7 @@ export const metadata: Metadata = {
 export default function NoticiasPage() {
   return (
     <div>
-      <h1>Noticias</h1>
-      <p>This is the customers page.</p>
+      <NoticiasList />
     </div>
   );
 }

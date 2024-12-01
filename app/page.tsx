@@ -16,18 +16,16 @@ import {
   faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
-import {
-  RiComputerLine,
-  RiBookLine,
-  RiArrowGoBackLine,
-  RiBookOpenLine,
-} from "react-icons/ri";
+// import {
+//   RiComputerLine,
+//   RiBookLine,
+//   RiArrowGoBackLine,
+//   RiBookOpenLine,
+// } from "react-icons/ri";
 import { Suspense } from "react";
 import { InvoiceSkeleton } from "./ui/skeletons";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
- import EventosComponent from "./ui/landing/eventos";
-
- 
+//  import EventosComponent from "./ui/landing/eventos";
 
 export default function Page() {
   return (
@@ -43,9 +41,9 @@ export default function Page() {
           >
             Novedades
           </h2>
-          <main>{/* Componente de eventos*/ }</main>
-          
-          { /*<EventosComponent />*/ }
+          <main>{/* Componente de eventos*/}</main>
+
+          {/*<EventosComponent />*/}
           <div>
             <Suspense fallback={<InvoiceSkeleton />}>
               <DocumentosImportantes />

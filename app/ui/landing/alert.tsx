@@ -1,5 +1,6 @@
 import React from 'react';
 import { Noticias } from '@/app/lib/definitions';
+import Image from 'next/image';
 
 interface AlertProps {
   noticia: Noticias;
@@ -18,6 +19,9 @@ const Alert: React.FC<AlertProps> = ({ noticia, onClose }) => {
         </button>
         <h2 className="text-xl font-bold mb-2">{noticia.titular}</h2>
         <p>{noticia.descripcion}</p>
+        {noticia.imagen && (
+          <Image src={noticia.imagen} alt={noticia.titular} className="mt-4 w-full h-auto rounded" layout="responsive" width={700} height={475} />
+        )}
       </div>
     </div>
   );

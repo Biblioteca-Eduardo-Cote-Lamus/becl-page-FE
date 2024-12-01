@@ -6,9 +6,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'biblioteca.ufps.edu.co',
-        pathname: '/wp-content/uploads/**',
+        hostname: '*',
+        pathname: '**',
       },
     ],
   },
