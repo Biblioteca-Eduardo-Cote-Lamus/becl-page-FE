@@ -3,7 +3,7 @@
 import { montserrat, openSans } from "./ui/fonts";
 import Footer from "./ui/landing/footer";
 import NavbarMenu from "./ui/landing/navbar";
-import DocumentosImportantes from "./ui/landing/documentos_importantes";
+// import DocumentosImportantes from "./ui/landing/documentos_importantes";
 import Carrusel from "./ui/landing/carrusel_imagenes";
 import Experiencia from "./ui/landing/experiencia";
 import Image from "next/image";
@@ -22,8 +22,8 @@ import {
 //   RiArrowGoBackLine,
 //   RiBookOpenLine,
 // } from "react-icons/ri";
-import { Suspense } from "react";
-import { InvoiceSkeleton } from "./ui/skeletons";
+// import { Suspense } from "react";
+// import { InvoiceSkeleton } from "./ui/skeletons";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
 //  import EventosComponent from "./ui/landing/eventos";
 
@@ -41,18 +41,15 @@ export default function Page() {
           >
             Novedades
           </h2>
-          <main>{/* Componente de eventos*/}</main>
-
-          {/*<EventosComponent />*/}
+          <main>{/* Componente de eventos*/ }</main>
+          
+          { /*<EventosComponent />*/ }
           <div>
-            <Suspense fallback={<InvoiceSkeleton />}>
-              <DocumentosImportantes />
-            </Suspense>
-            <div className="md:pt-9">
-              <Suspense>
+            
+              
                 <Carrusel />
-              </Suspense>
-            </div>
+              
+            
           </div>
         </section>
         {/* Sección de explora */}
