@@ -25,9 +25,7 @@ import {
 import { Suspense } from "react";
 import { InvoiceSkeleton } from "./ui/skeletons";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
- import EventosComponent from "./ui/landing/eventos";
-
- 
+import EventosComponent from "./ui/landing/eventos";
 
 export default function Page() {
   return (
@@ -43,13 +41,10 @@ export default function Page() {
           >
             Novedades
           </h2>
-          <main>{/* Componente de eventos*/ }</main>
-          
-          { /*<EventosComponent />*/ }
+          <main>{/* Componente de eventos*/}</main>
+
+          {/*<EventosComponent />*/}
           <div>
-            <Suspense fallback={<InvoiceSkeleton />}>
-              <DocumentosImportantes />
-            </Suspense>
             <div className="md:pt-9">
               <Suspense>
                 <Carrusel />

@@ -142,7 +142,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <NavLink href="/#documentos">Documentos</NavLink>
+          <NavLink href="/docs">Documentos</NavLink>
           <NavLink href="/pazysalvo">Paz y Salvo</NavLink>
         </div>
       </div>
@@ -260,7 +260,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <MobileNavLink href="/#documentos">Documentos</MobileNavLink>
+          <MobileNavLink href="/docs">Documentos</MobileNavLink>
           <MobileNavLink href="/pazysalvo">Paz y Salvo</MobileNavLink>
         </div>
       </div>
