@@ -24,7 +24,7 @@ export default function Page() {
         {/* Alerta de noticia importante */}
         <AlertaNoticia />
         {/* Sección de novedades */}
-        <section className="mt-32">
+        <section className="mt-32 pb-10">
           <h2
             className={`pb-10 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
           >

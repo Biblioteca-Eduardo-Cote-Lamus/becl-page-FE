@@ -18,7 +18,7 @@ export default function ServiciosPage() {
   return (
     <main className="container mx-auto px-4 py-8">
       {/* Sección de Introducción */}
-      <section className="mb-12">
+      <section className="mb-12 ">
         <h1 className="text-4xl font-bold mb-8 text-center text-secondaries_red-900">
           Servicios de la Biblioteca Eduardo Cote Lamus
         </h1>
@@ -34,7 +34,7 @@ export default function ServiciosPage() {
       </section>
 
       {/* Sección de Servicios Digitales */}
-      <section className="md:px-16">
+      <section className="md:px-16 bg-gray-100">
         <h2
           id="digitales"
           className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
@@ -222,7 +222,7 @@ export default function ServiciosPage() {
       </section>
 
       {/* Sección de Servicios Especiales */}
-      <section className="md:px-16">
+      <section className="md:px-16 bg-gray-100 py-10">
         <h2
           id="especiales"
           className={`mt-20 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}

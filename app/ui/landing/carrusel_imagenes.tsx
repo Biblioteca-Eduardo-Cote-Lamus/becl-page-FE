@@ -25,7 +25,7 @@ const PrevArrow = (props: {
       onClick={onClick}
       aria-label="Anterior"
     >
-      <svg
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 text-gray-800 group-hover:text-gray-600"
         fill="none"
@@ -38,7 +38,7 @@ const PrevArrow = (props: {
           strokeWidth={2}
           d="M15 19l-7-7 7-7"
         />
-      </svg>
+      </svg> */}
     </button>
   );
 };
@@ -55,7 +55,7 @@ const NextArrow = (props: {
       onClick={onClick}
       aria-label="Siguiente"
     >
-      <svg
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 text-gray-800 group-hover:text-gray-600"
         fill="none"
@@ -68,7 +68,7 @@ const NextArrow = (props: {
           strokeWidth={2}
           d="M9 5l7 7-7 7"
         />
-      </svg>
+      </svg> */}
     </button>
   );
 };
