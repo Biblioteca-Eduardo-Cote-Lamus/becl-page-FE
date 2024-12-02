@@ -158,7 +158,7 @@ export default function ServiciosPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiComputerLine className="text-6xl text-red" />
+            <RiComputerLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Sala de cómputo
             </h4>
@@ -169,7 +169,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
-            <RiBookLine className="text-6xl text-red" />
+            <RiBookLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo de material bibliográfico
             </h4>
@@ -181,7 +181,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiArrowGoBackLine className="text-6xl text-red" />
+            <RiArrowGoBackLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Devolución de material bibliográfico
             </h4>
@@ -199,7 +199,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
-            <RiBookOpenLine className="text-6xl text-red" />
+            <RiBookOpenLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Salas de lectura
             </h4>
@@ -210,7 +210,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiNewspaperLine className="text-6xl text-red" />
+            <RiNewspaperLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">Hemeroteca</h4>
             <p className="md:text-left">
               Ingresa a la biblioteca, busca el libro que necesita para estudiar
@@ -231,7 +231,7 @@ export default function ServiciosPage() {
         </h2>
         <div className="flex flex-col md:flex-row my-5">
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiArtboardLine className="text-6xl text-red" />
+            <RiArtboardLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Auditorio Eduardo Cote Lamus
             </h4>
@@ -250,7 +250,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiTeamLine className="text-6xl text-red" />
+            <RiTeamLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo Sala de Semilleros
             </h4>
@@ -269,7 +269,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiDatabase2Line className="text-6xl text-red" />
+            <RiDatabase2Line className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Capacitaciones de Bases de Datos
             </h4>
