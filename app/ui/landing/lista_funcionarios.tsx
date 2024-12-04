@@ -18,34 +18,27 @@ const ListaFuncionarios: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}>
+    <div className="flex flex-wrap gap-5 justify-center">
       {employees.map((employee) => (
         <div
           key={employee.id}
-          style={{
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "16px",
-            textAlign: "center",
-            width: "200px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+          className="border border-gray-300 rounded-lg p-4 text-center w-48 flex flex-col items-center"
         >
-          <Image
-            src={employee.imagen}
-            alt={employee.nombre}
-            width={100}
-            height={100}
-            style={{ borderRadius: "5%" }}
-          />
-          <h2 style={{ fontSize: "1.2em", margin: "10px 0" }} className="text-secondaries_red-950">{employee.nombre}</h2>
-          <p style={{ color: "#555" }}>{employee.cargo}</p>
+          <div className="transform transition-transform duration-300 hover:scale-150">
+            <Image
+              src={employee.imagen}
+              alt={employee.nombre}
+              width={100}
+              height={100}
+              className="rounded-[5%]"
+            />
+          </div>
+          <h2 className="text-lg my-2 text-secondaries_red-950">{employee.nombre}</h2>
+          <p className="text-gray-600">{employee.cargo}</p>
         </div>
       ))}
     </div>
-      );
+  );
 };
 
-export default ListaFuncionarios;
+export default ListaFuncionarios; 
