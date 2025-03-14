@@ -1,64 +1,82 @@
 "use client";
-import { fetchHitos } from "@/app/lib/data";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
-interface Hito {
-  id: string;
-  anio: string;
-  imagen: string;
-  descripcion: string;
-}
+import React, { useEffect, useState } from 'react';
+import { Hito, getHitos } from '@/app/actions/hitos';
+import Image from 'next/image';
 
 const LineaDelTiempo = () => {
   const [hitos, setHitos] = useState<Hito[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchHitos()
-      .then((data) => setHitos(data))
-      .catch((error) => console.error(error));
+    const fetchData = async () => {
+      try {
+        const data = await getHitos();
+        setHitos(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching hitos:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondaries_red-900"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative">
-      <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-black"></div>
-      {hitos.map((hito, index) => (
-        <div
-          key={hito.id}
-          className={`relative mb-8 flex items-center ${
-            index % 2 === 0 ? "flex-row-reverse" : ""
-          }`}
-        >
-          {/* Ícono de calendario */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-full shadow-md border-2 border-black w-10 h-10 flex flex-col justify-center">
-            <FontAwesomeIcon icon={faCalendarDays} />
-          </div>
-
-          {/* Año */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 -mt-16 mb-3">
-            <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full">
-              {hito.anio}
-            </span>
-          </div>
-
-          {/* Contenido del hito */}
-          <div className="pr-4 w-5/12 transform transition-transform hover:-translate-y-2">
-            <div className="bg-gray-200 shadow-md rounded-lg md:p-6 flex flex-col items-center">
-              <Image
-                src={hito.imagen}
-                alt={hito.anio}
-                width={500}
-                height={256}
-                className="w-auto h-56 object-cover rounded-lg "
-              />
-              <p className="text-sm text-center sm:text-lg sm:font-bold px-1 sm:px-0">
-                {hito.descripcion}
-              </p>
-            </div>
+    <div className="w-full py-12 bg-gray-50" id="historia">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-secondaries_red-900 mb-12">
+          Nuestra Historia
+        </h2>
+        <div className="relative">
+          {/* Línea vertical central */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-secondaries_red-200"></div>
+          
+          <div className="space-y-16">
+            {hitos.map((hito, index) => (
+              <div
+                key={hito.id}
+                className={`flex items-center ${
+                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                } relative`}
+              >
+                {/* Punto en la línea del tiempo */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-secondaries_red-900 rounded-full"></div>
+                
+                {/* Contenido */}
+                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
+                  <div className="bg-white p-6 rounded-lg shadow-lg">
+                    {hito.imagen && (
+                      <div className="relative h-48 mb-4">
+                        <Image
+                          src={hito.imagen}
+                          alt={hito.titulo}
+                          fill
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                    <h3 className="text-xl font-semibold text-secondaries_red-900 mb-2">
+                      {hito.titulo}
+                    </h3>
+                    <p className="text-gray-600 mb-2">{hito.fecha}</p>
+                    <p className="text-gray-700">{hito.descripcion}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

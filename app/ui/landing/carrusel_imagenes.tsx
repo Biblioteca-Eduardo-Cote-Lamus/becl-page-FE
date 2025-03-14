@@ -1,180 +1,104 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { fetchImagenesCarrusel } from "../../lib/data";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+'use client';
 
-interface Imagen {
-  id: number;
-  imagen: string;
-  enlace?: string;
-  descripcion?: string;
-  visible: boolean;
-}
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { ImagenCarrusel, getImagenesCarrusel } from '@/app/actions/imagenes';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const PrevArrow = (props: {
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-}) => {
-  const { className, onClick } = props;
-  return (
-    <button
-      className={`${className} !absolute !left-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group md:flex`}
-      onClick={onClick}
-      aria-label="Anterior"
-    >
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-800 group-hover:text-gray-600"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 19l-7-7 7-7"
-        />
-      </svg> */}
-    </button>
-  );
-};
-
-const NextArrow = (props: {
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-}) => {
-  const { className, onClick } = props;
-  return (
-    <button
-      className={`${className} !absolute !right-4 z-10 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group md:flex`}
-      onClick={onClick}
-      aria-label="Siguiente"
-    >
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-800 group-hover:text-gray-600"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 5l7 7-7 7"
-        />
-      </svg> */}
-    </button>
-  );
-};
-
-const CarruselImagenes: React.FC = () => {
-  const [imagenes, setImagenes] = useState<Imagen[]>([]);
-  const [loading, setLoading] = useState(true);
+const CarruselImagenes = () => {
+  const [imagenes, setImagenes] = useState<ImagenCarrusel[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const cargarImagenes = async () => {
+    const fetchData = async () => {
       try {
-        const data = await fetchImagenesCarrusel();
+        const data = await getImagenesCarrusel();
         setImagenes(data);
+        setIsLoading(false);
       } catch (error) {
-        console.error("Error al cargar las imágenes:", error);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching imágenes:', error);
+        setIsLoading(false);
       }
     };
 
-    cargarImagenes();
+    fetchData();
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-    appendDots: (dots: React.ReactNode) => (
-      <div className="!bottom-4">
-        <ul className="flex justify-center gap-2"> {dots} </ul>
-      </div>
-    ),
-    customPaging: () => (
-      <button className="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-200" />
-    ),
-  };
-
-  if (loading) {
+  if (isLoading) {
     return (
-      <div className="w-full aspect-[16/9] bg-gray-200 animate-pulse rounded-xl flex items-center justify-center">
-        <div className="text-gray-400">Cargando...</div>
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondaries_red-900"></div>
       </div>
     );
   }
 
+  if (imagenes.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl shadow-xl bg-gray-100">
-        <Slider {...settings} className="h-full [&_.slick-list]:h-full [&_.slick-track]:h-full [&_.slick-slide]:h-full [&_.slick-slide>div]:h-full">
-          {imagenes.map((imagen) => (
-            <div key={imagen.id} className="relative h-full w-full">
-              {imagen.enlace ? (
-                <a
-                  href={imagen.enlace}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full w-full"
-                  title={imagen.descripcion || `Imagen ${imagen.id}`}
-                >
-                  <div className="relative h-full w-full group">
-                    <Image
-                      src={imagen.imagen}
-                      alt={imagen.descripcion || `Imagen ${imagen.id}`}
-                      layout="fill"
-                      objectFit="cover"
-                      priority
-                      className="transition-transform duration-300 group-hover:scale-105"
-                    />
-                    {imagen.descripcion && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                        <p className="text-sm md:text-base line-clamp-2">
-                          {imagen.descripcion}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </a>
-              ) : (
-                <div className="relative h-full w-full group">
-                  <Image
-                    src={imagen.imagen}
-                    alt={imagen.descripcion || `Imagen ${imagen.id}`}
-                    layout="fill"
-                    objectFit="cover"
-                    priority
-                    className="transition-transform duration-300 group-hover:scale-105"
-                  />
-                  {imagen.descripcion && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                      <p className="text-sm md:text-base line-clamp-2">
-                        {imagen.descripcion}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-        </Slider>
-      </div>
+    <div className="relative w-full">
+      <style jsx global>{`
+        .carousel .control-arrow {
+          background-color: rgba(0, 0, 0, 0.3) !important;
+          height: 50px !important;
+          width: 50px !important;
+          border-radius: 25px !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          margin: 0 20px !important;
+        }
+        .carousel .control-prev.control-arrow:before {
+          border-right: 8px solid #fff !important;
+        }
+        .carousel .control-next.control-arrow:before {
+          border-left: 8px solid #fff !important;
+        }
+        .carousel .control-dots {
+          margin: 10px 0 !important;
+        }
+        .carousel .control-dots .dot {
+          background: #fff !important;
+          box-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+        }
+      `}</style>
+      <Carousel
+        showArrows={true}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={true}
+        interval={5000}
+        transitionTime={500}
+        className="w-full"
+        stopOnHover={true}
+        dynamicHeight={false}
+        emulateTouch={true}
+      >
+        {imagenes.map((imagen) => (
+          <div key={imagen.id} className="relative h-[600px]">
+            <Image
+              src={imagen.url}
+              alt={imagen.titulo || 'Imagen carrusel'}
+              fill
+              className="object-cover"
+              priority={true}
+              sizes="100vw"
+            />
+            {(imagen.titulo || imagen.descripcion) && (
+              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 transition-opacity duration-300">
+                {imagen.titulo && (
+                  <h2 className="text-2xl font-bold mb-2">{imagen.titulo}</h2>
+                )}
+                {imagen.descripcion && (
+                  <p className="text-lg">{imagen.descripcion}</p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </Carousel>
     </div>
   );
 };

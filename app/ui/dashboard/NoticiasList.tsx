@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Noticias } from "@/app/lib/definitions";
 import Link from "next/link";
-import { fetchNoticias } from "@/app/lib/data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
@@ -11,14 +10,20 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
+import { getNoticias, deleteNoticia } from "@/app/actions/noticias";
 
 const NoticiasList: React.FC = () => {
   const [noticias, setNoticias] = useState<Noticias[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchNoticias();
-      setNoticias(data);
+      try {
+        const data = await getNoticias();
+        setNoticias(data);
+      } catch (error) {
+        console.error('Error fetching noticias:', error);
+        toast.error('Error al cargar las noticias');
+      }
     };
 
     fetchData();
@@ -30,21 +35,7 @@ const NoticiasList: React.FC = () => {
     );
     if (confirmed) {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/noticias/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "x-api-key": process.env.API_KEY || "",
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          toast.error("Error al eliminar la noticia");
-          throw new Error("Failed to delete noticia");
-        }
+        await deleteNoticia(id);
         toast.success("Noticia eliminada exitosamente");
         setNoticias(noticias.filter((n) => n.id !== id));
       } catch (error) {

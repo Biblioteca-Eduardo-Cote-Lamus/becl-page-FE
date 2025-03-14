@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import AcmeLogo from "../becl-logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,13 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchDocumentosImportancia } from "@/app/lib/data";
-import { FileText } from "lucide-react"; // Importamos el ícono de documento
-
-interface Documento {
-  id: string;
-  descripcion: string;
-  url: string;
-}
+import { FileText } from "lucide-react";
+import { Documento, getDocumentosImportantes } from "@/app/actions/documentos";
 
 const DocumentosImportantes = () => {
   const [documentos, setDocumentos] = useState<Documento[]>([]);
@@ -15,7 +9,7 @@ const DocumentosImportantes = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchDocumentosImportancia()
+    getDocumentosImportantes()
       .then((data) => {
         setDocumentos(data);
         setIsLoading(false);

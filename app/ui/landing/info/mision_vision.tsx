@@ -1,33 +1,77 @@
 "use client";
-import { fetchInfoMisionVision } from "@/app/lib/data";
-import React, { useEffect, useState } from "react";
 
-interface MisionVisionData {
-  id: string;
-  nombre: string;
-  descripcion: string;
-}
-const MisionVision = () => {
-  const [mision_vision, setMisionVision] = useState<MisionVisionData[]>([]);
+import React, { useEffect, useState } from 'react';
+import { MisionVision, getMisionVision } from '@/app/actions/mision-vision';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLightbulb, faBullseye } from '@fortawesome/free-solid-svg-icons';
+
+const MisionVisionComponent = () => {
+  const [data, setData] = useState<MisionVision[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchInfoMisionVision()
-      .then((data) => setMisionVision(data))
-      .catch((error) => console.error(error));
+    const fetchData = async () => {
+      try {
+        const result = await getMisionVision();
+        setData(result);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching misión y visión:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondaries_red-900"></div>
+      </div>
+    );
+  }
+
+  const mision = data.find(item => item.tipo === 'mision');
+  const vision = data.find(item => item.tipo === 'vision');
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
-      {mision_vision.map((item) => (
-        <div
-          className="bg-white shadow-md rounded-lg p-4 mb-2 transform transition-transform hover:-translate-y-2"
-          key={item.id}
-        >
-          <h3 className="text-2xl font-semibold mb-4">{item.nombre}</h3>
-          <p>{item.descripcion}</p>
+    <div className="w-full py-16 bg-white" id="mision-vision">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Misión */}
+          <div className="bg-gray-50 rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:-translate-y-2">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-secondaries_red-900 rounded-full flex items-center justify-center mr-4">
+                <FontAwesomeIcon icon={faBullseye} className="text-white text-2xl" />
+              </div>
+              <h2 className="text-3xl font-bold text-secondaries_red-900">
+                {mision?.titulo || 'Misión'}
+              </h2>
+            </div>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {mision?.descripcion || 'Información no disponible'}
+            </p>
+          </div>
+
+          {/* Visión */}
+          <div className="bg-gray-50 rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:-translate-y-2">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-secondaries_red-900 rounded-full flex items-center justify-center mr-4">
+                <FontAwesomeIcon icon={faLightbulb} className="text-white text-2xl" />
+              </div>
+              <h2 className="text-3xl font-bold text-secondaries_red-900">
+                {vision?.titulo || 'Visión'}
+              </h2>
+            </div>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {vision?.descripcion || 'Información no disponible'}
+            </p>
+          </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };
 
-export default MisionVision;
+export default MisionVisionComponent;

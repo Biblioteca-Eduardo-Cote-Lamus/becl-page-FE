@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import { executeQuery } from './db';
 import {
   CustomerField,
   CustomersTableType,
@@ -35,101 +35,13 @@ export async function fetchEventos() {
   }
 };
 
-export async function fetchNoticias() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/noticias`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch noticias data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch noticias data.");
-  }
-}
-
-export async function fetchEmployees() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/funcionarios`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch documentos data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch documentos data.");
-  }
-}
-
-export async function fetchDocumentosImportancia() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/documentos_importancia`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch documentos data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch documentos data.");
-  }
-}
-
-export async function fetchImagenesCarrusel() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/imagenescarrusel`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch imágenes data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch imágenes data.");
-  }
-}
-
 export async function fetchExperiencia() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/experiencia`,
       {
         headers: {
-          "x-api-key": process.env.API_KEY || "", // Asegúrate de que la API key no sea undefined
+          "x-api-key": process.env.API_KEY || "",
           "Content-Type": "application/json",
         },
       }
@@ -145,60 +57,13 @@ export async function fetchExperiencia() {
   }
 }
 
-export async function fetchInfoMisionVision() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/infomisionvision`,
-      {
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch misión y visión data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch misión y visión data.");
-  }
-}
-
-export async function fetchHitos() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hitos`, {
-      headers: {
-        "x-api-key": process.env.API_KEY || "",
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch hitos data.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("API Error:", error);
-    throw new Error("Failed to fetch hitos data.");
-  }
-}
-
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
     console.log("Fetching revenue data...");
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const data = await sql<Revenue>`SELECT * FROM revenue`;
-
-    console.log("Data fetch completed after 3 seconds.");
-
-    return data.rows;
+    const data = await executeQuery('SELECT * FROM revenue');
+    return data as Revenue[];
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch revenue data.");
@@ -207,14 +72,15 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
-    const data = await sql<LatestInvoiceRaw>`
+    const data = await executeQuery(`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
-      LIMIT 5`;
+      LIMIT 5`
+    );
 
-    const latestInvoices = data.rows.map((invoice) => ({
+    const latestInvoices = (data as LatestInvoiceRaw[]).map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
@@ -225,28 +91,37 @@ export async function fetchLatestInvoices() {
   }
 }
 
+// Define specific types for our query results
+type CountResult = {
+  count: number;
+}[];
+
+type InvoiceStatusResult = {
+  paid: number;
+  pending: number;
+}[];
+
 export async function fetchCardData() {
   try {
-    // You can probably combine these into a single SQL query
-    // However, we are intentionally splitting them to demonstrate
-    // how to initialize multiple queries in parallel with JS.
-    const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
-    const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
-    const invoiceStatusPromise = sql`SELECT
-         SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
-         SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
-         FROM invoices`;
-
-    const data = await Promise.all([
-      invoiceCountPromise,
-      customerCountPromise,
-      invoiceStatusPromise,
+    const [
+      invoiceCountResult,
+      customerCountResult,
+      invoiceStatusResult
+    ] = await Promise.all([
+      executeQuery<CountResult>('SELECT COUNT(*) as count FROM invoices'),
+      executeQuery<CountResult>('SELECT COUNT(*) as count FROM customers'),
+      executeQuery<InvoiceStatusResult>(`
+        SELECT
+          SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS paid,
+          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS pending
+        FROM invoices`
+      )
     ]);
 
-    const numberOfInvoices = Number(data[0].rows[0].count ?? "0");
-    const numberOfCustomers = Number(data[1].rows[0].count ?? "0");
-    const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? "0");
-    const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? "0");
+    const numberOfInvoices = Number(invoiceCountResult[0]?.count ?? 0);
+    const numberOfCustomers = Number(customerCountResult[0]?.count ?? 0);
+    const totalPaidInvoices = formatCurrency(invoiceStatusResult[0]?.paid ?? 0);
+    const totalPendingInvoices = formatCurrency(invoiceStatusResult[0]?.pending ?? 0);
 
     return {
       numberOfCustomers,
@@ -268,7 +143,7 @@ export async function fetchFilteredInvoices(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const invoices = await sql<InvoicesTable>`
+    const invoices = await executeQuery(`
       SELECT
         invoices.id,
         invoices.amount,
@@ -280,16 +155,24 @@ export async function fetchFilteredInvoices(
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       WHERE
-        customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
-        invoices.status ILIKE ${`%${query}%`}
+        customers.name LIKE ? OR
+        customers.email LIKE ? OR
+        invoices.amount LIKE ? OR
+        invoices.date LIKE ? OR
+        invoices.status LIKE ?
       ORDER BY invoices.date DESC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-    `;
+      LIMIT ? OFFSET ?
+    `, [
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`,
+      ITEMS_PER_PAGE,
+      offset
+    ]);
 
-    return invoices.rows;
+    return invoices as InvoicesTable[];
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch invoices.");
@@ -298,18 +181,25 @@ export async function fetchFilteredInvoices(
 
 export async function fetchInvoicesPages(query: string) {
   try {
-    const count = await sql`SELECT COUNT(*)
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    WHERE
-      customers.name ILIKE ${`%${query}%`} OR
-      customers.email ILIKE ${`%${query}%`} OR
-      invoices.amount::text ILIKE ${`%${query}%`} OR
-      invoices.date::text ILIKE ${`%${query}%`} OR
-      invoices.status ILIKE ${`%${query}%`}
-  `;
+    const data = await executeQuery<CountResult>(`
+      SELECT COUNT(*) as count
+      FROM invoices
+      JOIN customers ON invoices.customer_id = customers.id
+      WHERE
+        customers.name LIKE ? OR
+        customers.email LIKE ? OR
+        invoices.amount LIKE ? OR
+        invoices.date LIKE ? OR
+        invoices.status LIKE ?
+    `, [
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`,
+      `%${query}%`
+    ]);
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(Number(data[0]?.count ?? 0) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
     console.error("Database Error:", error);
@@ -319,17 +209,17 @@ export async function fetchInvoicesPages(query: string) {
 
 export async function fetchInvoiceById(id: string) {
   try {
-    const data = await sql<InvoiceForm>`
+    const data = await executeQuery(`
       SELECT
         invoices.id,
         invoices.customer_id,
         invoices.amount,
         invoices.status
       FROM invoices
-      WHERE invoices.id = ${id};
-    `;
+      WHERE invoices.id = ?
+    `, [id]);
 
-    const invoice = data.rows.map((invoice) => ({
+    const invoice = (data as InvoiceForm[]).map((invoice) => ({
       ...invoice,
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
@@ -344,16 +234,15 @@ export async function fetchInvoiceById(id: string) {
 
 export async function fetchCustomers() {
   try {
-    const data = await sql<CustomerField>`
+    const data = await executeQuery(`
       SELECT
         id,
         name
       FROM customers
       ORDER BY name ASC
-    `;
+    `);
 
-    const customers = data.rows;
-    return customers;
+    return data as CustomerField[];
   } catch (err) {
     console.error("Database Error:", err);
     throw new Error("Failed to fetch all customers.");
@@ -362,25 +251,25 @@ export async function fetchCustomers() {
 
 export async function fetchFilteredCustomers(query: string) {
   try {
-    const data = await sql<CustomersTableType>`
-		SELECT
-		  customers.id,
-		  customers.name,
-		  customers.email,
-		  customers.image_url,
-		  COUNT(invoices.id) AS total_invoices,
-		  SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
-		  SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
-		FROM customers
-		LEFT JOIN invoices ON customers.id = invoices.customer_id
-		WHERE
-		  customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`}
-		GROUP BY customers.id, customers.name, customers.email, customers.image_url
-		ORDER BY customers.name ASC
-	  `;
+    const data = await executeQuery(`
+      SELECT
+        customers.id,
+        customers.name,
+        customers.email,
+        customers.image_url,
+        COUNT(invoices.id) AS total_invoices,
+        SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
+        SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
+      FROM customers
+      LEFT JOIN invoices ON customers.id = invoices.customer_id
+      WHERE
+        customers.name LIKE ? OR
+        customers.email LIKE ?
+      GROUP BY customers.id, customers.name, customers.email, customers.image_url
+      ORDER BY customers.name ASC
+    `, [`%${query}%`, `%${query}%`]);
 
-    const customers = data.rows.map((customer) => ({
+    const customers = (data as CustomersTableType[]).map((customer) => ({
       ...customer,
       total_pending: formatCurrency(customer.total_pending),
       total_paid: formatCurrency(customer.total_paid),

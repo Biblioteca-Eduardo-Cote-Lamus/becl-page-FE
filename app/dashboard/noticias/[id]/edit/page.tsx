@@ -1,5 +1,5 @@
-import EditNoticia from "../edit";
+import EditNoticia from "@/app/ui/dashboard/noticias/EditNoticia";
 
-export default function CreateNoticiaPage() {
-    return <EditNoticia />;
+export default function EditNoticiaPage({ params }: { params: { id: string } }) {
+    return <EditNoticia params={params} />;
 }

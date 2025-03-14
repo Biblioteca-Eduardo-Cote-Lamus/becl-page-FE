@@ -3,33 +3,28 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Noticias } from '@/app/lib/definitions';
-import { fetchNoticias } from '@/app/lib/data';
+import { getNoticiaById } from '@/app/actions/noticias';
 import ImageUploader from "@/app/ui/dashboard/imageUploader"; 
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { CustomToast, toastConfig } from "@/app/ui/components/CustomToast";
 
-const EditNoticia: React.FC = () => {
+export default function EditNoticiaPage({ params }: { params: { id: string } }) {
   const [noticia, setNoticia] = useState<Noticias | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const params = useParams();
-  const id = params.id as string;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchNoticia = async () => {
       try {
-        const data = await fetchNoticias();
-        const noticia = data.find((n: Noticias) => n.id === parseInt(id));
-        setNoticia(noticia);
+        const data = await getNoticiaById(params.id);
+        setNoticia(data);
       } catch (error) {
         console.error('Error fetching noticia:', error);
-        toast.error('Error al cargar la noticia', toastConfig.error);
+        router.push('/dashboard/noticias'); // Redirect on error
       }
     };
 
-    if (id) {
-      fetchNoticia();
-    }
-  }, [id]);
+    fetchNoticia();
+  }, [params.id, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,10 +36,8 @@ const EditNoticia: React.FC = () => {
       return;
     }
 
-    setIsLoading(true);
-    
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/noticias/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/noticias/${params.id}`, {
         method: 'PUT',
         headers: {
           "x-api-key": process.env.API_KEY || "",
@@ -58,13 +51,13 @@ const EditNoticia: React.FC = () => {
         throw new Error(`Failed to update noticia: ${response.status} ${errorText}`);
       }
       toast.success('Noticia actualizada exitosamente', toastConfig.success);
+      router.push('/dashboard/noticias'); // Redirect after successful update
     } catch (error) {
       console.error('Error updating noticia:', error);
       toast.error('Error al actualizar la noticia', toastConfig.error);
-    } finally {
-      setIsLoading(false);
     }
   };
+
   if (!noticia) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -121,13 +114,10 @@ const EditNoticia: React.FC = () => {
       <button
         type="submit"
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
-        disabled={isLoading}
       >
-        {isLoading ? 'Guardando...' : 'Guardar'}
+        Guardar
       </button>
       <CustomToast />
     </form>
   );
-};
-
-export default EditNoticia;
+}

@@ -4,15 +4,23 @@ import { openSans } from "@/app/ui/fonts";
 import { AtSymbolIcon, ExclamationCircleIcon, KeyIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
-import { useActionState } from "react";
 import { authenticate } from "@/app/lib/actions";
+import { useFormState, useFormStatus } from 'react-dom';
 import React from "react";
 
-export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  
+  return (
+    <Button className="mt-4 w-full" aria-disabled={pending}>
+      Ingresa <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+    </Button>
   );
+}
+
+export default function LoginForm() {
+  const [errorMessage, formAction] = useFormState(authenticate, undefined);
+
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -60,9 +68,7 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Ingresa <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
+        <SubmitButton />
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
