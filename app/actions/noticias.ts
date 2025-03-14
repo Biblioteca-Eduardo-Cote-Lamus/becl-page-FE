@@ -1,11 +1,11 @@
 'use server';
 
 import { executeQuery } from '../lib/db';
-import { Noticias } from '../lib/definitions';
+import { Noticia } from '../lib/definitions';
 
-export async function getNoticias(): Promise<Noticias[]> {
+export async function getNoticias(): Promise<Noticia[]> {
   try {
-    const data = await executeQuery<Noticias[]>('SELECT * FROM noticias ORDER BY fecha DESC');
+    const data = await executeQuery<Noticia[]>('SELECT * FROM noticias ORDER BY id DESC');
     return data;
   } catch (error) {
     console.error('Database Error:', error);
@@ -13,9 +13,9 @@ export async function getNoticias(): Promise<Noticias[]> {
   }
 }
 
-export async function getNoticiaById(id: string): Promise<Noticias | null> {
+export async function getNoticiaById(id: string): Promise<Noticia | null> {
   try {
-    const data = await executeQuery<Noticias[]>('SELECT * FROM noticias WHERE id = ?', [id]);
+    const data = await executeQuery<Noticia[]>('SELECT * FROM noticias WHERE id = ?', [id]);
     return data[0] || null;
   } catch (error) {
     console.error('Database Error:', error);

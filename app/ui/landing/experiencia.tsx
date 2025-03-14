@@ -29,7 +29,7 @@ async function ExperienciaContent() {
           También puedes ingresar a la encuesta de satisfacción usando el botón.
         </p>
         <a
-          href={experiencia.imagen || '#'}
+          href={experiencia.enlace}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-8 flex items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
@@ -38,18 +38,17 @@ async function ExperienciaContent() {
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </a>
       </div>
-      <div className="flex-1 flex justify-center">
-        {experiencia.imagen && (
-          <Image 
-            width={450} 
-            height={450} 
-            alt="Código QR para calificar experiencia" 
-            src={experiencia.imagen}
-            className="rounded-lg shadow-lg"
-            priority
-          />
-        )}
-      </div>
+      
+      {experiencia.imagen_qr && (
+        <Image 
+          width={450} 
+          height={450} 
+          alt="Código QR para calificar experiencia" 
+          src={experiencia.imagen_qr}
+          className="rounded-lg shadow-lg"
+          priority
+        />
+      )}
     </div>
   );
 }

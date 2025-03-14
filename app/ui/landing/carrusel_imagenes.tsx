@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ImagenCarrusel, getImagenesCarrusel } from '@/app/actions/imagenes';
+import { getImagenesCarrusel } from '@/app/actions/imagenes';
+import { ImagenCarrusel } from '@/app/lib/definitions';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -38,7 +39,7 @@ const CarruselImagenes = () => {
   }
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-7xl mx-auto">
       <style jsx global>{`
         .carousel .control-arrow {
           background-color: rgba(0, 0, 0, 0.3) !important;
@@ -64,37 +65,32 @@ const CarruselImagenes = () => {
         }
       `}</style>
       <Carousel
-        showArrows={true}
+        autoPlay
+        infiniteLoop
         showStatus={false}
         showThumbs={false}
-        infiniteLoop={true}
-        autoPlay={true}
         interval={5000}
-        transitionTime={500}
-        className="w-full"
-        stopOnHover={true}
-        dynamicHeight={false}
-        emulateTouch={true}
       >
         {imagenes.map((imagen) => (
           <div key={imagen.id} className="relative h-[600px]">
             <Image
-              src={imagen.url}
-              alt={imagen.titulo || 'Imagen carrusel'}
+              src={imagen.imagen}
+              alt={imagen.descripcion}
               fill
               className="object-cover"
-              priority={true}
-              sizes="100vw"
+              priority
             />
-            {(imagen.titulo || imagen.descripcion) && (
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 transition-opacity duration-300">
-                {imagen.titulo && (
-                  <h2 className="text-2xl font-bold mb-2">{imagen.titulo}</h2>
-                )}
-                {imagen.descripcion && (
-                  <p className="text-lg">{imagen.descripcion}</p>
-                )}
-              </div>
+            {imagen.enlace && (
+              <a
+                href={imagen.enlace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300"
+              >
+                <span className="text-white text-xl font-semibold">
+                  {imagen.descripcion}
+                </span>
+              </a>
             )}
           </div>
         ))}

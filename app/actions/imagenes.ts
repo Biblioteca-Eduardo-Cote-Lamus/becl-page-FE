@@ -1,18 +1,13 @@
 'use server';
 
 import { executeQuery } from '../lib/db';
-
-export interface ImagenCarrusel {
-  id: number;
-  url: string;
-  titulo?: string;
-  descripcion?: string;
-  orden: number;
-}
+import { ImagenCarrusel } from '../lib/definitions';
 
 export async function getImagenesCarrusel(): Promise<ImagenCarrusel[]> {
   try {
-    const data = await executeQuery<ImagenCarrusel[]>('SELECT * FROM imagenes_carrusel ORDER BY orden ASC');
+    const data = await executeQuery<ImagenCarrusel[]>(
+      'SELECT * FROM imagenes_carrusel WHERE visible = 1 ORDER BY id ASC'
+    );
     return data;
   } catch (error) {
     console.error('Database Error:', error);

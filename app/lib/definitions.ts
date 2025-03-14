@@ -113,7 +113,99 @@ export type Eventos = {
   lugar: Lugar;
   fecha: string;
   hora: string;
-  enlaceFacebook: string;  
-  enlaceYoutube: string;
-  enlaceGoogleMeet: string;
+  enlaceFacebook: string | null;
+  enlaceYoutube: string | null;
+  enlaceGoogleMeet: string | null;
+}
+
+// Base types for common database values
+export type DatabaseValue = string | number | boolean | Date | Buffer | null;
+
+// Document types
+export interface DocumentoImportante {
+  id: number;
+  descripcion: string;
+  url: string;
+}
+
+// Experience types
+export interface Experiencia {
+  id: number;
+  imagen_qr: string;
+  enlace: string;
+}
+
+// Staff types
+export interface FuncionarioBECL {
+  id: number;
+  nombre: string;
+  cargo: string;
+  imagen: string;
+}
+
+// Milestone types
+export interface Hito {
+  id: number;
+  anio: number;
+  imagen: string;
+  descripcion: string;
+}
+
+// Carousel types
+export interface ImagenCarrusel {
+  id: number;
+  imagen: string;
+  visible: boolean;
+  enlace: string | null;
+  descripcion: string;
+}
+
+// Mission and Vision types
+export interface InfoMisionVision {
+  id: number;
+  nombre: string | null;
+  descripcion: string | null;
+}
+
+// Location types
+export interface LugarEvento {
+  id: number;
+  nombre: string;
+}
+
+// Event types
+export interface Evento {
+  id: number;
+  titulo: string;
+  lugar_id: number | null;
+  fecha: string; // ISO date string
+  hora: string; // ISO time string
+  enlace_facebook: string | null;
+  enlace_youtube: string | null;
+  enlace_google_meet: string | null;
+  lugar?: LugarEvento; // Optional joined data
+}
+
+// News types
+export interface Noticia {
+  id: number;
+  titular: string;
+  descripcion: string;
+  imagen: string;
+  importante: boolean;
+}
+
+// Tutorial types
+export interface ServicioTutorial {
+  id: number;
+  nombre: string | null;
+  tutorial: string | null;
+}
+
+// User types
+export interface Usuario {
+  id: number;
+  nombre: string;
+  email: string;
+  clave: Buffer;
 }
