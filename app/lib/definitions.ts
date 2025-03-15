@@ -209,3 +209,11 @@ export interface Usuario {
   email: string;
   clave: Buffer;
 }
+
+// Update or add this interface
+export interface MisionVision {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+}

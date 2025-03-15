@@ -3,13 +3,6 @@
 import { executeQuery } from '../lib/db';
 import { InfoMisionVision } from '../lib/definitions';
 
-export interface MisionVision {
-  id: number;
-  titulo: string;
-  descripcion: string;
-  tipo: 'mision' | 'vision';
-}
-
 export async function getMisionVision(): Promise<InfoMisionVision[]> {
   try {
     const data = await executeQuery<InfoMisionVision[]>('SELECT * FROM info_mision_vision ORDER BY id ASC');

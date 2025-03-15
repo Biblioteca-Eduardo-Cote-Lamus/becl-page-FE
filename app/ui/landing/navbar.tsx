@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AcmeLogo from "../becl-logo";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -51,12 +52,12 @@ export default function Navbar() {
     >
       <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-20 px-4">
         <div className="flex items-center justify-between h-16 md:h-auto">
-          <a
+          <Link
             href="/"
             className="transition-transform duration-200 hover:scale-105"
           >
             <AcmeLogo />
-          </a>
+          </Link>
 
           <button
             className="md:hidden text-white p-2 rounded-lg hover:bg-secondaries_red-800 transition-colors"
@@ -270,38 +271,51 @@ export default function Navbar() {
   );
 }
 
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <a
-    href={href}
-    className="text-white hover:text-gray-300 px-3 py-2 rounded-md hover:bg-secondaries_red-800 transition-colors"
-  >
-    {children}
-  </a>
-);
-
-const DropdownLink = ({
-  href,
-  children,
-  external = false,
-}: {
+interface LinkProps {
   href: string;
   children: React.ReactNode;
   external?: boolean;
-}) => (
-  <a
-    href={href}
-    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
-    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-  >
-    {children}
-  </a>
-);
+}
+
+const DropdownLink = ({ href, children, external = false }: LinkProps) => {
+  return (
+    <a
+      href={href}
+      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondaries_red-900"
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {children}
+    </a>
+  );
+};
+
+const MobileDropdownLink = ({ href, children, external = false }: LinkProps) => {
+  return (
+    <a
+      href={href}
+      className="block px-4 py-2 text-sm text-white hover:bg-secondaries_red-700"
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {children}
+    </a>
+  );
+};
+
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+const NavLink = ({ href, children }: NavLinkProps) => {
+  return (
+    <a
+      href={href}
+      className="text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md hover:bg-secondaries_red-800"
+    >
+      {children}
+    </a>
+  );
+};
 
 const MobileNavLink = ({
   href,
@@ -313,24 +327,6 @@ const MobileNavLink = ({
   <a
     href={href}
     className="block text-white px-3 py-2 hover:bg-secondaries_red-700 transition-colors"
-  >
-    {children}
-  </a>
-);
-
-const MobileDropdownLink = ({
-  href,
-  children,
-  external = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  external?: boolean;
-}) => (
-  <a
-    href={href}
-    className="block text-white hover:bg-secondaries_red-700 px-3 py-2 pl-6 transition-colors"
-    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
   >
     {children}
   </a>

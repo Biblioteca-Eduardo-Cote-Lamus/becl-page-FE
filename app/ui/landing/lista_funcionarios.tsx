@@ -42,13 +42,17 @@ const ListaFuncionarios = () => {
             key={funcionario.id}
             className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2"
           >
-            <div className="relative h-64 w-full">
-              <Image
-                src={funcionario.imagen || '/placeholder-person.jpg'}
-                alt={funcionario.nombre}
-                fill
-                className="object-cover"
-              />
+            <div className="relative h-72 w-full flex items-center justify-center bg-gray-100 overflow-hidden">
+              <div className="relative h-full w-full transition-transform duration-300 hover:scale-110">
+                <Image
+                  src={funcionario.imagen || '/placeholder-person.jpg'}
+                  alt={funcionario.nombre}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={funcionario.id <= 3}
+                />
+              </div>
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-gray-800 mb-2">

@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { MisionVision, getMisionVision } from '@/app/actions/mision-vision';
+import { getMisionVision } from '@/app/actions/mision-vision';
+import type { InfoMisionVision } from '@/app/lib/definitions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb, faBullseye } from '@fortawesome/free-solid-svg-icons';
 
 const MisionVisionComponent = () => {
-  const [data, setData] = useState<MisionVision[]>([]);
+  const [data, setData] = useState<InfoMisionVision[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,8 +33,8 @@ const MisionVisionComponent = () => {
     );
   }
 
-  const mision = data.find(item => item.tipo === 'mision');
-  const vision = data.find(item => item.tipo === 'vision');
+  const mision = data.find(item => item.id === 1);
+  const vision = data.find(item => item.id === 2);
 
   return (
     <div className="w-full py-16 bg-white" id="mision-vision">
@@ -46,7 +47,7 @@ const MisionVisionComponent = () => {
                 <FontAwesomeIcon icon={faBullseye} className="text-white text-2xl" />
               </div>
               <h2 className="text-3xl font-bold text-secondaries_red-900">
-                {mision?.titulo || 'Misión'}
+                {mision?.nombre || 'Misión'}
               </h2>
             </div>
             <p className="text-gray-700 text-lg leading-relaxed">
@@ -61,7 +62,7 @@ const MisionVisionComponent = () => {
                 <FontAwesomeIcon icon={faLightbulb} className="text-white text-2xl" />
               </div>
               <h2 className="text-3xl font-bold text-secondaries_red-900">
-                {vision?.titulo || 'Visión'}
+                {vision?.nombre || 'Visión'}
               </h2>
             </div>
             <p className="text-gray-700 text-lg leading-relaxed">

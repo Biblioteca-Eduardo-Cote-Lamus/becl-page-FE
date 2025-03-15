@@ -3,12 +3,7 @@
 import { executeQuery } from '../lib/db';
 import { Funcionario } from '../lib/definitions';
 
-export interface Funcionario {
-  id: number;
-  nombre: string;
-  cargo: string;
-  imagen?: string;
-}
+export type { Funcionario };
 
 export async function getFuncionarios(): Promise<Funcionario[]> {
   try {
