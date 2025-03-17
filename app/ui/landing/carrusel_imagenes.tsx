@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { getImagenesCarrusel } from '@/app/actions/imagenes';
-import { ImagenCarrusel } from '@/app/lib/definitions';
-import { Carousel } from 'react-responsive-carousel';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { getImagenesCarrusel } from "@/app/actions/imagenes";
+import { ImagenCarrusel } from "@/app/lib/definitions";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const CarruselImagenes = () => {
@@ -18,14 +18,14 @@ const CarruselImagenes = () => {
         setImagenes(data);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching imágenes:', error);
+        console.error("Error fetching imágenes:", error);
         setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
-//Hola
+  //Hola
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -61,7 +61,7 @@ const CarruselImagenes = () => {
         }
         .carousel .control-dots .dot {
           background: #fff !important;
-          box-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
         }
       `}</style>
       <Carousel
