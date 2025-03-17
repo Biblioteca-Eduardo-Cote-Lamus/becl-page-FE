@@ -18,8 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${openSans.className} antialiased`} suppressHydrationWarning>
-        {children}</body>
+      <body
+        className={`${openSans.className} antialiased`}
+        suppressHydrationWarning
+      >
+        {children}
+      </body>
     </html>
   );
 }
