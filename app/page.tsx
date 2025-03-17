@@ -7,7 +7,17 @@ import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
 
-export default function Page() {
+export default async function Page() {
+  // Skip data fetching during build time
+  if (process.env.NEXT_PHASE === 'build') {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div>Loading...</div>
+      </main>
+    );
+  }
+
+  // Your existing data fetching code here
   return (
     <>
       <NavbarMenu />

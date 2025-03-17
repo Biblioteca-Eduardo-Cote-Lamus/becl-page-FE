@@ -32,37 +32,48 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Test the connection and database existence
-async function testConnection() {
-  try {
-    const connection = await pool.getConnection();
-    console.log('Successfully connected to MySQL database:', connection.config.database);
-    
-    // Test if we can access the database
-    const [rows] = await connection.execute('SHOW TABLES');
-    console.log('Available tables:', rows);
-    
-    connection.release();
-  } catch (error) {
-    const dbError = error as DatabaseError;
-    console.error('Database connection error:', {
-      message: dbError.message,
-      code: dbError.code,
-      sqlMessage: dbError.sqlMessage
-    });
-    throw dbError;
+// Skip database connection during build time
+if (process.env.NEXT_PHASE === 'build') {
+  console.log('Skipping database connection during build phase');
+} else {
+  // Test the connection and database existence
+  async function testConnection() {
+    try {
+      const connection = await pool.getConnection();
+      console.log('Successfully connected to MySQL database:', connection.config.database);
+      
+      // Test if we can access the database
+      const [rows] = await connection.execute('SHOW TABLES');
+      console.log('Available tables:', rows);
+      
+      connection.release();
+    } catch (error) {
+      const dbError = error as DatabaseError;
+      console.error('Database connection error:', {
+        message: dbError.message,
+        code: dbError.code,
+        sqlMessage: dbError.sqlMessage
+      });
+      throw dbError;
+    }
   }
-}
 
-// Call testConnection in development
-if (process.env.NODE_ENV === 'development') {
-  testConnection().catch(console.error);
+  // Call testConnection in development
+  if (process.env.NODE_ENV === 'development') {
+    testConnection().catch(console.error);
+  }
 }
 
 export async function executeQuery<T>(
   query: string, 
   values: Array<DatabaseValue> = []
 ): Promise<T> {
+  // Skip database operations during build time
+  if (process.env.NEXT_PHASE === 'build') {
+    console.log('Skipping database operation during build phase:', query);
+    return [] as T;
+  }
+
   try {
     const [results] = await pool.execute(query, values);
     return results as T;

@@ -6,7 +6,16 @@ export const metadata: Metadata = {
   description: 'Mantente informado sobre las últimas noticias y eventos de Bienestar Universitario.',
 };
 
-export default function NoticiasPage() {
+export default async function NoticiasPage() {
+  // Skip data fetching during build time
+  if (process.env.NEXT_PHASE === 'build') {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div>Loading...</div>
+      </main>
+    );
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-8">
       <div className="w-full max-w-7xl mx-auto">
