@@ -25,7 +25,7 @@ const CarruselImagenes = () => {
 
     fetchData();
   }, []);
-
+//Hola
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
