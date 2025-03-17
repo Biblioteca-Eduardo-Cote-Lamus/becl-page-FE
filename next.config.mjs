@@ -3,10 +3,22 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: '*',
-        pathname: '**',
+        protocol: 'https',
+        hostname: 'biblioteca.ufps.edu.co',
+        pathname: '/wp-content/uploads/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'biblioteca.ufps.edu.co',
+        pathname: '/wp-content/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.amazonaws.com',
+        pathname: '/**',
       },
     ],
+    unoptimized: true,
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
