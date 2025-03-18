@@ -30,16 +30,16 @@ export default function Footer() {
         </div>
         <div className="flex flex-col items-center md:items-start mt-5 md:mt-0">
           <p className="font-bold text-2xl mb-3">Navega</p>
-          <a className="hover:text-black" href="#">
+          <a className="hover:text-gray-300 transition-colors duration-200" href="#">
             Inicio
           </a>
-          <a className="hover:text-black" href="/info">
+          <a className="hover:text-gray-300 transition-colors duration-200" href="/info">
             Nosotros
           </a>
-          <a className="hover:text-black" href="/servicios">
+          <a className="hover:text-gray-300 transition-colors duration-200" href="/servicios">
             Servicios
           </a>
-          <a className="hover:text-black" href="#">
+          <a className="hover:text-gray-300 transition-colors duration-200" href="#">
             Eventos
           </a>
         </div>
@@ -71,47 +71,47 @@ export default function Footer() {
           <a
             target="_blank"
             rel="noopener"
-            className="hover:text-black"
-            href="https://www.facebook.com/profile.php?id=100085176715515"
+            className="hover:text-gray-300 transition-colors duration-200"
+            href="https://www.facebook.com/biblioteca.ufps"
             title="Facebook"
           >
-            <Facebook className="mr-2 h-5 w-5 fill-white" />
+            <Facebook className="w-6 h-6" />
           </a>
           <a
             target="_blank"
             rel="noopener"
-            className="hover:text-black"
-            href="https://twitter.com/bibliotecaUFPS"
-            title="Twitter"
-          >
-            <Twitter className="mr-2 h-5 w-5 fill-white" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-black"
-            href="https://www.youtube.com/channel/UC3FDhYdIfx6PJgsiNxl-pLA"
-            title="YouTube"
-          >
-            <Youtube className="mr-2 h-5 w-5 fill-white" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-black"
-            href="https://www.instagram.com/bibliotecaufps/"
+            className="hover:text-gray-300 transition-colors duration-200"
+            href="https://www.instagram.com/biblioteca.ufps/"
             title="Instagram"
           >
-            <Instagram className="mr-2 h-5 w-5 fill-white" />
+            <Instagram className="w-6 h-6" />
           </a>
           <a
             target="_blank"
             rel="noopener"
-            className="hover:text-black"
-            href="https://www.tiktok.com/@biblio_ufps"
+            className="hover:text-gray-300 transition-colors duration-200"
+            href="https://twitter.com/biblioteca_ufps"
+            title="Twitter"
+          >
+            <Twitter className="w-6 h-6" />
+          </a>
+          <a
+            target="_blank"
+            rel="noopener"
+            className="hover:text-gray-300 transition-colors duration-200"
+            href="https://www.youtube.com/@biblioteca.ufps"
+            title="YouTube"
+          >
+            <Youtube className="w-6 h-6" />
+          </a>
+          <a
+            target="_blank"
+            rel="noopener"
+            className="hover:text-gray-300 transition-colors duration-200"
+            href="https://open.spotify.com/show/0QZqXqXqXqXqXqXqXqXqXq"
             title="TikTok"
           >
-            <Music className="mr-2 h-5 w-5 fill-white" />
+            <Music className="w-6 h-6" />
           </a>
         </div>
       </div>

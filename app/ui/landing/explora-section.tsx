@@ -17,9 +17,9 @@ export default function ExploraSection() {
           className="transform transition-transform hover:-translate-x-2"
           width={450}
           height={377}
-          alt={"Biblioteca digital"}
+          alt={"Catálogo en línea"}
           src={
-            "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/bibliotecas-virtuales-removebg.png"
+            "https://becl-imagenes.s3.us-east-1.amazonaws.com/catalogo-en-linea.jpeg"
           }
         />
         <div>
@@ -55,7 +55,7 @@ export default function ExploraSection() {
           height={377}
           alt={"Biblioteca digital"}
           src={
-            "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/catalogo-en-linea-removebg-preview.png"
+            "https://becl-imagenes.s3.us-east-1.amazonaws.com/biblioteca-digital.jpeg"
           }
         />
         <div>
