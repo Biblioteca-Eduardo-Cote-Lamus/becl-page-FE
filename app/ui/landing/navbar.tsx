@@ -147,7 +147,7 @@ export default function Navbar() {
 
       {/* Menú móvil */}
       <div
-        className={`md:hidden transition-all duration-300 ${
+        className={`md:hidden transition-all duration-300 max-h-[calc(100vh-4rem)] overflow-y-auto ${
           mobileMenuOpen ? "block" : "hidden"
         }`}
       >
