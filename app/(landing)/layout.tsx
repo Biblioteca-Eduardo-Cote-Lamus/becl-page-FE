@@ -11,6 +11,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
       <body className={`${openSans.className} antialiased`} suppressHydrationWarning>
         <NavbarMenu />
         <div className="mt-32">{children}</div>
