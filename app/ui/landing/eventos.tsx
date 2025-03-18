@@ -1,13 +1,13 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Eventos } from "@/app/lib/definitions";
 import {
-  faCalendar,
-  faClock,
-  faMapPin,
-  faVideo,
-} from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faYoutube } from "@fortawesome/free-brands-svg-icons";
+  Calendar,
+  Clock,
+  MapPin,
+  Video,
+  Facebook,
+  Youtube,
+} from "lucide-react";
 
 const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
   const isToday = (dateStr: string) => {
@@ -58,18 +58,18 @@ const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
 
             <div className="mt-2 space-y-2 text-gray-600">
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faCalendar} className="w-4 h-4" />
+                <Calendar className="w-4 h-4" />
                 <span>{formatDate(evento.fecha)}</span>
               </div>
 
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faClock} className="w-4 h-4" />
+                <Clock className="w-4 h-4" />
                 <span>{evento.hora}</span>
               </div>
 
               {evento.lugar && (
                 <div className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faMapPin} className="w-4 h-4" />
+                  <MapPin className="w-4 h-4" />
                   <span>{evento.lugar.nombre}</span>
                 </div>
               )}
@@ -83,7 +83,7 @@ const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FontAwesomeIcon icon={faFacebook} className="w-6 h-6" />
+                  <Facebook className="w-6 h-6" />
                 </a>
               )}
               {evento.enlaceYoutube && (
@@ -93,7 +93,7 @@ const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FontAwesomeIcon icon={faYoutube} className="w-6 h-6" />
+                  <Youtube className="w-6 h-6" />
                 </a>
               )}
               {evento.enlaceGoogleMeet && (
@@ -103,7 +103,7 @@ const EventosList = ({ eventos }: { eventos: Eventos[] }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FontAwesomeIcon icon={faVideo} className="w-6 h-6" />
+                  <Video className="w-6 h-6" />
                 </a>
               )}
             </div>

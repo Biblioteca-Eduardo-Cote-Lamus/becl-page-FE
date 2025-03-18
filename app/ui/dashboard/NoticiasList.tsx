@@ -3,12 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Noticias } from "@/app/lib/definitions";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPenToSquare,
-  faSquarePlus,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { PlusSquare, PenSquare, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import { getNoticias, deleteNoticia } from "@/app/actions/noticias";
 
@@ -54,7 +49,7 @@ const NoticiasList: React.FC = () => {
         href="/dashboard/noticias/create"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        <FontAwesomeIcon icon={faSquarePlus} className="mr-1" />
+        <PlusSquare className="mr-1" />
         Crear Noticia
       </Link>
       <ul className="mt-4 md:mt-8 space-y-4 md:space-y-8">
@@ -74,14 +69,14 @@ const NoticiasList: React.FC = () => {
               }
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              <FontAwesomeIcon icon={faPenToSquare} className="mr-1" />
+              <PenSquare className="mr-1" />
               Editar
             </button>
             <button
               onClick={() => handleDelete(noticia.id)}
               className="bg-secondaries_red-700 hover:bg-secondaries_red-900 text-white font-bold py-2 px-4 rounded ml-2"
             >
-              <FontAwesomeIcon icon={faTrash} className="mr-1" />
+              <Trash2 className="mr-1" />
               Eliminar
             </button>
             <ToastContainer />

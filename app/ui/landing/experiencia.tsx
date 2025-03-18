@@ -1,8 +1,7 @@
 import React, { Suspense } from "react";
 import { openSans } from "../fonts";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ArrowRight } from "lucide-react";
 import { ImagenSkeleton } from "../skeletons";
 import { getExperiencia } from "@/app/actions/experiencia";
 
@@ -35,7 +34,7 @@ async function ExperienciaContent() {
           className="inline-block bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-8 flex items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
         >
           Calificar
-          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+          <ArrowRight className="ml-2" />
         </a>
       </div>
       

@@ -1,13 +1,12 @@
 'use client';
 import React from "react";
 import {
-  UserGroupIcon,
-  // HomeIcon,
-  DocumentDuplicateIcon,
-  NewspaperIcon,
-  CalendarIcon,
-  BriefcaseIcon,
-} from "@heroicons/react/24/outline";
+  Users,
+  FileText,
+  Newspaper,
+  Calendar,
+  Briefcase,
+} from "lucide-react";
 import Link from "next/link";
 
 import clsx from "clsx";
@@ -23,11 +22,11 @@ const links = [
   //   icon: DocumentDuplicateIcon,
   // },
   // { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
-  { name: "Noticias", href: "/dashboard/noticias", icon: NewspaperIcon },
-  { name: "Eventos", href: "/dashboard/eventos", icon: CalendarIcon },
-  { name: "Servicios", href: "/dashboard/servicios", icon: BriefcaseIcon },
-  { name: "Nosotros", href: "/dashboard/nosotros", icon: UserGroupIcon },
-  { name: "Documentos", href: "/dashboard/documentos", icon: DocumentDuplicateIcon },
+  { name: "Noticias", href: "/dashboard/noticias", icon: Newspaper },
+  { name: "Eventos", href: "/dashboard/eventos", icon: Calendar },
+  { name: "Servicios", href: "/dashboard/servicios", icon: Briefcase },
+  { name: "Nosotros", href: "/dashboard/nosotros", icon: Users },
+  { name: "Documentos", href: "/dashboard/documentos", icon: FileText },
 ];
 
 export default function NavLinks() {

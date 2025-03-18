@@ -2,8 +2,7 @@
 
 import { montserrat, openSans } from "@/app/ui/fonts";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ArrowRight } from "lucide-react";
 
 export default function ExploraSection() {
   return (
@@ -45,7 +44,7 @@ export default function ExploraSection() {
             }
           >
             Explorar bibliotecas
-            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+            <ArrowRight className="ml-2" />
           </button>
         </div>
       </div>
@@ -81,7 +80,7 @@ export default function ExploraSection() {
             }
           >
             Explorar Cátalogo
-            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+            <ArrowRight className="ml-2" />
           </button>
         </div>
       </div>

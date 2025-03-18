@@ -1,13 +1,12 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebook,
-  faInstagram,
-  faXTwitter,
-  faYoutube,
-  faTiktok,
-} from "@fortawesome/free-brands-svg-icons";
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+  Music,
+} from "lucide-react";
 import AcmeLogo from "../becl-logo";
 
 export default function Footer() {
@@ -76,10 +75,7 @@ export default function Footer() {
             href="https://www.facebook.com/profile.php?id=100085176715515"
             title="Facebook"
           >
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="mr-2 h-5 w-5 fill-white"
-            />
+            <Facebook className="mr-2 h-5 w-5 fill-white" />
           </a>
           <a
             target="_blank"
@@ -88,10 +84,7 @@ export default function Footer() {
             href="https://twitter.com/bibliotecaUFPS"
             title="Twitter"
           >
-            <FontAwesomeIcon
-              icon={faXTwitter}
-              className="mr-2 h-5 w-5 fill-white"
-            />
+            <Twitter className="mr-2 h-5 w-5 fill-white" />
           </a>
           <a
             target="_blank"
@@ -100,10 +93,7 @@ export default function Footer() {
             href="https://www.youtube.com/channel/UC3FDhYdIfx6PJgsiNxl-pLA"
             title="YouTube"
           >
-            <FontAwesomeIcon
-              icon={faYoutube}
-              className="mr-2 h-5 w-5 fill-white"
-            />
+            <Youtube className="mr-2 h-5 w-5 fill-white" />
           </a>
           <a
             target="_blank"
@@ -112,10 +102,7 @@ export default function Footer() {
             href="https://www.instagram.com/bibliotecaufps/"
             title="Instagram"
           >
-            <FontAwesomeIcon
-              icon={faInstagram}
-              className="mr-2 h-5 w-5 fill-white"
-            />
+            <Instagram className="mr-2 h-5 w-5 fill-white" />
           </a>
           <a
             target="_blank"
@@ -124,10 +111,7 @@ export default function Footer() {
             href="https://www.tiktok.com/@biblio_ufps"
             title="TikTok"
           >
-            <FontAwesomeIcon
-              icon={faTiktok}
-              className="mr-2 h-5 w-5 fill-white"
-            />
+            <Music className="mr-2 h-5 w-5 fill-white" />
           </a>
         </div>
       </div>

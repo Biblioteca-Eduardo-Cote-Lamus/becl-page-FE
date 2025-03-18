@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMisionVision } from '@/app/actions/mision-vision';
 import type { InfoMisionVision } from '@/app/lib/definitions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLightbulb, faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { Target, Lightbulb } from 'lucide-react';
 
 const MisionVisionComponent = () => {
   const [data, setData] = useState<InfoMisionVision[]>([]);
@@ -44,7 +43,7 @@ const MisionVisionComponent = () => {
           <div className="bg-gray-50 rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:-translate-y-2">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-secondaries_red-900 rounded-full flex items-center justify-center mr-4">
-                <FontAwesomeIcon icon={faBullseye} className="text-white text-2xl" />
+                <Target className="text-white text-2xl" />
               </div>
               <h2 className="text-3xl font-bold text-secondaries_red-900">
                 {mision?.nombre || 'Misión'}
@@ -59,7 +58,7 @@ const MisionVisionComponent = () => {
           <div className="bg-gray-50 rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:-translate-y-2">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-secondaries_red-900 rounded-full flex items-center justify-center mr-4">
-                <FontAwesomeIcon icon={faLightbulb} className="text-white text-2xl" />
+                <Lightbulb className="text-white text-2xl" />
               </div>
               <h2 className="text-3xl font-bold text-secondaries_red-900">
                 {vision?.nombre || 'Visión'}

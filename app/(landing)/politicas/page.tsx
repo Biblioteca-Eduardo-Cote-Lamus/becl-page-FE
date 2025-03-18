@@ -1,16 +1,7 @@
 import { montserrat } from "@/app/ui/fonts";
 import { Metadata } from "next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import {
-  faArrowsRotate,
-  faDesktop,
-  faPassport,
-  faPencilRuler,
-  faPeopleArrows,
-  faServer,
-  faUserCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { RefreshCw, Monitor, UserCheck, Users, Ruler, Globe, Server } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Políticas",
@@ -72,9 +63,9 @@ export default function PoliticasPage() {
 
       <section className="flex flex-col md:flex-row md:justify-between md:space-x-4 place-content-around">
         <div className="flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faArrowsRotate}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <RefreshCw
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -83,9 +74,9 @@ export default function PoliticasPage() {
           </p>
         </div>
         <div className="flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faDesktop}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <Monitor
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -94,9 +85,9 @@ export default function PoliticasPage() {
           </p>
         </div>
         <div className="flex flex-col items-center md:text-left w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faUserCheck}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <UserCheck
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -107,9 +98,9 @@ export default function PoliticasPage() {
       </section>
       <section className="flex flex-col md:flex-row md:justify-between md:space-x-4 place-content-around">
         <div className="flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faPeopleArrows}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <Users
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -118,9 +109,9 @@ export default function PoliticasPage() {
           </p>
         </div>
         <div className="flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faPencilRuler}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <Ruler
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -130,9 +121,9 @@ export default function PoliticasPage() {
           </p>
         </div>
         <div className="flex flex-col items-center md:text-left w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faPassport}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <Globe
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">
@@ -146,9 +137,9 @@ export default function PoliticasPage() {
         <div className="hidden md:flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4"></div>{" "}
         {/* Div izquierdo vacío, oculto en móviles */}
         <div className="flex flex-col items-center md:text-left mb-6 md:mb-0 w-full h-48 md:h-64 bg-white rounded-lg p-4">
-          <FontAwesomeIcon
-            icon={faServer}
-            style={{ width: "62.74px", height: "62.74px", color: "#a51f22" }}
+          <Server
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <p className="text-center md:text-left">

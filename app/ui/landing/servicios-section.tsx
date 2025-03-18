@@ -1,14 +1,7 @@
 "use client";
 
 import { montserrat } from "@/app/ui/fonts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faBook,
-  faBookOpen,
-  faDesktop,
-  faRotateLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { Monitor, Book, RotateCcw, BookOpen, ArrowRight } from 'lucide-react';
 
 export default function ServiciosSection() {
   return (
@@ -24,13 +17,9 @@ export default function ServiciosSection() {
       </p>
       <div className="md:flex md:flex-row my-5 items-start px-1 ">
         <div className="pt-4 text-center flex flex-col items-center">
-          <FontAwesomeIcon
-            icon={faDesktop}
-            style={{
-              width: "62.74px",
-              height: "62.74px",
-              color: "#a51f22",
-            }}
+          <Monitor
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <h4 className="text-xl font-semibold">Sala de cómputo</h4>
@@ -40,13 +29,9 @@ export default function ServiciosSection() {
           </p>
         </div>
         <div className="pt-4 text-center flex flex-col items-center px-1">
-          <FontAwesomeIcon
-            icon={faBook}
-            style={{
-              width: "62.74px",
-              height: "62.74px",
-              color: "#a51f22",
-            }}
+          <Book
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <h4 className="text-xl font-semibold">Préstamo de libros</h4>
@@ -56,13 +41,9 @@ export default function ServiciosSection() {
           </p>
         </div>
         <div className="pt-4 text-center flex flex-col items-center px-1">
-          <FontAwesomeIcon
-            icon={faRotateLeft}
-            style={{
-              width: "62.74px",
-              height: "62.74px",
-              color: "#a51f22",
-            }}
+          <RotateCcw
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <h4 className="text-xl font-semibold">Devolución de libros</h4>
@@ -72,13 +53,9 @@ export default function ServiciosSection() {
           </p>
         </div>
         <div className="pt-4 text-center flex flex-col items-center px-1">
-          <FontAwesomeIcon
-            icon={faBookOpen}
-            style={{
-              width: "62.74px",
-              height: "62.74px",
-              color: "#a51f22",
-            }}
+          <BookOpen
+            size={62.74}
+            color="#a51f22"
             className="mb-6 transform transition-transform hover:-translate-y-2"
           />
           <h4 className="text-xl font-semibold">Salas de lectura</h4>
@@ -94,7 +71,7 @@ export default function ServiciosSection() {
         onClick={() => (window.location.href = "/servicios")}
       >
         Ver más
-        <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+        <ArrowRight className="ml-2" />
       </button>
     </section>
   );

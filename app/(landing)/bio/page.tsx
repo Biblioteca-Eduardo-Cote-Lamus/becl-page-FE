@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { montserrat } from "@/app/ui/fonts";
 import Image from "next/image";
-import { MoonFastWindIcon, Tired01Icon, SignatureIcon } from "hugeicons-react";
+import { Wind, Heart, PenLine } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Biografía",
@@ -102,7 +102,7 @@ export default function BioPage() {
           <div className="flex flex-col md:flex-row px-4 md:px-10">
             <div className="w-full md:w-1/3 px-3 md:px-6 mb-6 md:mb-0">
               <div className="flex items-center gap-2 mb-3">
-                <Tired01Icon size={32} />
+                <Heart size={32} />
                 <b>
                   <h5 className=" text-2xl text-secondaries_red-800">YO SOY</h5>
                 </b>
@@ -123,7 +123,7 @@ export default function BioPage() {
             </div>
             <div className="w-full md:w-1/3 px-3 md:px-6 mb-6 md:mb-0">
               <div className="flex items-center gap-2 mb-3">
-                <SignatureIcon size={32} />
+                <PenLine size={32} />
                 <b>
                   <h5 className=" text-2xl text-secondaries_red-800">
                     EL DESÍGNIO
@@ -143,7 +143,7 @@ export default function BioPage() {
             </div>
             <div className="w-full md:w-1/3 px-3 md:px-6">
               <div className="flex items-center gap-2 mb-3">
-                <MoonFastWindIcon size={32} />
+                <Wind size={32} />
                 <b>
                   <h5 className="text-2xl text-secondaries_red-800">
                     EN EL AIRE SE BORRAN LAS PALABRAS

@@ -3,13 +3,7 @@
 import { useState, useEffect } from "react";
 import AcmeLogo from "../becl-logo";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDown,
-  faAngleUp,
-  faBars,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   type DropdownMenu = "bibliotecaDigital" | "servicios" | "nosotros";
@@ -64,10 +58,11 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <FontAwesomeIcon
-              icon={mobileMenuOpen ? faXmark : faBars}
-              className="text-2xl transition-transform duration-200"
-            />
+            {mobileMenuOpen ? (
+              <X className="text-2xl transition-transform duration-200" />
+            ) : (
+              <Menu className="text-2xl transition-transform duration-200" />
+            )}
           </button>
         </div>
 
@@ -77,7 +72,7 @@ export default function Navbar() {
           <div className="dropdown-container relative group">
             <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
               Biblioteca Digital
-              <FontAwesomeIcon icon={faAngleDown} className="ml-2" />
+              <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <DropdownLink
@@ -105,7 +100,7 @@ export default function Navbar() {
           <div className="dropdown-container relative group">
             <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
               Servicios
-              <FontAwesomeIcon icon={faAngleDown} className="ml-2" />
+              <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <DropdownLink href="/servicios#digitales">
@@ -130,7 +125,7 @@ export default function Navbar() {
           <div className="dropdown-container relative group">
             <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
               Nosotros
-              <FontAwesomeIcon icon={faAngleDown} className="ml-2" />
+              <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <DropdownLink href="/info#historia">Historia</DropdownLink>
@@ -164,10 +159,11 @@ export default function Navbar() {
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Biblioteca Digital
-              <FontAwesomeIcon
-                icon={dropdownOpen.bibliotecaDigital ? faAngleUp : faAngleDown}
-                className="transition-transform duration-200"
-              />
+              {dropdownOpen.bibliotecaDigital ? (
+                <ChevronUp className="transition-transform duration-200" />
+              ) : (
+                <ChevronDown className="transition-transform duration-200" />
+              )}
             </button>
             <div
               className={`overflow-hidden transition-all duration-300 ${
@@ -202,10 +198,11 @@ export default function Navbar() {
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Servicios
-              <FontAwesomeIcon
-                icon={dropdownOpen.servicios ? faAngleUp : faAngleDown}
-                className="transition-transform duration-200"
-              />
+              {dropdownOpen.servicios ? (
+                <ChevronUp className="transition-transform duration-200" />
+              ) : (
+                <ChevronDown className="transition-transform duration-200" />
+              )}
             </button>
             <div
               className={`overflow-hidden transition-all duration-300 ${
@@ -237,19 +234,18 @@ export default function Navbar() {
               className="w-full flex justify-between items-center text-white px-3 py-2"
             >
               Nosotros
-              <FontAwesomeIcon
-                icon={dropdownOpen.nosotros ? faAngleUp : faAngleDown}
-                className="transition-transform duration-200"
-              />
+              {dropdownOpen.nosotros ? (
+                <ChevronUp className="transition-transform duration-200" />
+              ) : (
+                <ChevronDown className="transition-transform duration-200" />
+              )}
             </button>
             <div
               className={`overflow-hidden transition-all duration-300 ${
                 dropdownOpen.nosotros ? "max-h-64" : "max-h-0"
               }`}
             >
-              <MobileDropdownLink href="/info#historia">
-                Historia
-              </MobileDropdownLink>
+              <MobileDropdownLink href="/info#historia">Historia</MobileDropdownLink>
               <MobileDropdownLink href="/info#mision-vision">
                 Misión y Visión
               </MobileDropdownLink>
@@ -257,9 +253,7 @@ export default function Navbar() {
               <MobileDropdownLink href="/politicas">
                 Políticas de Calidad
               </MobileDropdownLink>
-              <MobileDropdownLink href="/equipo">
-                Talento Humano
-              </MobileDropdownLink>
+              <MobileDropdownLink href="/equipo">Talento Humano</MobileDropdownLink>
             </div>
           </div>
 
@@ -277,45 +271,41 @@ interface LinkProps {
   external?: boolean;
 }
 
-const DropdownLink = ({ href, children, external = false }: LinkProps) => {
-  return (
-    <a
-      href={href}
-      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondaries_red-900"
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    >
-      {children}
-    </a>
-  );
-};
+const DropdownLink = ({ href, children, external = false }: LinkProps) => (
+  <Link
+    href={href}
+    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener noreferrer" : undefined}
+  >
+    {children}
+  </Link>
+);
 
-const MobileDropdownLink = ({ href, children, external = false }: LinkProps) => {
-  return (
-    <a
-      href={href}
-      className="block px-4 py-2 text-sm text-white hover:bg-secondaries_red-700"
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    >
-      {children}
-    </a>
-  );
-};
+const MobileDropdownLink = ({ href, children, external = false }: LinkProps) => (
+  <Link
+    href={href}
+    className="block px-6 py-2 text-white hover:bg-secondaries_red-700 transition-colors"
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener noreferrer" : undefined}
+  >
+    {children}
+  </Link>
+);
 
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
 }
 
-const NavLink = ({ href, children }: NavLinkProps) => {
-  return (
-    <a
-      href={href}
-      className="text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md hover:bg-secondaries_red-800"
-    >
-      {children}
-    </a>
-  );
-};
+const NavLink = ({ href, children }: NavLinkProps) => (
+  <Link
+    href={href}
+    className="text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md hover:bg-secondaries_red-800"
+  >
+    {children}
+  </Link>
+);
 
 const MobileNavLink = ({
   href,
@@ -324,10 +314,10 @@ const MobileNavLink = ({
   href: string;
   children: React.ReactNode;
 }) => (
-  <a
+  <Link
     href={href}
-    className="block text-white px-3 py-2 hover:bg-secondaries_red-700 transition-colors"
+    className="block px-3 py-2 text-white hover:bg-secondaries_red-700 transition-colors"
   >
     {children}
-  </a>
+  </Link>
 );

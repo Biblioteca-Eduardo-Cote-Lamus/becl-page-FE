@@ -1,18 +1,7 @@
 "use client";
 import { montserrat, openSans } from "@/app/ui/fonts";
-import { faArrowRight, faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ArrowRight, Eye, Computer, Book, ArrowLeft, BookOpen, Newspaper, Layout } from "lucide-react";
 import Image from "next/image";
-import {
-  RiArrowGoBackLine,
-  RiArtboardLine,
-  RiBookLine,
-  RiBookOpenLine,
-  RiComputerLine,
-  RiDatabase2Line,
-  RiNewspaperLine,
-  RiTeamLine,
-} from "react-icons/ri";
 
 export default function ServiciosPage() {
   return (
@@ -75,7 +64,7 @@ export default function ServiciosPage() {
                   }
                 >
                   Explorar bibliotecas
-                  <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+                  <ArrowRight className="ml-2" />
                 </button>
                 <button
                   className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
@@ -88,7 +77,7 @@ export default function ServiciosPage() {
                   }
                 >
                   Ver tutorial
-                  <FontAwesomeIcon icon={faEye} className="ml-2" />
+                  <Eye className="ml-2" />
                 </button>
               </div>
             </div>
@@ -127,7 +116,7 @@ export default function ServiciosPage() {
                   }
                 >
                   Explorar catálogo
-                  <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+                  <ArrowRight className="ml-2" />
                 </button>
                 <button
                   className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
@@ -140,7 +129,7 @@ export default function ServiciosPage() {
                   }
                 >
                   Ver tutorial
-                  <FontAwesomeIcon icon={faEye} className="ml-2" />
+                  <Eye className="ml-2" />
                 </button>
               </div>
             </div>
@@ -158,7 +147,7 @@ export default function ServiciosPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiComputerLine className="text-5xl text-red" />
+            <Computer className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Sala de cómputo
             </h4>
@@ -169,7 +158,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
-            <RiBookLine className="text-5xl text-red" />
+            <Book className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo de material bibliográfico
             </h4>
@@ -181,7 +170,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiArrowGoBackLine className="text-5xl text-red" />
+            <ArrowLeft className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Devolución de material bibliográfico
             </h4>
@@ -199,7 +188,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:translate-x-2">
-            <RiBookOpenLine className="text-5xl text-red" />
+            <BookOpen className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Salas de lectura
             </h4>
@@ -210,7 +199,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center md:items-start bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-x-2">
-            <RiNewspaperLine className="text-5xl text-red" />
+            <Newspaper className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">Hemeroteca</h4>
             <p className="md:text-left">
               Ingresa a la biblioteca, busca el libro que necesita para estudiar
@@ -231,7 +220,7 @@ export default function ServiciosPage() {
         </h2>
         <div className="flex flex-col md:flex-row my-5">
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiArtboardLine className="text-5xl text-red" />
+            <Layout className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Auditorio Eduardo Cote Lamus
             </h4>
@@ -250,7 +239,6 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiTeamLine className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo Sala de Semilleros
             </h4>
@@ -269,7 +257,6 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
-            <RiDatabase2Line className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Capacitaciones de Bases de Datos
             </h4>
