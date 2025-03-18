@@ -24,7 +24,7 @@ export default function AlertaNoticia() {
     return null;
   }
 
-  return (
+  /*return (
     <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4">
       <div className="flex">
         <div className="flex-shrink-0">
@@ -39,5 +39,5 @@ export default function AlertaNoticia() {
         </div>
       </div>
     </div>
-  );
+  );*/
 }
