@@ -14,7 +14,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/postgres": "^0.5.1",
     "axios": "^1.7.7",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
     "knex": "^3.1.0",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/bcrypt": "^5.0.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.14",
