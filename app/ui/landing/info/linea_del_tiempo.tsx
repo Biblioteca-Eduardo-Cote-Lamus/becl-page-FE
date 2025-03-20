@@ -59,7 +59,7 @@ const LineaDelTiempo = () => {
                     {hito.imagen && (
                       <div className="relative h-40 md:h-48 mb-4">
                         <Image
-                          src={hito.imagen}
+                          src={`/Imagenes_biblioteca/hitos/${hito.imagen}`}
                           alt={`Hito del año ${hito.anio}`}
                           fill
                           className="object-cover rounded-lg"
