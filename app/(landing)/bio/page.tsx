@@ -27,7 +27,7 @@ export default function BioPage() {
           </p>
         </div>
         <Image
-          src="http://biblioteca.ufps.edu.co/wp-content/uploads/2022/12/reading.png"
+          src="/Imagenes_biblioteca/biografia/reading.png"
           alt="Libro"
           width={512}
           height={512}
@@ -74,9 +74,7 @@ export default function BioPage() {
                 height={495}
                 className="w-full object-cover transform transition-transform hover:-translate-y-2"
                 alt="Eduardo Cote Lamus"
-                src={
-                  "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/eduardo_cote_lamus-001-1.jpg"
-                }
+                src="/Imagenes_biblioteca/biografia/eduardo-cote-lamus.jpg"
               />
             </div>
           </div>
@@ -188,9 +186,7 @@ export default function BioPage() {
                 height={422}
                 className="w-full object-cover"
                 alt="La Vida Cotidiana"
-                src={
-                  "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/12/la-vida-cotidiana.gif"
-                }
+                src="/Imagenes_biblioteca/biografia/la-vida-cotidiana.jpg"
               />
               <b>
                 <h2 className="py-3">LA VIDA COTIDIANA</h2>
@@ -202,9 +198,7 @@ export default function BioPage() {
                 height={422}
                 className="w-full object-cover"
                 alt="Los Sueños"
-                src={
-                  "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/12/los-suenos.jpg"
-                }
+                src="/Imagenes_biblioteca/biografia/los-suenos.jpg"
               />
               <b>
                 <h2 className="py-3">LOS SUEÑOS</h2>
@@ -216,9 +210,7 @@ export default function BioPage() {
                 height={422}
                 className="w-full object-cover"
                 alt="Memorias de un Olvido"
-                src={
-                  "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/12/momorias-de-un-olvido.jpg"
-                }
+                src="/Imagenes_biblioteca/biografia/memorias-de-un-olvido.png"
               />
               <b>
                 <h2 className="py-3">MEMORIAS DE UN OLVIDO</h2>
