@@ -43,7 +43,7 @@ async function ExperienciaContent() {
           width={450} 
           height={450} 
           alt="Código QR para calificar experiencia" 
-          src={experiencia.imagen_qr}
+          src={`/Imagenes_biblioteca/${experiencia.imagen_qr}`}
           className="rounded-lg shadow-lg"
           priority
         />
