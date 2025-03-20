@@ -25,7 +25,7 @@ const CarruselImagenes = () => {
 
     fetchData();
   }, []);
-  //Hola
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -74,7 +74,7 @@ const CarruselImagenes = () => {
         {imagenes.map((imagen) => (
           <div key={imagen.id} className="relative h-[600px]">
             <Image
-              src={imagen.imagen}
+              src={`/Imagenes_biblioteca/carrusel/${imagen.imagen}`}
               alt={imagen.descripcion}
               fill
               className="object-cover"
