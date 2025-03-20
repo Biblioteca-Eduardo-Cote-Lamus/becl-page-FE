@@ -198,7 +198,7 @@ export default function BioPage() {
                 height={422}
                 className="w-full object-cover"
                 alt="Los Sueños"
-                src="/Imagenes_biblioteca/biografia/los-suenos.jpg"
+                src="/Imagenes_biblioteca/biografia/los-sueños.jpg"
               />
               <b>
                 <h2 className="py-3">LOS SUEÑOS</h2>
