@@ -1,6 +1,6 @@
 "use client";
 import { montserrat, openSans } from "@/app/ui/fonts";
-import { ArrowRight, Eye, Computer, Book, ArrowLeft, BookOpen, Newspaper, Layout } from "lucide-react";
+import { ArrowRight, Eye, Computer, Book, ArrowLeft, BookOpen, Newspaper, Layout, Database, MonitorCheck } from "lucide-react";
 import Image from "next/image";
 
 export default function ServiciosPage() {
@@ -239,6 +239,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
+            <MonitorCheck className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Préstamo Sala de Semilleros
             </h4>
@@ -257,6 +258,7 @@ export default function ServiciosPage() {
             </p>
           </div>
           <div className="pt-4 text-center flex flex-col items-center bg-white shadow-md rounded-md p-4 transform transition-transform hover:-translate-y-2">
+            <Database className="text-5xl text-red" />
             <h4 className="md:text-left text-xl font-semibold">
               Capacitaciones de Bases de Datos
             </h4>
