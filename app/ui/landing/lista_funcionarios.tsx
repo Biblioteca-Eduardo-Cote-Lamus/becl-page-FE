@@ -45,7 +45,7 @@ const ListaFuncionarios = () => {
             <div className="relative h-72 w-full flex items-center justify-center bg-gray-100 overflow-hidden">
               <div className="relative h-full w-full transition-transform duration-300 hover:scale-110">
                 <Image
-                  src={funcionario.imagen || '/placeholder-person.jpg'}
+                  src={funcionario.imagen ? `/Imagenes_biblioteca/funcionarios/${funcionario.imagen}` : '/placeholder-person.jpg'}
                   alt={funcionario.nombre}
                   fill
                   className="object-contain"
