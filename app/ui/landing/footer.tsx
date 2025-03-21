@@ -28,21 +28,6 @@ export default function Footer() {
           </a>
         </div>
         <div className="flex flex-col items-center md:items-start mt-5 md:mt-0">
-          <p className="font-bold text-2xl mb-3">Navega</p>
-          <a className="hover:text-gray-300 transition-colors duration-200" href="#">
-            Inicio
-          </a>
-          <a className="hover:text-gray-300 transition-colors duration-200" href="/info">
-            Nosotros
-          </a>
-          <a className="hover:text-gray-300 transition-colors duration-200" href="/servicios">
-            Servicios
-          </a>
-          <a className="hover:text-gray-300 transition-colors duration-200" href="#">
-            Eventos
-          </a>
-        </div>
-        <div className="flex flex-col items-center md:items-start mt-5 md:mt-0">
           <p className="font-bold text-2xl mb-3">Convenios</p>
           <a
             target="_blank"
