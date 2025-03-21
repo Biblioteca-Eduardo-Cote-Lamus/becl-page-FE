@@ -87,12 +87,6 @@ export default function Navbar() {
               >
                 Bases de Datos
               </DropdownLink>
-              <DropdownLink
-                href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
-                external
-              >
-                Biblioteca 3D
-              </DropdownLink>
             </div>
           </div>
 
@@ -181,12 +175,6 @@ export default function Navbar() {
                 external
               >
                 Bases de Datos
-              </MobileDropdownLink>
-              <MobileDropdownLink
-                href="http://biblioteca.ufps.edu.co/biblioteca-digital/"
-                external
-              >
-                Biblioteca 3D
               </MobileDropdownLink>
             </div>
           </div>
