@@ -28,7 +28,7 @@ const CarruselImagenes = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-[400px]">
+      <div className="flex justify-center items-center min-h-[200px] md:min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondaries_red-900"></div>
       </div>
     );
@@ -39,16 +39,24 @@ const CarruselImagenes = () => {
   }
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto">
+    <div className="relative w-full max-w-7xl mx-auto px-4 md:px-0">
       <style jsx global>{`
         .carousel .control-arrow {
           background-color: rgba(0, 0, 0, 0.3) !important;
-          height: 50px !important;
-          width: 50px !important;
-          border-radius: 25px !important;
+          height: 40px !important;
+          width: 40px !important;
+          border-radius: 20px !important;
           top: 50% !important;
           transform: translateY(-50%) !important;
-          margin: 0 20px !important;
+          margin: 0 10px !important;
+        }
+        @media (min-width: 768px) {
+          .carousel .control-arrow {
+            height: 50px !important;
+            width: 50px !important;
+            border-radius: 25px !important;
+            margin: 0 20px !important;
+          }
         }
         .carousel .control-prev.control-arrow:before {
           border-right: 8px solid #fff !important;
@@ -72,12 +80,12 @@ const CarruselImagenes = () => {
         interval={5000}
       >
         {imagenes.map((imagen) => (
-          <div key={imagen.id} className="relative h-[600px]">
+          <div key={imagen.id} className="relative h-[300px] md:h-[500px] lg:h-[600px]">
             <Image
               src={`/Imagenes_biblioteca/carrusel/${imagen.imagen}`}
               alt={imagen.descripcion}
               fill
-              className="object-cover"
+              className="object-contain md:object-cover"
               priority
             />
             {imagen.enlace && (
@@ -87,7 +95,7 @@ const CarruselImagenes = () => {
                 rel="noopener noreferrer"
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300"
               >
-                <span className="text-white text-xl font-semibold">
+                <span className="text-white text-lg md:text-xl font-semibold text-center px-4">
                   {imagen.descripcion}
                 </span>
               </a>
