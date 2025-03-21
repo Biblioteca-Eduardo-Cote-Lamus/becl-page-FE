@@ -20,28 +20,46 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Mostrar/ocultar navbar basado en la dirección del scroll
-      if (currentScrollY > lastScrollY) {
-        // Scroll hacia abajo
-        setIsVisible(false);
-      } else {
-        // Scroll hacia arriba
-        setIsVisible(true);
+      // Limpiar el timeout anterior si existe
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
-      
-      // Actualizar el estado de scroll para el fondo
-      setScrolled(currentScrollY > 20);
-      setLastScrollY(currentScrollY);
+
+      // Crear un nuevo timeout para retrasar la acción
+      const timeout = setTimeout(() => {
+        // Solo ocultar/mostrar si el scroll es significativo (más de 50px)
+        if (Math.abs(currentScrollY - lastScrollY) > 50) {
+          if (currentScrollY > lastScrollY) {
+            // Scroll hacia abajo
+            setIsVisible(false);
+          } else {
+            // Scroll hacia arriba
+            setIsVisible(true);
+          }
+        }
+        
+        // Actualizar el estado de scroll para el fondo
+        setScrolled(currentScrollY > 20);
+        setLastScrollY(currentScrollY);
+      }, 150); // Retraso de 150ms
+
+      setScrollTimeout(timeout);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+  }, [lastScrollY, scrollTimeout]);
 
   const toggleMobileDropdown = (menu: DropdownMenu) => {
     setDropdownOpen((prev) => ({
