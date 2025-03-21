@@ -5,7 +5,6 @@ import {
   Instagram,
   Twitter,
   Youtube,
-  Music,
 } from "lucide-react";
 import AcmeLogo from "../becl-logo";
 
@@ -103,15 +102,6 @@ export default function Footer() {
             title="YouTube"
           >
             <Youtube className="w-6 h-6" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-gray-300 transition-colors duration-200"
-            href="https://open.spotify.com/show/0QZqXqXqXqXqXqXqXqXqXq"
-            title="TikTok"
-          >
-            <Music className="w-6 h-6" />
           </a>
         </div>
       </div>
