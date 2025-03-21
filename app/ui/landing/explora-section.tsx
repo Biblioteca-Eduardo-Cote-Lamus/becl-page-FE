@@ -17,9 +17,9 @@ export default function ExploraSection() {
           className="transform transition-transform hover:-translate-x-2"
           width={450}
           height={377}
-          alt={"Catálogo en línea"}
+          alt={"Biblioteca digital"}
           src={
-            "/Imagenes_biblioteca/bases-de-datos.png"
+            "/Imagenes_biblioteca/biblioteca-digital.png"
           }
         />
         <div>
@@ -53,7 +53,7 @@ export default function ExploraSection() {
           className="transform transition-transform hover:translate-x-2"
           width={450}
           height={377}
-          alt={"Biblioteca digital"}
+          alt={"Catálogo en línea"}
           src={
             "/Imagenes_biblioteca/catalogo-en-linea.png"
           }

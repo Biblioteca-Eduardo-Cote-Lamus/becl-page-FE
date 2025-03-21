@@ -48,7 +48,7 @@ export default function InfoPage() {
             height={642}
             alt={"Línea de tiempo directores"}
             src={
-              "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/Grafico-de-Linea-de-Tiempo-con-Fechas-y-Etapas-Multicolor-1.jpg"
+              "/Imagenes_biblioteca/linea-del-tiempo-directores.jpg"
             }
           />
         </div>
