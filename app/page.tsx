@@ -6,6 +6,7 @@ import Experiencia from "./ui/landing/experiencia";
 import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
+import Image from "next/image";
 
 export default async function Page() {
   // Skip data fetching during build time
@@ -21,7 +22,26 @@ export default async function Page() {
   return (
     <>
       <NavbarMenu />
-      <main className="flex min-h-screen flex-col p-6">
+      <main className="flex min-h-screen flex-col">
+        {/* Sección de bienvenida con fondo */}
+        <section className="relative h-[100vh] w-full">
+          <Image
+            src="/Imagenes_biblioteca/fondo.jpg"
+            alt="Fondo de la biblioteca"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center">
+            <h1 className={`text-4xl md:text-6xl text-white font-bold text-center mb-4 ${montserrat.className}`}>
+              Bienvenido a Nuestra
+            </h1>
+            <h2 className={`text-3xl md:text-5xl text-yellow-400 font-bold text-center ${montserrat.className}`}>
+              Biblioteca Eduardo Cote Lamus
+            </h2>
+          </div>
+        </section>
+
         {/* Alerta de noticia importante */}
         <AlertaNoticia />
         {/* Sección de novedades */}
