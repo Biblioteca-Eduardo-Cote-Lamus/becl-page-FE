@@ -38,7 +38,7 @@ export default function ServiciosPage() {
               height={377}
               alt={"Catálogo en línea"}
               src={
-                "https://becl-imagenes.s3.us-east-1.amazonaws.com/catalogo-en-linea.jpeg"
+                "/Imagenes_biblioteca/bases-de-datos.png"
               }
             />
             <div>
@@ -89,7 +89,7 @@ export default function ServiciosPage() {
               height={377}
               alt={"Biblioteca digital"}
               src={
-                "https://becl-imagenes.s3.us-east-1.amazonaws.com/biblioteca-digital.jpeg"
+                "/Imagenes_biblioteca/catalogo-en-linea.png"
               }
             />
             <div>
