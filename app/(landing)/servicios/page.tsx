@@ -38,7 +38,7 @@ export default function ServiciosPage() {
               height={377}
               alt={"Catálogo en línea"}
               src={
-                "/Imagenes_biblioteca/bases-de-datos.png"
+                "/Imagenes_biblioteca/catalogo-en-linea.png"
               }
             />
             <div>
@@ -89,7 +89,7 @@ export default function ServiciosPage() {
               height={377}
               alt={"Biblioteca digital"}
               src={
-                "/Imagenes_biblioteca/catalogo-en-linea.png"
+                "/Imagenes_biblioteca/biblioteca-digital.png"
               }
             />
             <div>
