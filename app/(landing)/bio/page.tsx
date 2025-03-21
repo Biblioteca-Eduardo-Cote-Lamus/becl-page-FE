@@ -27,7 +27,7 @@ export default function BioPage() {
           </p>
         </div>
         <Image
-          src="/Imagenes_biblioteca/biografia/reading.png"
+          src="/Imagenes_biblioteca/biografia/libro.png"
           alt="Libro"
           width={512}
           height={512}

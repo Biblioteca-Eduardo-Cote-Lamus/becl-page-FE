@@ -20,7 +20,7 @@ export default function PazYSalvoPage() {
         </div>
         <Image
           src={
-            "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/servicios.png"
+            "/Imagenes_biblioteca/pazysalvo.png"
           }
           alt="Paz y salvo"
           width={320}

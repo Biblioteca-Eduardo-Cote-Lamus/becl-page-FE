@@ -28,7 +28,7 @@ export default function PoliticasPage() {
         <Image
           className="py-20"
           src={
-            "http://biblioteca.ufps.edu.co/wp-content/uploads/2022/11/historia.png"
+            "/Imagenes_biblioteca/leyendo.png"
           }
           alt="Historia"
           width={414}
