@@ -18,14 +18,30 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      
+      // Mostrar/ocultar navbar basado en la dirección del scroll
+      if (currentScrollY > lastScrollY) {
+        // Scroll hacia abajo
+        setIsVisible(false);
+      } else {
+        // Scroll hacia arriba
+        setIsVisible(true);
+      }
+      
+      // Actualizar el estado de scroll para el fondo
+      setScrolled(currentScrollY > 20);
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const toggleMobileDropdown = (menu: DropdownMenu) => {
     setDropdownOpen((prev) => ({
@@ -42,6 +58,8 @@ export default function Navbar() {
         scrolled
           ? "bg-secondaries_red-900/95 shadow-lg"
           : "bg-secondaries_red-900"
+      } ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-20 px-4">
