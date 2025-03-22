@@ -177,11 +177,17 @@ export default function Navbar() {
 
       {/* Menú móvil */}
       <div
-        className={`md:hidden transition-all duration-300 max-h-[calc(100vh-4rem)] overflow-y-auto ${
-          mobileMenuOpen ? "block" : "hidden"
-        }`}
+        className={`md:hidden fixed left-0 right-0 top-16 transition-all duration-300 ease-in-out transform ${
+          mobileMenuOpen 
+            ? "opacity-100 translate-y-0" 
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        } bg-secondaries_red-800 shadow-lg`}
+        style={{
+          maxHeight: "calc(100vh - 4rem)",
+          overflowY: "auto"
+        }}
       >
-        <div className="bg-secondaries_red-800 px-4 py-2 space-y-1">
+        <div className="px-4 py-2 space-y-1">
           {/* Biblioteca Digital Mobile */}
           <div className="border-b border-secondaries_red-700">
             <button
