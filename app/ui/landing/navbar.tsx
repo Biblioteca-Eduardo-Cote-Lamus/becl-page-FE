@@ -106,11 +106,11 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-8">
           {/* Biblioteca Digital Dropdown */}
           <div className="dropdown-container relative group">
-            <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
+            <button className="text-white group-hover:text-gray-300 transition-all duration-200 px-3 py-2 rounded-md hover:bg-secondaries_red-800 flex items-center gap-1">
               Biblioteca Digital
-              <ChevronDown className="ml-2 inline-block" />
+              <ChevronDown className="ml-1 inline-block transition-transform duration-200 group-hover:rotate-180" />
             </button>
-            <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
               <DropdownLink
                 href="https://catalogobiblioteca.ufps.edu.co/"
                 external
@@ -128,12 +128,12 @@ export default function Navbar() {
 
           {/* Servicios Dropdown */}
           <div className="dropdown-container relative group">
-            <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
+            <button className="text-white group-hover:text-gray-300 transition-all duration-200 px-3 py-2 rounded-md hover:bg-secondaries_red-800 flex items-center gap-1">
               Servicios
-              <ChevronDown className="ml-2 inline-block" />
+              <ChevronDown className="ml-1 inline-block transition-transform duration-200 group-hover:rotate-180" />
             </button>
-            <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <DropdownLink href="/servicios#digitales">
+            <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
+              <DropdownLink href="/servicios">
                 Servicios Digitales
               </DropdownLink>
               <DropdownLink href="/servicios#presenciales">
@@ -158,7 +158,7 @@ export default function Navbar() {
               <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <DropdownLink href="/info#historia">Historia</DropdownLink>
+              <DropdownLink href="/info">Historia</DropdownLink>
               <DropdownLink href="/info#mision-vision">
                 Misión y Visión
               </DropdownLink>
@@ -177,27 +177,33 @@ export default function Navbar() {
 
       {/* Menú móvil */}
       <div
-        className={`md:hidden transition-all duration-300 max-h-[calc(100vh-4rem)] overflow-y-auto ${
-          mobileMenuOpen ? "block" : "hidden"
-        }`}
+        className={`md:hidden fixed left-0 right-0 top-16 transition-all duration-300 ease-in-out transform ${
+          mobileMenuOpen 
+            ? "opacity-100 translate-y-0" 
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        } bg-secondaries_red-800 shadow-lg`}
+        style={{
+          maxHeight: "calc(100vh - 4rem)",
+          overflowY: "auto"
+        }}
       >
-        <div className="bg-secondaries_red-800 px-4 py-2 space-y-1">
+        <div className="px-4 py-2 space-y-1">
           {/* Biblioteca Digital Mobile */}
-          <div className="border-b border-secondaries_red-700">
+          <div className="border-b border-secondaries_red-700/30">
             <button
               onClick={() => toggleMobileDropdown("bibliotecaDigital")}
-              className="w-full flex justify-between items-center text-white px-3 py-2"
+              className="w-full flex justify-between items-center text-white/90 hover:text-white px-3 py-2.5 hover:bg-secondaries_red-700/50 transition-all duration-200 rounded-md"
             >
               Biblioteca Digital
               {dropdownOpen.bibliotecaDigital ? (
-                <ChevronUp className="transition-transform duration-200" />
+                <ChevronUp className="transition-transform duration-300 rotate-0" />
               ) : (
-                <ChevronDown className="transition-transform duration-200" />
+                <ChevronDown className="transition-transform duration-300 rotate-0" />
               )}
             </button>
             <div
-              className={`overflow-hidden transition-all duration-300 ${
-                dropdownOpen.bibliotecaDigital ? "max-h-48" : "max-h-0"
+              className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
+                dropdownOpen.bibliotecaDigital ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
               }`}
             >
               <MobileDropdownLink
@@ -298,7 +304,7 @@ interface LinkProps {
 const DropdownLink = ({ href, children, external = false }: LinkProps) => (
   <Link
     href={href}
-    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
+    className="block px-4 py-2.5 text-gray-700 hover:bg-gray-50 hover:text-secondaries_red-900 transition-all duration-200 first:rounded-t-md last:rounded-b-md border-b border-gray-100 last:border-0"
     target={external ? "_blank" : undefined}
     rel={external ? "noopener noreferrer" : undefined}
   >
@@ -309,7 +315,7 @@ const DropdownLink = ({ href, children, external = false }: LinkProps) => (
 const MobileDropdownLink = ({ href, children, external = false }: LinkProps) => (
   <Link
     href={href}
-    className="block px-6 py-2 text-white hover:bg-secondaries_red-700 transition-colors"
+    className="block px-6 py-2.5 text-white/90 hover:text-white hover:bg-secondaries_red-700 transition-all duration-200 border-b border-secondaries_red-700/30"
     target={external ? "_blank" : undefined}
     rel={external ? "noopener noreferrer" : undefined}
   >
@@ -325,22 +331,16 @@ interface NavLinkProps {
 const NavLink = ({ href, children }: NavLinkProps) => (
   <Link
     href={href}
-    className="text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md hover:bg-secondaries_red-800"
+    className="text-white hover:text-white transition-all duration-200 px-3 py-2 rounded-md hover:bg-secondaries_red-800 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:bg-white/30"
   >
     {children}
   </Link>
 );
 
-const MobileNavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
+const MobileNavLink = ({ href, children }: NavLinkProps) => (
   <Link
     href={href}
-    className="block px-3 py-2 text-white hover:bg-secondaries_red-700 transition-colors"
+    className="block px-3 py-2.5 text-white/90 hover:text-white hover:bg-secondaries_red-700 transition-all duration-200 rounded-md"
   >
     {children}
   </Link>
