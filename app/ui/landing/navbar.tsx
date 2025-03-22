@@ -133,7 +133,7 @@ export default function Navbar() {
               <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <DropdownLink href="/servicios#digitales">
+              <DropdownLink href="/servicios">
                 Servicios Digitales
               </DropdownLink>
               <DropdownLink href="/servicios#presenciales">
@@ -158,7 +158,7 @@ export default function Navbar() {
               <ChevronDown className="ml-2 inline-block" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <DropdownLink href="/info#historia">Historia</DropdownLink>
+              <DropdownLink href="/info">Historia</DropdownLink>
               <DropdownLink href="/info#mision-vision">
                 Misión y Visión
               </DropdownLink>
