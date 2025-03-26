@@ -40,10 +40,10 @@ const ListaFuncionarios = () => {
         {funcionarios.map((funcionario) => (
           <div
             key={funcionario.id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2"
+            className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
           >
             <div className="relative h-72 w-full flex items-center justify-center bg-gray-100 overflow-hidden">
-              <div className="relative h-full w-full transition-transform duration-300 hover:scale-110">
+              <div className="relative h-full w-full transition-transform duration-300 hover:scale-105">
                 <Image
                   src={funcionario.imagen ? `/Imagenes_biblioteca/funcionarios/${funcionario.imagen}` : '/placeholder-person.jpg'}
                   alt={funcionario.nombre}
@@ -55,10 +55,10 @@ const ListaFuncionarios = () => {
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-secondaries_red-900 mb-2">
                 {funcionario.nombre}
               </h3>
-              <p className="text-gray-600">{funcionario.cargo}</p>
+              <p className="text-gray-600 font-medium">{funcionario.cargo}</p>
             </div>
           </div>
         ))}

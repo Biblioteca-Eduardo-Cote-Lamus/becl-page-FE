@@ -33,30 +33,30 @@ const DocumentosImportantes = () => {
       <h2 className="mb-8 text-3xl font-bold text-center text-secondaries_red-900">
         Documentos de Importancia
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {documentos.map((documento) => (
           <a
             key={documento.id}
             href={documento.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group p-4 bg-white rounded-lg shadow-md hover:shadow-lg 
+            className="group p-6 bg-white rounded-lg shadow-md hover:shadow-xl 
                      transition-all duration-300 border border-gray-100 
                      hover:border-secondaries_red-200 hover:-translate-y-1"
           >
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
                 <FileText 
-                  className="w-6 h-6 text-secondaries_red-900 group-hover:text-secondaries_red-700 
+                  className="w-8 h-8 text-secondaries_red-900 group-hover:text-secondaries_red-700 
                            transition-colors duration-300" 
                 />
               </div>
               <div className="flex-1">
-                <p className="text-lg text-gray-800 group-hover:text-secondaries_red-900 
+                <p className="text-lg font-medium text-gray-800 group-hover:text-secondaries_red-900 
                           transition-colors duration-300 line-clamp-2">
                   {documento.descripcion}
                 </p>
-                <p className="mt-1 text-sm text-gray-500 group-hover:text-secondaries_red-700">
+                <p className="mt-2 text-sm text-gray-500 group-hover:text-secondaries_red-700">
                   Click para ver documento
                 </p>
               </div>
