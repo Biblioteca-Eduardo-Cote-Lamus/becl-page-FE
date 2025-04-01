@@ -217,3 +217,8 @@ export interface MisionVision {
   descripcion: string;
   imagen: string;
 }
+
+export interface ProgramaData {
+  programa: string
+  total: number
+}
