@@ -69,7 +69,7 @@ const Estadisticas = () => {
       })
 
     fetch(
-      'https://ufps.cloudbiteca.com/ProyectoEntradaBECL/admin/controladores/api_grafica.php'
+      `https://ufps.cloudbiteca.com/ProyectoEntradaBECL/admin/controladores/api_grafica.php?timestamp=${new Date().getTime()}`
     )
       .then((res) => res.json())
       .then((data: ProgramaData) => {
