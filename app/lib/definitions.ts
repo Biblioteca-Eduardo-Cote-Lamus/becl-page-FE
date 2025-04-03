@@ -217,3 +217,14 @@ export interface MisionVision {
   descripcion: string;
   imagen: string;
 }
+
+export interface ProgramaData {
+  totalRegistros: string,
+  registrosDia: string,
+  registrosUltimos7Dias: string,
+  registrosUltimos30Dias: string,
+  programas: [{
+    programa: string,
+    total: string
+  }]
+}

@@ -8,7 +8,11 @@
     "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@heroicons/react": "^2.2.0",
+    "@mui/material": "^7.0.0",
+    "@mui/x-charts": "^7.28.0",
     "@nextui-org/navbar": "^2.0.37",
     "@nextui-org/react": "^2.4.8",
     "@tailwindcss/forms": "^0.5.7",
@@ -16,6 +20,8 @@
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
+    "framer-motion": "^12.6.2",
+    "googleapis": "^148.0.0",
     "knex": "^3.1.0",
     "lucide-react": "^0.462.0",
     "mysql2": "^3.9.2",
