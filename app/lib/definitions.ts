@@ -219,6 +219,12 @@ export interface MisionVision {
 }
 
 export interface ProgramaData {
-  programa: string
-  total: number
+  totalRegistros: string,
+  registrosDia: string,
+  registrosUltimos7Dias: string,
+  registrosUltimos30Dias: string,
+  programas: [{
+    programa: string,
+    total: string
+  }]
 }
