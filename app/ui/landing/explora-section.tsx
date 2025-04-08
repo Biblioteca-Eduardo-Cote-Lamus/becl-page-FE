@@ -22,7 +22,7 @@ export default function ExploraSection() {
             "/Imagenes_biblioteca/biblioteca-digital.png"
           }
         />
-        <div>
+        <div className="px-4 md:px-0">
           <h3
             className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 ${openSans.className}`}
           >
@@ -58,7 +58,7 @@ export default function ExploraSection() {
             "/Imagenes_biblioteca/catalogo-en-linea.png"
           }
         />
-        <div>
+        <div className="px-4 py-10 md:px-0">
           <h3
             className={`mb-4 text-4xl md:text-4xl text-center text-secondaries_red-900 ${openSans.className}`}
           >

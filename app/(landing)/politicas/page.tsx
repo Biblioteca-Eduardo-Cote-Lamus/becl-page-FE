@@ -10,21 +10,17 @@ export const metadata: Metadata = {
 export default function PoliticasPage() {
   return (
     <>
-      <section className="flex flex-col md:flex-row md:justify-evenly items-center text-left bg-secondaries_red-900 py-20 animate-fade-in-up">
+      <section className="px-4 md:px-0 flex flex-col md:flex-row md:justify-evenly items-center text-left bg-secondaries_red-900 py-20 animate-fade-in-up">
         <div className="text-white md:pr-11 md:w-1/2">
-          <p className={`${montserrat.className} md:mb-4 text-white font-extrabold animate-fade-in-up animation-delay-200`}>
+          <p className={`${montserrat.className} md:mb-4 text-yellow-400 font-extrabold animate-fade-in-up animation-delay-200`}>
             #BibliotecaEduardoCoteLamus
           </p>
           <p className="text-6xl md:mb-4 font-bold animate-fade-in-up animation-delay-400">
             Conoce más acerca de la Biblioteca Eduardo Cote Lamus
           </p>
-          <p className="md:mb-10 font-bold animate-fade-in-up animation-delay-600">
-            Infórmate de nuestra historia, políticas de calidad, funcionarios y
-            sobre nuestra misión y visión
-          </p>
         </div>
         <Image
-          className="py-20 animate-fade-in-up animation-delay-800"
+          className="py-10 animate-fade-in-up animation-delay-800"
           src="/Imagenes_biblioteca/leyendo.png"
           alt="Historia"
           width={414}
@@ -133,7 +129,7 @@ export default function PoliticasPage() {
         </div>
       </section>
 
-      <section className="flex justify-center px-4 md:px-8 mt-6">
+      <section className="flex justify-center px-4 md:px-8 mt-6 py-5">
         <div className="w-full md:w-1/3 flex flex-col items-center md:text-left bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-2400">
           <Server
             size={48}

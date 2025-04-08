@@ -1,6 +1,12 @@
 import "@/app/ui/global.css";
 import { openSans } from "@/app/ui/fonts";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+// Importar el componente de manera dinámica para evitar problemas de hidratación
+const SocialButtons = dynamic(() => import("./components/SocialButtons"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -38,11 +44,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </head>
       <body
-        className={`${openSans.className} antialiased`}
+        className={`${openSans.className} antialiased min-h-screen w-full overflow-x-hidden`}
         suppressHydrationWarning
       >
         {children}
+        <SocialButtons />
+        <script
+          src="https://website-widgets.pages.dev/dist/sienna.min.js"
+          defer
+        ></script>
       </body>
     </html>
   );
