@@ -24,7 +24,9 @@ export default async function Page() {
   return (
     <>
       <NavbarMenu />
-      <main className='flex min-h-screen flex-col'>
+      
+      <main className="flex min-h-screen flex-col animate-fade-in-up">
+
         {/* Sección de bienvenida con fondo */}
         <section className='relative h-[100vh] w-full'>
           <Image
