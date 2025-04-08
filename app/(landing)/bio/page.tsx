@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function BioPage() {
   return (
     <main>
-      <section className="flex flex-col md:flex-row md:justify-evenly items-center text-left bg-secondaries_red-900 py-44 animate-fade-in-up">
+      <section className=" px-4  md:px-0 flex flex-col md:flex-row md:justify-evenly items-center text-left bg-secondaries_red-900 py-44 animate-fade-in-up">
         <div className="text-white md:pr-11 md:w-1/2">
           <p className={`${montserrat.className} md:mb-4 animate-fade-in-up animation-delay-200`}>
             <b className="text-yellow-400">#EduardoCoteLamus</b>
@@ -21,7 +21,8 @@ export default function BioPage() {
               Lamus!
             </b>
           </p>
-          <p className="animate-fade-in-up animation-delay-600">
+
+          <p className="py-5 md:py-0 animate-fade-in-up animation-delay-600">
             Conoce de su biografía, obras más importantes y poemas destacados
             del ilustre Escritor Norte Santandereano.
           </p>
