@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+
 import AcmeLogo from "../becl-logo";
 
 export default function Footer() {
@@ -51,44 +46,6 @@ export default function Footer() {
         <p className="text-center text-white mb-3 md:mb-0">
           Copyright © Todos los derechos reservados Términos del Servicio UFPS
         </p>
-        <div className="flex justify-center md:justify-start">
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-gray-300 transition-colors duration-200"
-            href="https://www.facebook.com/biblioteca.ufps"
-            title="Facebook"
-          >
-            <Facebook className="w-6 h-6" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-gray-300 transition-colors duration-200"
-            href="https://www.instagram.com/biblioteca.ufps/"
-            title="Instagram"
-          >
-            <Instagram className="w-6 h-6" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-gray-300 transition-colors duration-200"
-            href="https://twitter.com/biblioteca_ufps"
-            title="Twitter"
-          >
-            <Twitter className="w-6 h-6" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            className="hover:text-gray-300 transition-colors duration-200"
-            href="https://www.youtube.com/@biblioteca.ufps"
-            title="YouTube"
-          >
-            <Youtube className="w-6 h-6" />
-          </a>
-        </div>
       </div>
     </footer>
   );
