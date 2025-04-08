@@ -8,6 +8,7 @@ import ExploraSection from './ui/landing/explora-section'
 import AlertaNoticia from './ui/landing/alerta_noticia'
 import Image from 'next/image'
 import Estadisticas from './ui/landing/estadisticas'
+import PopupEstadisticas from './ui/components/PopupEstadisticas'
 
 export default async function Page() {
   // Skip data fetching during build time
@@ -71,7 +72,12 @@ export default async function Page() {
         <ServiciosSection />
 
         {/* Sección de estadísticas */}
-        <Estadisticas />
+        <section
+          id='seccion-estadisticas'
+          className='flex flex-col items-center justify-center bg-gray-100'
+        >
+          <Estadisticas />
+        </section>
 
         {/* Sección de experiencia */}
         <section>
@@ -79,6 +85,8 @@ export default async function Page() {
         </section>
       </main>
       <Footer />
+
+      <PopupEstadisticas />
       <script
         src='https://website-widgets.pages.dev/dist/sienna.min.js'
         defer
