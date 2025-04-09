@@ -20,6 +20,8 @@ export const authConfig = {
   pages: {
     signIn: '/login',
   },
+  trustHost: true,
+  secret: process.env.NEXTAUTH_SECRET || 'your-fallback-secret-key-for-development',
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
