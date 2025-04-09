@@ -104,6 +104,7 @@ export type Desarrollador = {
   nombre: string;
   cargo: string;
   imagen: string;
+  linkedin?: string;
 }
 
 export type Noticias = {
