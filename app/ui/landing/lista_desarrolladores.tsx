@@ -6,6 +6,7 @@ import {
   Desarrollador,
   getDesarrolladores,
 } from "@/app/actions/desarrolladores";
+import { FaLinkedin } from "react-icons/fa";
 
 const ListaDesarrolladores = () => {
   const [desarrolladores, setDesarrolladores] = useState<Desarrollador[]>([]);
@@ -65,7 +66,21 @@ const ListaDesarrolladores = () => {
               <h3 className="text-xl font-semibold text-secondaries_red-900 mb-2">
                 {desarrollador.nombre}
               </h3>
-              <p className="text-gray-600 font-medium">{desarrollador.cargo}</p>
+              <p className="text-gray-600 font-medium mb-4">
+                {desarrollador.cargo}
+              </p>
+              <div className="flex justify-center">
+                {desarrollador.linkedin && (
+                  <a
+                    href={desarrollador.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-[#0077b5] text-white rounded-md hover:bg-[#006399] transition-colors"
+                  >
+                    <FaLinkedin className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}
