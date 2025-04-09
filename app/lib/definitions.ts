@@ -99,6 +99,13 @@ export type Funcionario = {
   imagen: string;
 }
 
+export type Desarrollador = {
+  id: number;
+  nombre: string;
+  cargo: string;
+  imagen: string;
+}
+
 export type Noticias = {
   id: number;
   titular: string;
