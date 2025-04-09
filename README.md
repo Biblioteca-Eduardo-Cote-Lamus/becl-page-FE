@@ -87,17 +87,10 @@ pnpm start
 
 ## 👥 Autores
 
-- División de Biblioteca UFPS
-- Biblioteca Eduardo Cote Lamus
-- Programa de Ingeniería de Sistemas UFPS
 - Marcos David Mejía Gómez
 - Anderson David Patiño Caicedo
 
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia [LICENCIA] - ver el archivo LICENSE.md para más detalles.
 
 ## 🌐 Enlaces
 
 - [Sitio Web](https://biblioteca.ufps.edu.co)
-- [Documentación](https://biblioteca.ufps.edu.co/docs)
