@@ -18,9 +18,7 @@ export default function ExploraSection() {
           width={450}
           height={377}
           alt={"Biblioteca digital"}
-          src={
-            "/Imagenes_biblioteca/biblioteca-digital.png"
-          }
+          src={"/Imagenes_biblioteca/biblioteca-digital.png"}
         />
         <div className="px-4 md:px-0">
           <h3
@@ -30,8 +28,8 @@ export default function ExploraSection() {
           </h3>
           <p className="text-xl">
             Ingresa a la biblioteca digital Eduardo Cote Lamus y obtenga
-            información de calidad como base de datos, artículos
-            científicos, libros digitales y demás información de su interés.
+            información de calidad como base de datos, artículos científicos,
+            libros digitales y demás información de su interés.
           </p>
           <button
             className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
@@ -54,9 +52,7 @@ export default function ExploraSection() {
           width={450}
           height={377}
           alt={"Catálogo en línea"}
-          src={
-            "/Imagenes_biblioteca/catalogo-en-linea.png"
-          }
+          src={"/Imagenes_biblioteca/catalogo-en-linea.png"}
         />
         <div className="px-4 py-10 md:px-0">
           <h3
@@ -65,18 +61,15 @@ export default function ExploraSection() {
             Catálogo en línea
           </h3>
           <p className="text-xl">
-            Ubique en el catálogo en línea el libro físico de su interés
-            usando nuestro sistema Koha y disfrute en cualquiera de las
-            salas disponibles su lectura
+            Ubique en el catálogo en línea el libro físico de su interés usando
+            nuestro sistema Koha y disfrute en cualquiera de las salas
+            disponibles su lectura
           </p>
           <button
             className="bg-secondaries_red-800 text-white rounded py-4 px-6 md:py-3 mt-2 flex justify-self-center items-center hover:bg-secondaries_red-700 hover:scale-105 transition duration-300"
             type="button"
             onClick={() =>
-              window.open(
-                "https://catalogobiblioteca.ufps.edu.co/",
-                "_blank"
-              )
+              window.open("https://catalogobiblioteca.ufps.edu.co/", "_blank")
             }
           >
             Explorar Cátalogo
@@ -86,4 +79,4 @@ export default function ExploraSection() {
       </div>
     </section>
   );
-} 
+}

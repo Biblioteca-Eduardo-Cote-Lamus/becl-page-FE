@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ListaFuncionarios from "@/app/ui/landing/lista_funcionarios";
+import ListaDesarrolladores from "@/app/ui/landing/lista_desarrolladores";
 
 export const metadata: Metadata = {
   title: "Equipo",
@@ -39,6 +40,9 @@ export default function EquipoPage() {
         </div>
         <div className="mt-12 px-4">
           <ListaFuncionarios />
+        </div>
+        <div className="mt-12 px-4">
+          <ListaDesarrolladores />
         </div>
       </section>
     </div>
