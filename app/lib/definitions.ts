@@ -99,6 +99,11 @@ export type Funcionario = {
   imagen: string;
 }
 
+export type ImagenLanding = {
+  id: number;
+  imagen: string;
+}
+
 export type Desarrollador = {
   id: number;
   nombre: string;

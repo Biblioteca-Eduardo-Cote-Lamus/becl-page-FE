@@ -6,10 +6,9 @@ import Experiencia from "./ui/landing/experiencia";
 import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
-import Image from "next/image";
 import Estadisticas from "./ui/landing/estadisticas";
 import PopupEstadisticas from "./ui/components/PopupEstadisticas";
-
+import CarruselLanding from "./ui/landing/carrusel_landing";
 export default async function Page() {
   // Skip data fetching during build time
   if (process.env.NEXT_PHASE === "build") {
@@ -27,15 +26,9 @@ export default async function Page() {
 
       <main className="flex min-h-screen flex-col animate-fade-in-up">
         {/* Sección de bienvenida con fondo */}
-        <section className="relative h-[100vh] w-full">
-          <Image
-            src="/Imagenes_biblioteca/fondo.jpg"
-            alt="Fondo de la biblioteca"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center">
+        <section className="relative h-screen w-full overflow-hidden">
+        <CarruselLanding />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-10">
             <h1
               className={`text-4xl md:text-6xl text-white font-bold text-center mb-4 ${montserrat.className}`}
             >
