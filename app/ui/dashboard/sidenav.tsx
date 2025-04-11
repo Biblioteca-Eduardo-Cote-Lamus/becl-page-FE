@@ -11,7 +11,7 @@ export default function SideNav() {
         className="mb-2 flex h-auto rounded-md bg-secondaries_red-700 p-4 md:h-40"
         href="/dashboard"
       >
-        <div className="w-32 text-white md:w-40 flex flex-1">
+        <div className="w-full h-full flex items-center justify-center">
           <AcmeLogo />
         </div>
       </Link>

@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { User } from "@/app/lib/definitions";
 import Link from "next/link";
 import { PlusSquare, PenSquare, Trash2 } from "lucide-react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { getUsers, deleteUser } from "@/app/actions/users";
+import { CustomToast } from "@/app/ui/components/CustomToast";
 
 export default function UsersList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -18,8 +19,8 @@ export default function UsersList() {
         const data = await getUsers();
         setUsers(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Error fetching users:', error);
-        toast.error('Error al cargar los usuarios');
+        console.error("Error fetching users:", error);
+        toast.error("Error al cargar los usuarios");
         setUsers([]);
       } finally {
         setIsLoading(false);
@@ -48,7 +49,7 @@ export default function UsersList() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondaries_red-700"></div>
       </div>
     );
   }
@@ -59,7 +60,7 @@ export default function UsersList() {
         <p className="text-gray-600">No hay usuarios disponibles.</p>
         <Link
           href="/dashboard/usuarios/create"
-          className="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="mt-4 inline-block bg-secondaries_red-700 hover:bg-secondaries_red-800 text-white font-bold py-2 px-4 rounded"
         >
           <PlusSquare className="mr-1 inline-block" />
           Crear Usuario
@@ -72,7 +73,7 @@ export default function UsersList() {
     <div>
       <Link
         href="/dashboard/usuarios/create"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block"
+        className="bg-secondaries_red-700 hover:bg-secondaries_red-800 text-white font-bold py-2 px-4 rounded mb-4 inline-block"
       >
         <PlusSquare className="mr-1 inline-block" />
         Crear Usuario
@@ -81,21 +82,21 @@ export default function UsersList() {
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-100">
-              <th className="py-2 px-4 border-b text-left">Nombre</th>
-              <th className="py-2 px-4 border-b text-left">Email</th>
-              <th className="py-2 px-4 border-b text-left">Acciones</th>
+              <th className="py-2 px-4 border-b text-center">Nombre</th>
+              <th className="py-2 px-4 border-b text-center">Email</th>
+              <th className="py-2 px-4 border-b text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id}>
-                <td className="py-2 px-4 border-b">{user.name}</td>
-                <td className="py-2 px-4 border-b">{user.email}</td>
-                <td className="py-2 px-4 border-b">
-                  <div className="flex space-x-2">
+                <td className="py-2 px-4 border-b text-center">{user.name}</td>
+                <td className="py-2 px-4 border-b text-center">{user.email}</td>
+                <td className="py-2 px-4 border-b text-center">
+                  <div className="flex space-x-2 justify-center">
                     <Link
                       href={`/dashboard/usuarios/${user.id}/edit`}
-                      className="text-blue-500 hover:text-blue-700"
+                      className="text-secondaries_red-700 hover:text-secondaries_red-800"
                     >
                       <PenSquare className="inline-block" />
                     </Link>
@@ -112,7 +113,7 @@ export default function UsersList() {
           </tbody>
         </table>
       </div>
-      <ToastContainer />
+      <CustomToast />
     </div>
   );
-} 
+}

@@ -56,6 +56,7 @@ export default function RootLayout({
       >
         {children}
         <SocialButtons />
+
         <script
           src="https://website-widgets.pages.dev/dist/sienna.min.js"
           defer
