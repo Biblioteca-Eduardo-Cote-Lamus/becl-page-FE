@@ -6,10 +6,10 @@ import { Noticia } from '../lib/definitions';
 export async function getNoticias(): Promise<Noticia[]> {
   try {
     const data = await executeQuery<Noticia[]>('SELECT * FROM noticias ORDER BY id DESC');
-    return data;
+    return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch noticias.');
+    return [];
   }
 }
 

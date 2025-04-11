@@ -27,7 +27,7 @@ export default async function Page() {
       <main className="flex min-h-screen flex-col animate-fade-in-up">
         {/* Sección de bienvenida con fondo */}
         <section className="relative h-screen w-full overflow-hidden">
-        <CarruselLanding />
+          <CarruselLanding />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-10">
             <h1
               className={`text-4xl md:text-6xl text-white font-bold text-center mb-4 ${montserrat.className}`}
