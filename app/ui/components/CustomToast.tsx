@@ -21,7 +21,7 @@ export const CustomToast = () => {
       }}
       icon={({ type }) => {
         return (
-          <div style={{ fontSize: '18px', display: 'flex', alignItems: 'center' }}>
+          <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', width: '16px', height: '16px' }}>
             {type === 'success' && '✅'}
             {type === 'error' && '❌'}
             {type === 'info' && 'ℹ️'}

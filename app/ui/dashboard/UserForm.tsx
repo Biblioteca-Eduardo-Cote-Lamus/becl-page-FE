@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import { createUser, updateUser } from "@/app/actions/users";
 import { User } from "@/app/lib/definitions";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import { useRouter } from "next/navigation";
+import { CustomToast } from "@/app/ui/components/CustomToast";
 
 interface UserFormProps {
   user?: User;
@@ -28,9 +29,11 @@ const UserForm: React.FC<UserFormProps> = ({ user }) => {
         toast.error(result.error);
       } else {
         toast.success(user ? "Usuario actualizado" : "Usuario creado");
-        router.push("/dashboard/usuarios");
-        router.refresh();
-      }
+        setTimeout(() => {
+          router.push("/dashboard/usuarios");
+          router.refresh();
+        }, 3600);
+      } 
     } catch {
       toast.error("Error al procesar la solicitud");
     } finally {
@@ -100,7 +103,7 @@ const UserForm: React.FC<UserFormProps> = ({ user }) => {
               : "Crear Usuario"}
         </button>
       </div>
-      <ToastContainer />
+      <CustomToast />
     </form>
   );
 };
