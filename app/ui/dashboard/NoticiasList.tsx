@@ -9,15 +9,20 @@ import { getNoticias, deleteNoticia } from "@/app/actions/noticias";
 
 const NoticiasList: React.FC = () => {
   const [noticias, setNoticias] = useState<Noticias[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const data = await getNoticias();
-        setNoticias(data);
+        setNoticias(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching noticias:', error);
         toast.error('Error al cargar las noticias');
+        setNoticias([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -40,6 +45,29 @@ const NoticiasList: React.FC = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (!noticias || noticias.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600">No hay noticias disponibles.</p>
+        <Link
+          href="/dashboard/noticias/create"
+          className="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <PlusSquare className="mr-1 inline-block" />
+          Crear Noticia
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">
@@ -58,31 +86,25 @@ const NoticiasList: React.FC = () => {
             <h3 className="text-lg md:text-xl font-semibold">
               {noticia.titular}
             </h3>
-            <p className="text-sm md:text-base text-gray-500">
-              {noticia.descripcion.length > 100
-                ? `${noticia.descripcion.substring(0, 100)}...`
-                : noticia.descripcion}
-            </p>
-            <button
-              onClick={() =>
-                (window.location.href = `/dashboard/noticias/${noticia.id}/edit`)
-              }
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              <PenSquare className="mr-1" />
-              Editar
-            </button>
-            <button
-              onClick={() => handleDelete(noticia.id)}
-              className="bg-secondaries_red-700 hover:bg-secondaries_red-900 text-white font-bold py-2 px-4 rounded ml-2"
-            >
-              <Trash2 className="mr-1" />
-              Eliminar
-            </button>
-            <ToastContainer />
+            <p className="text-gray-600">{noticia.descripcion}</p>
+            <div className="flex justify-end space-x-2 mt-2">
+              <Link
+                href={`/dashboard/noticias/${noticia.id}/edit`}
+                className="text-blue-500 hover:text-blue-700"
+              >
+                <PenSquare className="inline-block" />
+              </Link>
+              <button
+                onClick={() => handleDelete(noticia.id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 className="inline-block" />
+              </button>
+            </div>
           </li>
         ))}
       </ul>
+      <ToastContainer />
     </div>
   );
 };

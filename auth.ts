@@ -19,6 +19,17 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
+async function updateLastLogin(userId: string): Promise<void> {
+  try {
+    await executeQuery(
+      "UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?",
+      [userId]
+    );
+  } catch (error) {
+    console.error("Failed to update last login:", error);
+  }
+}
+
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
@@ -44,6 +55,9 @@ export const { auth, signIn, signOut } = NextAuth({
         if (!passwordsMatch) {
           return null;
         }
+
+        // Actualizar last_login después de una autenticación exitosa
+        await updateLastLogin(user.id);
 
         return {
           id: user.id,

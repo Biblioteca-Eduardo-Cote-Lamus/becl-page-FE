@@ -6,6 +6,7 @@ import {
   Newspaper,
   Calendar,
   Briefcase,
+  UserCog,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -27,6 +28,7 @@ const links = [
   { name: "Servicios", href: "/dashboard/servicios", icon: Briefcase },
   { name: "Nosotros", href: "/dashboard/nosotros", icon: Users },
   { name: "Documentos", href: "/dashboard/documentos", icon: FileText },
+  { name: "Usuarios", href: "/dashboard/usuarios", icon: UserCog },
 ];
 
 export default function NavLinks() {
