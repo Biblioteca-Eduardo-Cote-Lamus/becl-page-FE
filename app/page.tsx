@@ -65,14 +65,6 @@ export default async function Page() {
         {/* Sección de servicios */}
         <ServiciosSection />
 
-        {/* Sección de estadísticas */}
-        <section
-          id="seccion-estadisticas"
-          className="flex flex-col items-center justify-center bg-gray-100"
-        >
-          <Estadisticas />
-        </section>
-
         {/* Sección de experiencia */}
         <section>
           <Experiencia />
