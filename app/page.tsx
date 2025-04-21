@@ -6,7 +6,6 @@ import Experiencia from "./ui/landing/experiencia";
 import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
-import Estadisticas from "./ui/landing/estadisticas";
 import PopupEstadisticas from "./ui/components/PopupEstadisticas";
 import CarruselLanding from "./ui/landing/carrusel_landing";
 export default async function Page() {
