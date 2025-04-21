@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import AcmeLogo from "../becl-logo";
 import Link from "next/link";
-import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   type DropdownMenu = "bibliotecaDigital" | "servicios" | "nosotros";
@@ -20,12 +20,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Limpiar el timeout anterior si existe
       if (scrollTimeout) {
         clearTimeout(scrollTimeout);
@@ -43,7 +45,7 @@ export default function Navbar() {
             setIsVisible(true);
           }
         }
-        
+
         // Actualizar el estado de scroll para el fondo
         setScrolled(currentScrollY > 20);
         setLastScrollY(currentScrollY);
@@ -76,9 +78,7 @@ export default function Navbar() {
         scrolled
           ? "bg-secondaries_red-900/95 shadow-lg"
           : "bg-secondaries_red-900"
-      } ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
+      } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-20 px-4">
         <div className="flex items-center justify-between h-16 md:h-auto">
@@ -133,9 +133,7 @@ export default function Navbar() {
               <ChevronDown className="ml-1 inline-block transition-transform duration-200 group-hover:rotate-180" />
             </button>
             <div className="absolute z-10 mt-2 w-56 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
-              <DropdownLink href="/servicios">
-                Servicios Digitales
-              </DropdownLink>
+              <DropdownLink href="/servicios">Servicios Digitales</DropdownLink>
               <DropdownLink href="/servicios#presenciales">
                 Servicios Presenciales
               </DropdownLink>
@@ -148,6 +146,7 @@ export default function Navbar() {
               >
                 Préstamo Interbibliotecario SIES+
               </DropdownLink>
+              <DropdownLink href="/estadisticas">Estadísticas</DropdownLink>
             </div>
           </div>
 
@@ -178,13 +177,13 @@ export default function Navbar() {
       {/* Menú móvil */}
       <div
         className={`md:hidden fixed left-0 right-0 top-16 transition-all duration-300 ease-in-out transform ${
-          mobileMenuOpen 
-            ? "opacity-100 translate-y-0" 
+          mobileMenuOpen
+            ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-2 pointer-events-none"
         } bg-secondaries_red-800 shadow-lg`}
         style={{
           maxHeight: "calc(100vh - 4rem)",
-          overflowY: "auto"
+          overflowY: "auto",
         }}
       >
         <div className="px-4 py-2 space-y-1">
@@ -195,15 +194,17 @@ export default function Navbar() {
               className="w-full flex justify-between items-center text-white/90 hover:text-white px-3 py-2.5 hover:bg-secondaries_red-700/50 transition-all duration-200 rounded-md"
             >
               Biblioteca Digital
-              {dropdownOpen.bibliotecaDigital ? (
-                <ChevronUp className="transition-transform duration-300 rotate-0" />
-              ) : (
-                <ChevronDown className="transition-transform duration-300 rotate-0" />
-              )}
+              <ChevronDown
+                className={`transition-transform duration-300 ${
+                  dropdownOpen.bibliotecaDigital ? "rotate-180" : ""
+                }`}
+              />
             </button>
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
-                dropdownOpen.bibliotecaDigital ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+                dropdownOpen.bibliotecaDigital
+                  ? "max-h-48 opacity-100"
+                  : "max-h-0 opacity-0"
               }`}
             >
               <MobileDropdownLink
@@ -225,18 +226,20 @@ export default function Navbar() {
           <div className="border-b border-secondaries_red-700">
             <button
               onClick={() => toggleMobileDropdown("servicios")}
-              className="w-full flex justify-between items-center text-white px-3 py-2"
+              className="w-full flex justify-between items-center text-white/90 hover:text-white px-3 py-2.5 hover:bg-secondaries_red-700/50 transition-all duration-200 rounded-md"
             >
               Servicios
-              {dropdownOpen.servicios ? (
-                <ChevronUp className="transition-transform duration-200" />
-              ) : (
-                <ChevronDown className="transition-transform duration-200" />
-              )}
+              <ChevronDown
+                className={`transition-transform duration-300 ${
+                  dropdownOpen.servicios ? "rotate-180" : ""
+                }`}
+              />
             </button>
             <div
-              className={`overflow-hidden transition-all duration-300 ${
-                dropdownOpen.servicios ? "max-h-64" : "max-h-0"
+              className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
+                dropdownOpen.servicios
+                  ? "max-h-64 opacity-100"
+                  : "max-h-0 opacity-0"
               }`}
             >
               <MobileDropdownLink href="/servicios#digitales">
@@ -254,6 +257,9 @@ export default function Navbar() {
               >
                 Préstamo Interbibliotecario SIES+
               </MobileDropdownLink>
+              <MobileDropdownLink href="/estadisticas">
+              Estadisticas
+              </MobileDropdownLink>
             </div>
           </div>
 
@@ -261,21 +267,26 @@ export default function Navbar() {
           <div className="border-b border-secondaries_red-700">
             <button
               onClick={() => toggleMobileDropdown("nosotros")}
-              className="w-full flex justify-between items-center text-white px-3 py-2"
+              className="w-full flex justify-between items-center text-white/90 hover:text-white px-3 py-2.5 hover:bg-secondaries_red-700/50 transition-all duration-200 rounded-md"
             >
               Nosotros
-              {dropdownOpen.nosotros ? (
-                <ChevronUp className="transition-transform duration-200" />
-              ) : (
-                <ChevronDown className="transition-transform duration-200" />
-              )}
+              <ChevronDown
+                className={`transition-transform duration-300 ${
+                  dropdownOpen.nosotros ? "rotate-180" : ""
+                }`}
+              />
             </button>
+
             <div
-              className={`overflow-hidden transition-all duration-300 ${
-                dropdownOpen.nosotros ? "max-h-64" : "max-h-0"
+              className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
+                dropdownOpen.nosotros
+                  ? "max-h-48 opacity-100"
+                  : "max-h-0 opacity-0"
               }`}
             >
-              <MobileDropdownLink href="/info#historia">Historia</MobileDropdownLink>
+              <MobileDropdownLink href="/info#historia">
+                Historia
+              </MobileDropdownLink>
               <MobileDropdownLink href="/info#mision-vision">
                 Misión y Visión
               </MobileDropdownLink>
@@ -283,7 +294,9 @@ export default function Navbar() {
               <MobileDropdownLink href="/politicas">
                 Políticas de Calidad
               </MobileDropdownLink>
-              <MobileDropdownLink href="/equipo">Talento Humano</MobileDropdownLink>
+              <MobileDropdownLink href="/equipo">
+                Talento Humano
+              </MobileDropdownLink>
             </div>
           </div>
 
@@ -312,7 +325,11 @@ const DropdownLink = ({ href, children, external = false }: LinkProps) => (
   </Link>
 );
 
-const MobileDropdownLink = ({ href, children, external = false }: LinkProps) => (
+const MobileDropdownLink = ({
+  href,
+  children,
+  external = false,
+}: LinkProps) => (
   <Link
     href={href}
     className="block px-6 py-2.5 text-white/90 hover:text-white hover:bg-secondaries_red-700 transition-all duration-200 border-b border-secondaries_red-700/30"
