@@ -147,6 +147,9 @@ export default function Navbar() {
                 Préstamo Interbibliotecario SIES+
               </DropdownLink>
               <DropdownLink href="/estadisticas">Estadísticas</DropdownLink>
+              <DropdownLink href="https://pqrsdf.ufps.edu.co/" external>
+                PQRSDF
+              </DropdownLink>
             </div>
           </div>
 
@@ -238,7 +241,7 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
                 dropdownOpen.servicios
-                  ? "max-h-64 opacity-100"
+                  ? "max-h-72 opacity-100"
                   : "max-h-0 opacity-0"
               }`}
             >
@@ -258,7 +261,13 @@ export default function Navbar() {
                 Préstamo Interbibliotecario SIES+
               </MobileDropdownLink>
               <MobileDropdownLink href="/estadisticas">
-              Estadisticas
+                Estadisticas
+              </MobileDropdownLink>
+              <MobileDropdownLink
+                href="https://pqrsdf.ufps.edu.co/"
+                external
+              >
+                PQRSDF
               </MobileDropdownLink>
             </div>
           </div>
