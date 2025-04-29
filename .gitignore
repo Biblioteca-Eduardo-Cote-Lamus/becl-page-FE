@@ -37,3 +37,4 @@ next-env.d.ts
 
 # data
 /app/lib/placeholder-data.ts
+public/biblioteca-*.json
