@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Biblioteca UFPS - Portal Web
 
 ![Next.js](https://img.shields.io/badge/Next.js-14.0.2-black?style=for-the-badge&logo=next.js&logoColor=white)
@@ -96,5 +95,3 @@ pnpm start
 
 - [Sitio Web](https://biblioteca.ufps.edu.co)
 =======
-# becl-page
->>>>>>> 100590f0dc5087a25822b4b81d789aa0e2700160
