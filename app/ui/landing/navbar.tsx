@@ -263,10 +263,7 @@ export default function Navbar() {
               <MobileDropdownLink href="/estadisticas">
                 Estadisticas
               </MobileDropdownLink>
-              <MobileDropdownLink
-                href="https://pqrsdf.ufps.edu.co/"
-                external
-              >
+              <MobileDropdownLink href="https://pqrsdf.ufps.edu.co/" external>
                 PQRSDF
               </MobileDropdownLink>
             </div>
