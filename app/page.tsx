@@ -6,7 +6,6 @@ import Experiencia from "./ui/landing/experiencia";
 import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
-import PopupEstadisticas from "./ui/components/PopupEstadisticas";
 import CarruselLanding from "./ui/landing/carrusel_landing";
 export default async function Page() {
   // Skip data fetching during build time
@@ -71,7 +70,6 @@ export default async function Page() {
       </main>
       <Footer />
 
-      <PopupEstadisticas />
       <script
         src="https://website-widgets.pages.dev/dist/sienna.min.js"
         defer
