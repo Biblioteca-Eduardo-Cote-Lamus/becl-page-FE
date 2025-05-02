@@ -64,13 +64,7 @@ _______________________________
 pnpm install
 ```
 
-3. Configurar variables de entorno:
-```bash
-cp .env.example .env
-```
-Editar el archivo `.env` con tus credenciales y configuraciones.
-
-4. Iniciar el servidor de desarrollo:
+3. Iniciar el servidor de desarrollo:
 ```bash
 pnpm dev
 ```
