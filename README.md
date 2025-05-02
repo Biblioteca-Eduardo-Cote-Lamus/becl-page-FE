@@ -48,6 +48,7 @@ git clone [URL_DEL_REPOSITORIO]
 ```
 Tener en cuenta: Crear archivo .env en la raiz del proyecto 
 _______________________________
+```bash 
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
@@ -55,6 +56,7 @@ MYSQL_PASSWORD=
 MYSQL_DATABASE=nextjs_dashboard
 
 NODE_ENV="development"
+```
 _______________________________
 
 2. Instalar dependencias:
