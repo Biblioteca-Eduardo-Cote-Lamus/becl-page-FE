@@ -46,19 +46,25 @@ Portal web oficial de la División de Biblioteca de la Universidad Francisco de 
 ```bash
 git clone [URL_DEL_REPOSITORIO]
 ```
+Tener en cuenta: Crear archivo .env en la raiz del proyecto 
+_______________________________
+```bash 
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=
+MYSQL_DATABASE=nextjs_dashboard
+
+NODE_ENV="development"
+```
+_______________________________
 
 2. Instalar dependencias:
 ```bash
 pnpm install
 ```
 
-3. Configurar variables de entorno:
-```bash
-cp .env.example .env
-```
-Editar el archivo `.env` con tus credenciales y configuraciones.
-
-4. Iniciar el servidor de desarrollo:
+3. Iniciar el servidor de desarrollo:
 ```bash
 pnpm dev
 ```
