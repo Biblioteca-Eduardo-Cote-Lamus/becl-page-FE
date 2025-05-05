@@ -4,7 +4,7 @@ import { montserrat, openSans } from "@/app/ui/fonts";
 import { Computer, Book, ArrowLeft, BookOpen, Newspaper, Layout, Database, MonitorCheck } from "lucide-react";
 import Image from "next/image";
 import ActionButton from "@/app/ui/landing/action_button";
-
+ 
 export default function ServiciosPage() {
   return (
     <main className="container mx-auto px-4 py-8">

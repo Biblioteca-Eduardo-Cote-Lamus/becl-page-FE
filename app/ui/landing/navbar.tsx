@@ -80,8 +80,8 @@ export default function Navbar() {
           : "bg-secondaries_red-900"
       } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <div className="md:container md:mx-auto md:flex md:justify-between md:items-center md:h-20 px-4">
-        <div className="flex items-center justify-between h-16 md:h-auto">
+      <div className="container mx-auto lg:flex lg:justify-between lg:items-center lg:h-20 px-4">
+        <div className="flex items-center justify-between h-16 lg:h-auto">
           <Link
             href="/"
             className="transition-transform duration-200 hover:scale-105"
@@ -90,7 +90,7 @@ export default function Navbar() {
           </Link>
 
           <button
-            className="md:hidden text-white p-2 rounded-lg hover:bg-secondaries_red-800 transition-colors"
+            className="lg:hidden text-white p-2 rounded-lg hover:bg-secondaries_red-800 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -103,7 +103,7 @@ export default function Navbar() {
         </div>
 
         {/* Menú de escritorio */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-4 lg:space-x-8">
           {/* Biblioteca Digital Dropdown */}
           <div className="dropdown-container relative group">
             <button className="text-white group-hover:text-gray-300 transition-all duration-200 px-3 py-2 rounded-md hover:bg-secondaries_red-800 flex items-center gap-1">
@@ -146,6 +146,9 @@ export default function Navbar() {
               >
                 Préstamo Interbibliotecario SIES+
               </DropdownLink>
+              <DropdownLink href="/prestamos">
+                Préstamo de Auditorio y Sala de Semilleros
+              </DropdownLink>
               <DropdownLink href="/estadisticas">Estadísticas</DropdownLink>
               <DropdownLink href="https://pqrsdf.ufps.edu.co/" external>
                 PQRSDF
@@ -155,7 +158,7 @@ export default function Navbar() {
 
           {/* Nosotros Dropdown */}
           <div className="dropdown-container relative group">
-            <button className="text-white group-hover:text-gray-300 transition-colors px-3 py-2 rounded-md group-hover:bg-secondaries_red-800">
+            <button className="text-white group-hover:text-gray-300 transition-colors px-2 py-2 rounded-md group-hover:bg-secondaries_red-800 text-sm lg:text-base lg:px-3">
               Nosotros
               <ChevronDown className="ml-1 inline-block transition-transform duration-200 group-hover:rotate-180" />
             </button>
@@ -179,7 +182,7 @@ export default function Navbar() {
 
       {/* Menú móvil */}
       <div
-        className={`md:hidden fixed left-0 right-0 top-16 transition-all duration-300 ease-in-out transform ${
+        className={`lg:hidden fixed left-0 right-0 top-16 transition-all duration-300 ease-in-out transform ${
           mobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-2 pointer-events-none"
@@ -241,7 +244,7 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
                 dropdownOpen.servicios
-                  ? "max-h-72 opacity-100"
+                  ? "max-h-96 opacity-100"
                   : "max-h-0 opacity-0"
               }`}
             >
@@ -259,6 +262,9 @@ export default function Navbar() {
                 external
               >
                 Préstamo Interbibliotecario SIES+
+              </MobileDropdownLink>
+              <MobileDropdownLink href="/prestamos">
+                Préstamo de Auditorio y Sala de Semilleros
               </MobileDropdownLink>
               <MobileDropdownLink href="/estadisticas">
                 Estadisticas
@@ -286,7 +292,7 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
                 dropdownOpen.nosotros
-                  ? "max-h-48 opacity-100"
+                  ? "max-h-72 opacity-100"
                   : "max-h-0 opacity-0"
               }`}
             >
@@ -354,7 +360,7 @@ interface NavLinkProps {
 const NavLink = ({ href, children }: NavLinkProps) => (
   <Link
     href={href}
-    className="text-white hover:text-white transition-all duration-200 px-3 py-2 rounded-md hover:bg-secondaries_red-800 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:bg-white/30"
+    className="text-white hover:text-white transition-all duration-200 px-2 py-2 rounded-md hover:bg-secondaries_red-800 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:bg-white/30 text-sm lg:text-base lg:px-3"
   >
     {children}
   </Link>

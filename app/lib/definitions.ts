@@ -223,6 +223,20 @@ export interface Usuario {
   clave: Buffer;
 }
 
+// Prestamos types
+export interface Prestamo {
+  id: number;
+  nombre_docente: string;
+  codigo_docente: number;
+  correo_docente: string;
+  nombre_actividad: string;
+  encargado_actividad: string;
+  numero_asistentes: number;
+  personas_externas: boolean;
+  foto_carne: string;
+  mensaje: string;
+}
+
 // Update or add this interface
 export interface MisionVision {
   id: number;

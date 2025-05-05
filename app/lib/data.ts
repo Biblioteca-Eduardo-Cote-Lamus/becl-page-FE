@@ -6,6 +6,7 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
+  Prestamo,
 } from "./definitions";
 import { formatCurrency } from "./utils";
 
@@ -279,5 +280,21 @@ export async function fetchFilteredCustomers(query: string) {
   } catch (err) {
     console.error("Database Error:", err);
     throw new Error("Failed to fetch customer table.");
+  }
+}
+
+export async function fetchPrestamos() {
+  try {
+    // Ejecutar consulta para obtener todos los préstamos
+    const data = await executeQuery('SELECT * FROM prestamos ORDER BY id DESC', []);
+    
+    // Convertir el valor de personas_externas de 0/1 a boolean
+    return (data as Prestamo[]).map(prestamo => ({
+      ...prestamo,
+      personas_externas: Boolean(prestamo.personas_externas)
+    })) as Prestamo[];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch prestamos.');
   }
 }

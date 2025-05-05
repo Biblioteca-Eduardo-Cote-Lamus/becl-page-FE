@@ -3,7 +3,7 @@ import ListaFuncionarios from "@/app/ui/landing/lista_funcionarios";
 import ListaDesarrolladores from "@/app/ui/landing/lista_desarrolladores";
 
 export const metadata: Metadata = {
-  title: "Equipo",
+  title: "Talento Humano",
 };
 
 export default function EquipoPage() {

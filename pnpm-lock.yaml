@@ -57,7 +57,7 @@ importers:
         specifier: ^0.462.0
         version: 0.462.0(react@18.2.0)
       mysql2:
-        specifier: ^3.9.2
+        specifier: ^3.13.0
         version: 3.13.0
       next:
         specifier: ^14.0.2
