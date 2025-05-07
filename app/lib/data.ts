@@ -286,12 +286,27 @@ export async function fetchFilteredCustomers(query: string) {
 export async function fetchPrestamos() {
   try {
     // Ejecutar consulta para obtener todos los préstamos
-    const data = await executeQuery('SELECT * FROM prestamos ORDER BY id DESC', []);
+    // Ordenar por estado (pendiente primero, luego aprobado, luego denegado) y luego por ID descendente
+    const query = `
+      SELECT * FROM prestamos 
+      ORDER BY 
+        CASE 
+          WHEN estado IS NULL OR estado = 'pendiente' THEN 1
+          WHEN estado = 'aprobado' THEN 2
+          WHEN estado = 'denegado' THEN 3
+          ELSE 4
+        END,
+        id DESC
+    `;
+    
+    const data = await executeQuery(query, []);
     
     // Convertir el valor de personas_externas de 0/1 a boolean
     return (data as Prestamo[]).map(prestamo => ({
       ...prestamo,
-      personas_externas: Boolean(prestamo.personas_externas)
+      personas_externas: Boolean(prestamo.personas_externas),
+      // Asegurarse de que estado tenga un valor por defecto si es NULL
+      estado: prestamo.estado || 'pendiente'
     })) as Prestamo[];
   } catch (error) {
     console.error('Database Error:', error);

@@ -235,6 +235,25 @@ export interface Prestamo {
   personas_externas: boolean;
   foto_carne: string;
   mensaje: string;
+  estado?: 'pendiente' | 'aprobado' | 'denegado';
+  fecha_respuesta?: string;
+  razon_denegacion?: string;
+  respondido_por?: string;
+  // Nuevos campos para reserva de espacios
+  espacio_id?: number;
+  fecha_reserva?: string; // Formato YYYY-MM-DD
+  hora_inicio?: string;   // Formato HH:MM
+  hora_fin?: string;      // Formato HH:MM
+  evento_calendar_id?: string; // ID del evento en Google Calendar
+}
+
+// Espacios disponibles para préstamo
+export interface Espacio {
+  id: number;
+  nombre: string;
+  capacidad: number;
+  descripcion?: string;
+  disponible: boolean;
 }
 
 // Update or add this interface

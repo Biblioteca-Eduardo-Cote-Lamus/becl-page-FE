@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import ReservaEspacio from '@/app/ui/dashboard/prestamos/reserva-espacio';
 
 export default function PrestamosForm() {
   const [formData, setFormData] = useState({
@@ -12,7 +13,13 @@ export default function PrestamosForm() {
     numero_asistentes: '',
     personas_externas: false,
     foto_carne: '',
-    mensaje: ''
+    mensaje: '',
+    // Nuevos campos para reserva de espacios
+    espacio_id: null as number | null,
+    espacio_nombre: '',
+    fecha_reserva: '',
+    hora_inicio: '',
+    hora_fin: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -35,12 +42,62 @@ export default function PrestamosForm() {
     }
   };
 
+  // Manejar cambios en la reserva de espacio
+  const handleReservaChange = (reserva: {
+    espacioId: number;
+    espacioNombre: string;
+    fechaReserva: string;
+    horaInicio: string;
+    horaFin: string;
+  } | null) => {
+    if (reserva) {
+      setFormData(prev => ({
+        ...prev,
+        espacio_id: reserva.espacioId as number,
+        espacio_nombre: reserva.espacioNombre,
+        fecha_reserva: reserva.fechaReserva,
+        hora_inicio: reserva.horaInicio,
+        hora_fin: reserva.horaFin
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        espacio_id: null,
+        espacio_nombre: '',
+        fecha_reserva: '',
+        hora_inicio: '',
+        hora_fin: ''
+      }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
 
     try {
+      // Validar si se seleccionó un espacio y horario
+      if (formData.espacio_id) {
+        // Primero verificar disponibilidad final
+        const disponibilidadResponse = await fetch('/api/calendario/disponibilidad', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            espacioId: formData.espacio_id,
+            fechaReserva: formData.fecha_reserva,
+            horaInicio: formData.hora_inicio,
+            horaFin: formData.hora_fin
+          }),
+        });
+        
+        const disponibilidadResult = await disponibilidadResponse.json();
+        
+        if (!disponibilidadResponse.ok || !disponibilidadResult.available) {
+          throw new Error('El espacio ya no está disponible en el horario seleccionado');
+        }
+      }
+      
       // Enviar los datos a nuestra API
       const response = await fetch('/api/prestamos', {
         method: 'POST',
@@ -70,7 +127,12 @@ export default function PrestamosForm() {
         numero_asistentes: '',
         personas_externas: false,
         foto_carne: '',
-        mensaje: ''
+        mensaje: '',
+        espacio_id: null,
+        espacio_nombre: '',
+        fecha_reserva: '',
+        hora_inicio: '',
+        hora_fin: ''
       });
     } catch (err) {
       console.error('Error submitting form:', err);
@@ -223,20 +285,23 @@ export default function PrestamosForm() {
         </div>
         
         {/* Mensaje */}
-        <div>
+        <div className="col-span-1 md:col-span-2">
           <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
             Mensaje
           </label>
           <textarea
             id="mensaje"
             name="mensaje"
+            rows={4}
             value={formData.mensaje}
             onChange={handleChange}
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Escriba un mensaje o comentario adicional si lo desea"
-          ></textarea>
-          <p className="text-xs text-gray-500 mt-1">Escriba un mensaje breve explicando el motivo de su solicitud</p>
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        
+        {/* Componente de Reserva de Espacio */}
+        <div className="col-span-1 md:col-span-2 mt-6">
+          <ReservaEspacio onReservaChange={handleReservaChange} />
         </div>
         
         {/* Submit Button */}
