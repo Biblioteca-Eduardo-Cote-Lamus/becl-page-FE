@@ -1,16 +1,6 @@
 import { NextResponse } from 'next/server';
 import { executeQuery } from '@/app/lib/db';
 import { createCalendarEvent, cancelCalendarEvent } from '@/app/lib/googleCalendar';
-import { RowDataPacket } from 'mysql2';
-
-// Configuración de la conexión a la base de datos
-const dbConfig = {
-  host: process.env.MYSQL_HOST || 'localhost',
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || '1234',
-  database: process.env.MYSQL_DATABASE || 'nextjs_dashboard',
-  port: parseInt(process.env.MYSQL_PORT || '3306')
-};
 
 export async function PATCH(
   request: Request,
@@ -41,7 +31,7 @@ export async function PATCH(
     
     // Primero obtener el préstamo actual para verificar si tiene reserva de espacio
     const prestamoQuery = `SELECT * FROM prestamos WHERE id = ?`;
-    const prestamoResult = await executeQuery<RowDataPacket[]>(prestamoQuery, [id]);
+    const prestamoResult = await executeQuery<Record<string, unknown>[]>(prestamoQuery, [id]);
     
     if (!Array.isArray(prestamoResult) || prestamoResult.length === 0) {
       return NextResponse.json(
@@ -57,12 +47,19 @@ export async function PATCH(
     let values: (string | number)[] = [];
     
     if (data.estado === 'aprobado') {
+      // Validar que existan los datos de reserva antes de crear el evento
+      if (!prestamo.espacio_id || !prestamo.fecha_reserva || !prestamo.hora_inicio || !prestamo.hora_fin) {
+        return NextResponse.json(
+          { error: 'No se puede aprobar una reserva sin datos de espacio y horario.' },
+          { status: 400 }
+        );
+      }
       // Si tiene reserva, crear evento en Google Calendar
       if (tieneReserva) {
         try {
           // Obtener información del espacio
           const espacioQuery = `SELECT * FROM espacios WHERE id = ?`;
-          const espacioResult = await executeQuery<RowDataPacket[]>(espacioQuery, [prestamo.espacio_id]);
+          const espacioResult = await executeQuery<Record<string, unknown>[]>(espacioQuery, [prestamo.espacio_id]);
           
           if (!Array.isArray(espacioResult) || espacioResult.length === 0) {
             return NextResponse.json(
@@ -75,14 +72,14 @@ export async function PATCH(
           
           // Crear evento en Google Calendar
           const calendarResult = await createCalendarEvent(
-            prestamo.espacio_id,
-            espacio.nombre,
-            prestamo.fecha_reserva,
-            prestamo.hora_inicio,
-            prestamo.hora_fin,
-            prestamo.nombre_actividad,
-            prestamo.nombre_docente,
-            prestamo.correo_docente
+            Number(prestamo.espacio_id),
+            String(espacio.nombre),
+            String(prestamo.fecha_reserva),
+            String(prestamo.hora_inicio),
+            String(prestamo.hora_fin),
+            String(prestamo.nombre_actividad),
+            String(prestamo.nombre_docente),
+            String(prestamo.correo_docente)
           );
           
           // Actualizar el préstamo con el ID del evento
@@ -132,7 +129,7 @@ export async function PATCH(
       // Si tiene reserva y evento creado, cancelar el evento
       if (tieneReserva && prestamo.evento_calendar_id) {
         try {
-          await cancelCalendarEvent(prestamo.evento_calendar_id);
+          await cancelCalendarEvent(String(prestamo.evento_calendar_id));
         } catch (error) {
           console.error('Error al cancelar evento en Google Calendar:', error);
           // Continuamos aunque falle la cancelación
@@ -182,7 +179,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     
     // Obtener el préstamo por ID
     const result = await executeQuery('SELECT * FROM prestamos WHERE id = ?', [id]);
-    const rows = (result as [any, any])[0];
+    const rows = (result as [Record<string, unknown>[], unknown])[0];
     
     if (!Array.isArray(rows) || rows.length === 0) {
       return NextResponse.json(

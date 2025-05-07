@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import { checkAvailability } from '@/app/lib/googleCalendar';
 import { executeQuery } from '@/app/lib/db';
 
+interface DisponibilidadRow {
+  count: number;
+}
+
 // POST /api/calendario/disponibilidad - Verificar disponibilidad de un espacio
 export async function POST(request: Request) {
   try {
@@ -43,7 +47,7 @@ export async function POST(request: Request) {
     console.log('Resultado de la consulta:', JSON.stringify(result, null, 2));
     
     // Acceder correctamente al resultado del contador
-    const rows = (result as [any, any])[0];
+    const rows = (result as [DisponibilidadRow[], unknown])[0];
     const reservasCount = rows && rows.length > 0 ? rows[0].count : 0;
     console.log(`Se encontraron ${reservasCount} reservas que se solapan en la base de datos`);
     

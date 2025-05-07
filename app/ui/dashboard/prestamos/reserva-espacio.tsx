@@ -1,10 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Espacio } from '@/app/lib/definitions';
 import CalendarioReservas from './calendario-reservas';
+
+// Definir tipo para los eventos reservados
+interface EventoReservado {
+  title: string;
+  extendedProps: {
+    tipo: string;
+    hora_inicio: string;
+    hora_fin: string;
+    source?: string;
+  };
+}
 
 interface ReservaEspacioProps {
   onReservaChange: (reserva: {
@@ -14,10 +25,9 @@ interface ReservaEspacioProps {
     horaInicio: string;
     horaFin: string;
   } | null) => void;
-  prestamoId?: number;
 }
 
-export default function ReservaEspacio({ onReservaChange, prestamoId }: ReservaEspacioProps) {
+export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps) {
   const [espacios, setEspacios] = useState<Espacio[]>([]);
   const [espacioSeleccionado, setEspacioSeleccionado] = useState<number | ''>('');
   const [fechaReserva, setFechaReserva] = useState<string>('');
@@ -27,6 +37,113 @@ export default function ReservaEspacio({ onReservaChange, prestamoId }: ReservaE
   const [error, setError] = useState<string>('');
   const [disponibilidad, setDisponibilidad] = useState<boolean | null>(null);
   const [horariosDisponibles, setHorariosDisponibles] = useState<{inicio: string, fin: string}[]>([]);
+  // Estado para almacenar los horarios ocupados
+  const [horariosOcupados, setHorariosOcupados] = useState<{[key: string]: boolean}>({});
+  const lastReserva = useRef<string | null>(null);
+
+  // Mueve las declaraciones de useCallback antes de los useEffect que las usan
+  const cargarHorariosOcupados = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/calendario/eventos?espacioId=${espacioSeleccionado}&fecha=${fechaReserva}`);
+      if (!response.ok) {
+        throw new Error('Error al cargar eventos');
+      }
+      const data = await response.json();
+      const ocupados: {[key: string]: boolean} = {};
+      const eventosReservados = data.filter((evento: EventoReservado) => evento.extendedProps?.tipo === 'reservado');
+      console.log('Eventos reservados encontrados:', eventosReservados.length);
+      eventosReservados.forEach((evento: EventoReservado) => {
+        const horaInicio = evento.extendedProps.hora_inicio;
+        const horaFin = evento.extendedProps.hora_fin;
+        const horaInicioNum = parseInt(horaInicio.split(':')[0]);
+        const horaFinNum = parseInt(horaFin.split(':')[0]);
+        console.log(`Evento reservado: ${evento.title} de ${horaInicio} a ${horaFin} (fuente: ${evento.extendedProps.source || 'database'})`);
+        for (let hora = horaInicioNum; hora < horaFinNum; hora++) {
+          const horaStr = hora.toString().padStart(2, '0') + ':00';
+          ocupados[horaStr] = true;
+          console.log(`Marcando hora ocupada: ${horaStr}`);
+        }
+      });
+      setHorariosOcupados(ocupados);
+      console.log('Mapa de horarios ocupados:', ocupados);
+      if (horaInicio && horaFin) {
+        const horaInicioNum = parseInt(horaInicio.split(':')[0]);
+        const horaFinNum = parseInt(horaFin.split(':')[0]);
+        let conflicto = false;
+        for (let h = horaInicioNum; h < horaFinNum; h++) {
+          const horaStr = h.toString().padStart(2, '0') + ':00';
+          if (ocupados[horaStr]) {
+            conflicto = true;
+            break;
+          }
+        }
+        if (conflicto) {
+          setError('El horario seleccionado tiene conflicto con reservas existentes');
+          setDisponibilidad(false);
+        }
+      }
+    } catch (error) {
+      console.error('Error al cargar horarios ocupados:', error);
+      setError('Error al cargar la disponibilidad de horarios');
+    } finally {
+      setLoading(false);
+    }
+  }, [espacioSeleccionado, fechaReserva, horaInicio, horaFin]);
+
+  const verificarDisponibilidad = useCallback(async () => {
+    if (!espacioSeleccionado || !fechaReserva || !horaInicio || !horaFin) {
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      const horaInicioNum = parseInt(horaInicio);
+      const horaFinNum = parseInt(horaFin);
+      let conflictoLocal = false;
+      for (let h = horaInicioNum; h < horaFinNum; h++) {
+        const horaStr = h.toString().padStart(2, '0') + ':00';
+        if (horariosOcupados[horaStr]) {
+          conflictoLocal = true;
+          break;
+        }
+      }
+      if (conflictoLocal) {
+        console.log('Conflicto detectado localmente con horarios ocupados');
+        setDisponibilidad(false);
+        setError('El espacio ya está reservado en el horario seleccionado');
+        return;
+      }
+      const response = await fetch('/api/calendario/disponibilidad', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          espacioId: Number(espacioSeleccionado),
+          fechaReserva,
+          horaInicio,
+          horaFin
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Error al verificar disponibilidad');
+      }
+      const data = await response.json();
+      console.log('Respuesta de disponibilidad de la API:', data);
+      setDisponibilidad(data.available);
+      if (!data.available) {
+        setError('El espacio no está disponible en el horario seleccionado');
+        await cargarHorariosOcupados();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Error al verificar disponibilidad');
+      setDisponibilidad(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [espacioSeleccionado, fechaReserva, horaInicio, horaFin, horariosOcupados, cargarHorariosOcupados]);
 
   // Cargar espacios disponibles
   useEffect(() => {
@@ -58,189 +175,55 @@ export default function ReservaEspacio({ onReservaChange, prestamoId }: ReservaE
     setHorariosDisponibles(horarios);
   }, []);
 
-  // Estado para almacenar los horarios ocupados
-  const [horariosOcupados, setHorariosOcupados] = useState<{[key: string]: boolean}>({});
-
-  // Cargar los horarios ocupados cuando cambia el espacio o la fecha
+  // useEffect para cargar horarios ocupados solo cuando cambian espacio o fecha
   useEffect(() => {
     if (espacioSeleccionado && fechaReserva) {
       cargarHorariosOcupados();
-      // También verificamos disponibilidad si ya hay horarios seleccionados
-      if (horaInicio && horaFin) {
-        verificarDisponibilidad();
-      }
     } else {
       setHorariosOcupados({});
     }
-  }, [espacioSeleccionado, fechaReserva]);
+  }, [espacioSeleccionado, fechaReserva, cargarHorariosOcupados]);
 
-  // Función para cargar los horarios ocupados directamente de la base de datos
-  const cargarHorariosOcupados = async () => {
-    try {
-      setLoading(true);
-      
-      // Usamos la API de eventos que ahora consulta directamente la base de datos
-      const response = await fetch(`/api/calendario/eventos?espacioId=${espacioSeleccionado}&fecha=${fechaReserva}`);
-      
-      if (!response.ok) {
-        throw new Error('Error al cargar eventos');
-      }
-      
-      const data = await response.json();
-      
-      // Crear un mapa de horarios ocupados
-      const ocupados: {[key: string]: boolean} = {};
-      
-      // Filtrar solo los eventos reservados (no los disponibles)
-      const eventosReservados = data.filter((evento: any) => 
-        evento.extendedProps?.tipo === 'reservado'
-      );
-      
-      console.log('Eventos reservados encontrados:', eventosReservados.length);
-      
-      // Marcar cada hora ocupada en el mapa
-      eventosReservados.forEach((evento: any) => {
-        // Extraer las horas directamente de los datos del evento
-        const horaInicio = evento.extendedProps.hora_inicio;
-        const horaFin = evento.extendedProps.hora_fin;
-        
-        // Convertir a números para poder iterar
-        const horaInicioNum = parseInt(horaInicio.split(':')[0]);
-        const horaFinNum = parseInt(horaFin.split(':')[0]);
-        
-        console.log(`Evento reservado: ${evento.title} de ${horaInicio} a ${horaFin} (fuente: ${evento.extendedProps.source || 'database'})`);
-        
-        // Marcar todas las horas entre inicio y fin como ocupadas
-        for (let hora = horaInicioNum; hora < horaFinNum; hora++) {
-          const horaStr = hora.toString().padStart(2, '0') + ':00';
-          ocupados[horaStr] = true;
-          console.log(`Marcando hora ocupada: ${horaStr}`);
-        }
-      });
-      
-      setHorariosOcupados(ocupados);
-      console.log('Mapa de horarios ocupados:', ocupados);
-      
-      // Si hay horarios seleccionados, verificar si siguen siendo válidos
-      if (horaInicio && horaFin) {
-        const horaInicioNum = parseInt(horaInicio.split(':')[0]);
-        const horaFinNum = parseInt(horaFin.split(':')[0]);
-        
-        // Verificar si alguna hora entre inicio y fin está ocupada
-        let conflicto = false;
-        for (let h = horaInicioNum; h < horaFinNum; h++) {
-          const horaStr = h.toString().padStart(2, '0') + ':00';
-          if (ocupados[horaStr]) {
-            conflicto = true;
-            break;
-          }
-        }
-        
-        if (conflicto) {
-          setError('El horario seleccionado tiene conflicto con reservas existentes');
-          setDisponibilidad(false);
-        }
-      }
-    } catch (error) {
-      console.error('Error al cargar horarios ocupados:', error);
-      setError('Error al cargar la disponibilidad de horarios');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Verificar disponibilidad cuando se seleccionan todos los campos
+  // useEffect para verificar disponibilidad solo cuando todos los campos están completos o cambian los horarios ocupados
   useEffect(() => {
     if (espacioSeleccionado && fechaReserva && horaInicio && horaFin) {
       verificarDisponibilidad();
     } else {
       setDisponibilidad(null);
     }
-    
-    // Actualizar el estado de reserva para el componente padre
+  }, [espacioSeleccionado, fechaReserva, horaInicio, horaFin, horariosOcupados, verificarDisponibilidad]);
+
+  // Obtener fecha mínima (hoy)
+  const fechaMinima = new Date().toISOString().split('T')[0];
+
+  // Notificar al padre cuando los datos estén completos
+  useEffect(() => {
     if (espacioSeleccionado && fechaReserva && horaInicio && horaFin) {
       const espacioNombre = espacios.find(e => e.id === Number(espacioSeleccionado))?.nombre || '';
-      onReservaChange({
+      const reservaStr = JSON.stringify({
         espacioId: Number(espacioSeleccionado),
         espacioNombre,
         fechaReserva,
         horaInicio,
         horaFin
       });
-    } else {
-      onReservaChange(null);
-    }
-  }, [espacioSeleccionado, fechaReserva, horaInicio, horaFin]);
-
-  // Verificar disponibilidad en el calendario
-  const verificarDisponibilidad = async () => {
-    if (!espacioSeleccionado || !fechaReserva || !horaInicio || !horaFin) {
-      return;
-    }
-
-    setLoading(true);
-    setError('');
-    
-    try {
-      // Primero verificamos localmente si hay conflictos con los horarios ya cargados
-      const horaInicioNum = parseInt(horaInicio);
-      const horaFinNum = parseInt(horaFin);
-      
-      let conflictoLocal = false;
-      for (let h = horaInicioNum; h < horaFinNum; h++) {
-        const horaStr = h.toString().padStart(2, '0') + ':00';
-        if (horariosOcupados[horaStr]) {
-          conflictoLocal = true;
-          break;
-        }
-      }
-      
-      if (conflictoLocal) {
-        console.log('Conflicto detectado localmente con horarios ocupados');
-        setDisponibilidad(false);
-        setError('El espacio ya está reservado en el horario seleccionado');
-        return;
-      }
-      
-      // Si no hay conflicto local, verificamos con la API
-      const response = await fetch('/api/calendario/disponibilidad', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      if (lastReserva.current !== reservaStr) {
+        lastReserva.current = reservaStr;
+        onReservaChange({
           espacioId: Number(espacioSeleccionado),
+          espacioNombre,
           fechaReserva,
           horaInicio,
           horaFin
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al verificar disponibilidad');
+        });
       }
-
-      const data = await response.json();
-      console.log('Respuesta de disponibilidad de la API:', data);
-      setDisponibilidad(data.available);
-      
-      if (!data.available) {
-        setError('El espacio no está disponible en el horario seleccionado');
-        
-        // Actualizar los horarios ocupados con esta nueva información
-        await cargarHorariosOcupados();
+    } else {
+      if (lastReserva.current !== null) {
+        lastReserva.current = null;
+        onReservaChange(null);
       }
-    } catch (error) {
-      console.error('Error:', error);
-      setError('Error al verificar disponibilidad');
-      setDisponibilidad(null);
-    } finally {
-      setLoading(false);
     }
-  };
-
-  // Obtener fecha mínima (hoy)
-  const fechaMinima = new Date().toISOString().split('T')[0];
+  }, [espacioSeleccionado, fechaReserva, horaInicio, horaFin, espacios, onReservaChange]);
 
   return (
     <div className="space-y-4 p-4 bg-white rounded-lg border border-gray-200">

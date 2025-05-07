@@ -17,6 +17,10 @@ async function executeQuery(query: string, values: unknown[]) {
   return result;
 }
 
+interface InsertResult {
+  insertId: number;
+}
+
 export async function POST(request: Request) {
   try {
     const req = await request.json();
@@ -107,7 +111,7 @@ export async function POST(request: Request) {
     
     const result = await executeQuery(query, values);
     // El resultado es un array donde el primer elemento contiene información sobre la consulta
-    const queryResult = result[0] as any;
+    const queryResult = result[0] as InsertResult;
     const prestamoId = queryResult.insertId;
     
     return NextResponse.json({ 

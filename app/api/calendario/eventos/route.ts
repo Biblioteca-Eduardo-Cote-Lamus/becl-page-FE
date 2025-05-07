@@ -2,6 +2,44 @@ import { NextResponse } from 'next/server';
 import { executeQuery } from '@/app/lib/db';
 import { checkAvailability } from '@/app/lib/googleCalendar';
 
+interface ReservaDB {
+  id: number;
+  nombre_actividad: string;
+  nombre_docente: string;
+  fecha_reserva: string;
+  hora_inicio: string;
+  hora_fin: string;
+  espacio_id?: number;
+  espacio_nombre?: string;
+}
+
+// Definir un tipo mínimo para los eventos de Google Calendar
+interface GoogleCalendarEvent {
+  id: string;
+  summary: string;
+  start: { dateTime: string };
+  end: { dateTime: string };
+}
+
+// Modificar la definición de eventos para que 'reservaId' sea opcional y nunca requerida
+interface EventoFullCalendar {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  backgroundColor: string;
+  borderColor: string;
+  textColor?: string;
+  extendedProps?: {
+    tipo: string;
+    prestamoId?: number;
+    hora_inicio?: string;
+    hora_fin?: string;
+    reservaId?: number | string;
+    source?: string;
+  };
+}
+
 // GET /api/calendario/eventos - Obtener eventos para un espacio y fecha específicos
 export async function GET(request: Request) {
   try {
@@ -29,7 +67,7 @@ export async function GET(request: Request) {
     console.log(`Buscando reservas para espacio ID: ${espacioId} en fecha: ${fecha}`);
     
     const result = await executeQuery(query, [espacioId, fecha]);
-    const reservas = (result as [any, any])[0];
+    const reservas = (result as [ReservaDB[], unknown])[0];
     
     console.log(`Se encontraron ${Array.isArray(reservas) ? reservas.length : 0} reservas en la base de datos`);
     if (Array.isArray(reservas) && reservas.length > 0) {
@@ -37,7 +75,7 @@ export async function GET(request: Request) {
     }
     
     // Convertir las reservas a eventos para el calendario
-    const eventos = Array.isArray(reservas) ? reservas.map((reserva: any) => ({
+    const eventos = Array.isArray(reservas) ? reservas.map((reserva: ReservaDB) => ({
       id: `reserva-${reserva.id}`,
       title: `${reserva.nombre_actividad} - ${reserva.nombre_docente}`,
       start: `${reserva.fecha_reserva}T${reserva.hora_inicio}:00`,
@@ -64,7 +102,7 @@ export async function GET(request: Request) {
     console.log(`Consultando reservas directamente de la base de datos para espacio ID: ${espacioId} en fecha: ${fecha}`);
     
     const resultReservas = await executeQuery(queryReservas, [espacioId, fecha]);
-    const reservasDirectas = (resultReservas as [any, any])[0];
+    const reservasDirectas = (resultReservas as [ReservaDB[], unknown])[0];
     
     console.log(`Se encontraron ${Array.isArray(reservasDirectas) ? reservasDirectas.length : 0} reservas directas en la base de datos`);
     if (Array.isArray(reservasDirectas) && reservasDirectas.length > 0) {
@@ -75,7 +113,7 @@ export async function GET(request: Request) {
     const horasOcupadas = new Map();
     
     if (Array.isArray(reservasDirectas)) {
-      reservasDirectas.forEach((reserva: any) => {
+      reservasDirectas.forEach((reserva: ReservaDB) => {
         // Convertir horas de inicio y fin a números (formato: "08:00" -> 8)
         const horaInicio = parseInt(reserva.hora_inicio.split(':')[0]);
         const horaFin = parseInt(reserva.hora_fin.split(':')[0]);
@@ -94,7 +132,7 @@ export async function GET(request: Request) {
     }
     
     // Generar eventos para cada hora (6:00 AM - 10:00 PM)
-    const eventosDisponibles = [];
+    const eventosDisponibles: EventoFullCalendar[] = [];
     const inicioJornada = 6; // 6:00 AM
     const finJornada = 22;   // 10:00 PM
     
@@ -120,7 +158,7 @@ export async function GET(request: Request) {
             tipo: 'reservado',
             hora_inicio: `${horaFormateada}:00`,
             hora_fin: `${siguienteHora}:00`,
-            reservaId: infoReserva.id
+            ...(infoReserva.id ? { reservaId: infoReserva.id } : {})
           }
         });
       } else {
@@ -142,7 +180,7 @@ export async function GET(request: Request) {
     }
     
     // Combinar eventos reservados y disponibles
-    const todosEventos = [...eventos, ...eventosDisponibles];
+    const todosEventos: EventoFullCalendar[] = [...eventos, ...eventosDisponibles];
 
     // Consultar también Google Calendar
     try {
@@ -155,18 +193,18 @@ export async function GET(request: Request) {
 
       if (!eventosGoogle.available && eventosGoogle.events) {
         // Convertir eventos de Google Calendar al formato que espera el frontend
-        const eventosGoogleFormateados = eventosGoogle.events.map((evento: any) => ({
+        const eventosGoogleFormateados = (eventosGoogle.events as GoogleCalendarEvent[]).map((evento) => ({
           id: `google-${evento.id}`,
-          title: evento.summary,
-          start: evento.start.dateTime,
-          end: evento.end.dateTime,
+          title: String(evento.summary),
+          start: String(evento.start.dateTime),
+          end: String(evento.end.dateTime),
           backgroundColor: '#3788d8', // Azul para reservado
           borderColor: '#3788d8',
           textColor: 'white',
           extendedProps: {
             tipo: 'reservado',
-            hora_inicio: evento.start.dateTime.split('T')[1].substring(0, 5),
-            hora_fin: evento.end.dateTime.split('T')[1].substring(0, 5),
+            hora_inicio: String(evento.start.dateTime).split('T')[1].substring(0, 5),
+            hora_fin: String(evento.end.dateTime).split('T')[1].substring(0, 5),
             source: 'google'
           }
         }));

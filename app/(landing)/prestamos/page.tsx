@@ -42,35 +42,6 @@ export default function PrestamosForm() {
     }
   };
 
-  // Manejar cambios en la reserva de espacio
-  const handleReservaChange = (reserva: {
-    espacioId: number;
-    espacioNombre: string;
-    fechaReserva: string;
-    horaInicio: string;
-    horaFin: string;
-  } | null) => {
-    if (reserva) {
-      setFormData(prev => ({
-        ...prev,
-        espacio_id: reserva.espacioId as number,
-        espacio_nombre: reserva.espacioNombre,
-        fecha_reserva: reserva.fechaReserva,
-        hora_inicio: reserva.horaInicio,
-        hora_fin: reserva.horaFin
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        espacio_id: null,
-        espacio_nombre: '',
-        fecha_reserva: '',
-        hora_inicio: '',
-        hora_fin: ''
-      }));
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -139,6 +110,34 @@ export default function PrestamosForm() {
       setError('Hubo un error al enviar el formulario. Por favor intente nuevamente.');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleReservaChange = (reserva: {
+    espacioId: number;
+    espacioNombre: string;
+    fechaReserva: string;
+    horaInicio: string;
+    horaFin: string;
+  } | null) => {
+    if (reserva) {
+      setFormData(prev => ({
+        ...prev,
+        espacio_id: reserva.espacioId as number,
+        espacio_nombre: reserva.espacioNombre,
+        fecha_reserva: reserva.fechaReserva,
+        hora_inicio: reserva.horaInicio,
+        hora_fin: reserva.horaFin
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        espacio_id: null,
+        espacio_nombre: '',
+        fecha_reserva: '',
+        hora_inicio: '',
+        hora_fin: ''
+      }));
     }
   };
 

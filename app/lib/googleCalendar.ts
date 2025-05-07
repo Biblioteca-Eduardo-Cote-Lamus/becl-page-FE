@@ -20,7 +20,7 @@ export async function checkAvailability(
 ) {
   try {
     const calendar = configureGoogleCalendar();
-    let calendarId = process.env.GOOGLE_CALENDAR_ID;
+    const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
     if (!calendarId) {
       throw new Error('ID de calendario no configurado');
@@ -119,7 +119,7 @@ export async function createCalendarEvent(
 ) {
   try {
     const calendar = configureGoogleCalendar();
-    let calendarId = process.env.GOOGLE_CALENDAR_ID;
+    const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
     if (!calendarId) {
       throw new Error('ID de calendario no configurado');
@@ -206,7 +206,7 @@ export async function createCalendarEvent(
 export async function cancelCalendarEvent(eventId: string) {
   try {
     const calendar = configureGoogleCalendar();
-    let calendarId = process.env.GOOGLE_CALENDAR_ID;
+    const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
     if (!calendarId) {
       throw new Error('ID de calendario no configurado');
