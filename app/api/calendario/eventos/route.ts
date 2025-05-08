@@ -80,8 +80,8 @@ export async function GET(request: Request) {
       title: `${reserva.nombre_actividad} - ${reserva.nombre_docente}`,
       start: `${reserva.fecha_reserva}T${reserva.hora_inicio}:00`,
       end: `${reserva.fecha_reserva}T${reserva.hora_fin}:00`,
-      backgroundColor: '#3788d8', // Azul para reservado
-      borderColor: '#3788d8',
+      backgroundColor: '#b92d378', // Azul para reservado
+      borderColor: '#b92d37',
       textColor: 'white',
       extendedProps: {
         tipo: 'reservado',
@@ -151,8 +151,8 @@ export async function GET(request: Request) {
           title: `Reservado: ${infoReserva.actividad}`,
           start: `${fecha}T${horaFormateada}:00:00`,
           end: `${fecha}T${siguienteHora}:00:00`,
-          backgroundColor: '#3788d8', // Azul para reservado
-          borderColor: '#3788d8',
+          backgroundColor: '#b92d37', // Azul para reservado
+          borderColor: '#b92d37',
           textColor: 'white',
           extendedProps: {
             tipo: 'reservado',
@@ -198,8 +198,8 @@ export async function GET(request: Request) {
           title: String(evento.summary),
           start: String(evento.start.dateTime),
           end: String(evento.end.dateTime),
-          backgroundColor: '#3788d8', // Azul para reservado
-          borderColor: '#3788d8',
+          backgroundColor: '#b92d37', // Azul para reservado
+          borderColor: '#b92d37',
           textColor: 'white',
           extendedProps: {
             tipo: 'reservado',

@@ -239,7 +239,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
             id="espacio"
             value={espacioSeleccionado}
             onChange={(e) => setEspacioSeleccionado(e.target.value ? Number(e.target.value) : '')}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondaries_red-700 focus:border-secondaries_red-700"
             required
           >
             <option value="">Seleccionar espacio</option>
@@ -262,7 +262,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
             value={fechaReserva}
             onChange={(e) => setFechaReserva(e.target.value)}
             min={fechaMinima}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondaries_red-700 focus:border-secondaries_red-700"
             required
           />
         </div>
@@ -285,7 +285,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
                 }
               }
             }}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondaries_red-700 focus:border-secondaries_red-700"
             required
           >
             <option value="">Seleccionar hora de inicio</option>
@@ -294,7 +294,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
                 key={horario.inicio} 
                 value={horario.inicio}
                 disabled={horariosOcupados[horario.inicio]}
-                className={horariosOcupados[horario.inicio] ? 'bg-blue-100 text-blue-800' : ''}
+                className={horariosOcupados[horario.inicio] ? 'bg-secondaries_red-100 text-secondaries_red-800' : ''}
               >
                 {horario.inicio} {horariosOcupados[horario.inicio] ? '(Reservado)' : ''}
               </option>
@@ -311,7 +311,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
             id="horaFin"
             value={horaFin}
             onChange={(e) => setHoraFin(e.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondaries_red-700 focus:border-secondaries_red-700"
             required
             disabled={!horaInicio}
           >
@@ -334,7 +334,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
                     key={horario.inicio} 
                     value={horario.inicio}
                     disabled={hayHorasOcupadasEntre || horariosOcupados[horario.inicio]}
-                    className={horariosOcupados[horario.inicio] ? 'bg-blue-100 text-blue-800' : ''}
+                    className={horariosOcupados[horario.inicio] ? 'bg-secondaries_red-100 text-secondaries_red-800' : ''}
                   >
                     {horario.inicio} {hayHorasOcupadasEntre ? '(Conflicto)' : horariosOcupados[horario.inicio] ? '(Reservado)' : ''}
                   </option>
@@ -353,7 +353,7 @@ export default function ReservaEspacio({ onReservaChange }: ReservaEspacioProps)
             <span className="text-sm">Horario disponible</span>
           </div>
           <div className="flex items-center">
-            <div className="w-4 h-4 bg-blue-500 mr-2"></div>
+            <div className="w-4 h-4 bg-secondaries_red-700 mr-2"></div>
             <span className="text-sm">Horario reservado</span>
           </div>
         </div>

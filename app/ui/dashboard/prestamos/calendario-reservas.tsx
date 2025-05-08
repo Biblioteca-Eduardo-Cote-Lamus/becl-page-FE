@@ -129,8 +129,8 @@ export default function CalendarioReservas({
           title: evento.extendedProps?.tipo === 'disponible' ? 'Disponible' : `${evento.title} (Reservado)`,
           start: evento.start,
           end: evento.end,
-          backgroundColor: evento.extendedProps?.tipo === 'disponible' ? '#4CAF50' : '#3788d8', // Verde para disponible, Azul para reservado
-          borderColor: evento.extendedProps?.tipo === 'disponible' ? '#4CAF50' : '#3788d8',
+          backgroundColor: evento.extendedProps?.tipo === 'disponible' ? '#4CAF50' : '#b92d37', // Verde para disponible, Rojo para reservado
+          borderColor: evento.extendedProps?.tipo === 'disponible' ? '#4CAF50' : '#b92d37',
           textColor: evento.extendedProps?.tipo === 'disponible' ? 'white' : 'white',
           extendedProps: evento.extendedProps,
           classNames: evento.extendedProps?.tipo === 'disponible' ? 'evento-disponible' : 'evento-reservado'
