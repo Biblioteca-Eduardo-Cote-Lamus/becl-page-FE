@@ -4,7 +4,7 @@ import mysql from 'mysql2/promise';
 // Configuración de la conexión a la base de datos
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
+  user: process.env.DB_USER || 'PC_MARCOS',
   password: process.env.DB_PASSWORD || '1234',
   database: process.env.DB_NAME || 'nextjs_dashboard',
   port: parseInt(process.env.DB_PORT || '3306')

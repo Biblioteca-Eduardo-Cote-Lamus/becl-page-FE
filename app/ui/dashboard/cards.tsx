@@ -15,7 +15,7 @@ const iconMap = {
   invoices: Inbox,
 };
 
-export default async function CardWraFpper() {
+export default async function CardWrapper() {
   const {
     numberOfInvoices,
     numberOfCustomers,
@@ -23,9 +23,7 @@ export default async function CardWraFpper() {
     totalPendingInvoices,
   } = await fetchCardData();
   return (
-    <>
-      {/* NOTE: Uncomment this code in Chapter 9 */}
-
+    <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
@@ -34,7 +32,7 @@ export default async function CardWraFpper() {
         value={numberOfCustomers}
         type="customers"
       />
-    </>
+    </div>
   );
 }
 
@@ -50,17 +48,23 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-      <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
+    <div className="group relative overflow-hidden rounded-xl bg-white p-4 sm:p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+      <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-secondaries_red-950/5 opacity-0 transition-all duration-300 group-hover:opacity-100"></div>
+      <div className="relative">
+        <div className="mb-3 sm:mb-4 flex items-center">
+          {Icon ? (
+            <div className="rounded-lg bg-secondaries_red-950/10 p-1.5 sm:p-2">
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-secondaries_red-700" />
+            </div>
+          ) : null}
+          <h3 className="ml-2 sm:ml-3 text-xs sm:text-sm font-medium text-gray-600">{title}</h3>
+        </div>
+        <p
+          className={`${openSans.className} text-2xl sm:text-3xl font-semibold text-gray-900`}
+        >
+          {value}
+        </p>
       </div>
-      <p
-        className={`${openSans.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-      >
-        {value}
-      </p>
     </div>
   );
 }

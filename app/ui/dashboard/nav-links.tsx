@@ -7,10 +7,8 @@ import {
   Calendar,
   Briefcase,
   UserCog,
-  
 } from "lucide-react";
 import Link from "next/link";
-
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
@@ -36,7 +34,7 @@ const links = [
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <>
+    <div className="flex flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-2">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -44,17 +42,38 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-secondaries_red-900 md:flex-none md:justify-start md:p-2 md:px-3',
+              'group flex h-[48px] grow items-center justify-center gap-2 rounded-xl bg-white p-2 text-sm font-medium shadow-sm transition-all duration-300 hover:shadow-md md:flex-none md:justify-start md:px-3',
               {
-                'bg-sky-100 text-secondaries_red-900': pathname === link.href,
+                'bg-secondaries_red-950/5 text-secondaries_red-700': pathname === link.href,
+                'hover:bg-secondaries_red-950/5': pathname !== link.href,
               },
             )}
           >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <div className={clsx(
+              'rounded-lg p-1.5 sm:p-2 transition-colors',
+              {
+                'bg-secondaries_red-950/10': pathname === link.href,
+                'bg-secondaries_red-950/5 group-hover:bg-secondaries_red-950/10': pathname !== link.href,
+              }
+            )}>
+              <LinkIcon className={clsx(
+                'w-4 h-4 sm:w-5 sm:h-5',
+                {
+                  'text-secondaries_red-700': pathname === link.href,
+                  'text-gray-600 group-hover:text-secondaries_red-700': pathname !== link.href,
+                }
+              )} />
+            </div>
+            <p className={clsx(
+              'hidden text-xs sm:text-sm md:block',
+              {
+                'text-secondaries_red-700': pathname === link.href,
+                'text-gray-600 group-hover:text-secondaries_red-700': pathname !== link.href,
+              }
+            )}>{link.name}</p>
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
