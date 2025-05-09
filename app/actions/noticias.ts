@@ -2,10 +2,13 @@
 
 import { executeQuery } from '../lib/db';
 import { Noticia } from '../lib/definitions';
+import { revalidatePath } from 'next/cache';
 
 export async function getNoticias(): Promise<Noticia[]> {
   try {
     const data = await executeQuery<Noticia[]>('SELECT * FROM noticias ORDER BY id DESC');
+    revalidatePath('/');
+    revalidatePath('/noticias');
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error('Database Error:', error);
