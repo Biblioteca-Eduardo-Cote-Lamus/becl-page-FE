@@ -23,11 +23,63 @@ export async function getNoticiaById(id: string): Promise<Noticia | null> {
   }
 }
 
-export async function deleteNoticia(id: number): Promise<void> {
+export async function createNoticia(noticia: Omit<Noticia, 'id'>): Promise<{ success: boolean; id?: number; error?: string }> {
   try {
-    await executeQuery('DELETE FROM noticias WHERE id = ?', [id]);
+    const result = await executeQuery<{ insertId: number }>(
+      'INSERT INTO noticias (titular, descripcion, imagen, importante) VALUES (?, ?, ?, ?)',
+      [noticia.titular, noticia.descripcion, noticia.imagen, noticia.importante]
+    );
+    
+    return {
+      success: true,
+      id: result.insertId
+    };
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to delete noticia.');
+    return {
+      success: false,
+      error: 'Failed to create noticia.'
+    };
+  }
+}
+
+export async function updateNoticia(id: string, noticia: Partial<Noticia>): Promise<{ success: boolean; error?: string }> {
+  try {
+    const fields = Object.keys(noticia)
+      .filter(key => key !== 'id')
+      .map(key => `${key} = ?`)
+      .join(', ');
+    
+    const values = Object.entries(noticia)
+      .filter(([key]) => key !== 'id')
+      .map(([, value]) => value);
+    
+    values.push(id);
+
+    await executeQuery(
+      `UPDATE noticias SET ${fields} WHERE id = ?`,
+      values
+    );
+
+    return { success: true };
+  } catch (error) {
+    console.error('Database Error:', error);
+    return {
+      success: false,
+      error: 'Failed to update noticia.'
+    };
+  }
+}
+
+export async function deleteNoticia(id: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    await executeQuery('DELETE FROM noticias WHERE id = ?', [id]);
+    return { success: true };
+  } catch (error) {
+    console.error('Database Error:', error);
+    return {
+      success: false,
+      error: 'Failed to delete noticia.'
+    };
   }
 } 

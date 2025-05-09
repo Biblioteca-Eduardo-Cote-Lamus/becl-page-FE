@@ -6,6 +6,7 @@ import { Noticias } from '@/app/lib/definitions';
 import ImageUploader from "@/app/ui/dashboard/imageUploader";
 import { useRouter } from 'next/navigation';
 import { CustomToast, toastConfig } from "@/app/ui/components/CustomToast";
+import { createNoticia } from '@/app/actions/noticias';
 
 export default function CreateNoticiaPage() {
   const [noticia, setNoticia] = useState<Partial<Noticias>>({
@@ -14,6 +15,7 @@ export default function CreateNoticiaPage() {
     imagen: '',
     importante: false
   });
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,25 +26,21 @@ export default function CreateNoticiaPage() {
       return;
     }
 
+    setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/noticias`, {
-        method: 'POST',
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(noticia),
-      });
-  
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to create noticia: ${response.status} ${errorText}`);
+      const result = await createNoticia(noticia as Omit<Noticias, 'id'>);
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Error al crear la noticia');
       }
+
       toast.success('Noticia creada exitosamente', toastConfig.success);
       router.push('/dashboard/noticias');
     } catch (error) {
       console.error('Error creating noticia:', error);
-      toast.error('Error al crear la noticia', toastConfig.error);
+      toast.error(error instanceof Error ? error.message : 'Error al crear la noticia', toastConfig.error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,9 +91,10 @@ export default function CreateNoticiaPage() {
       
       <button
         type="submit"
+        disabled={isLoading}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Crear Noticia
+        {isLoading ? 'Creando...' : 'Crear Noticia'}
       </button>
       <CustomToast />
     </form>

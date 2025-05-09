@@ -1,5 +1,3 @@
-import "@/app/ui/global.css";
-import { openSans } from "@/app/ui/fonts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -29,27 +27,4 @@ export const metadata: Metadata = {
     siteName: "Biblioteca UFPS",
   },
   viewport: "width=device-width, initial-scale=1.0",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="es" suppressHydrationWarning>
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      </head>
-      <body
-        className={`${openSans.className} antialiased min-h-screen w-full overflow-x-hidden`}
-        suppressHydrationWarning
-      >
-        {children}
-      </body>
-    </html>
-  );
-}
+}; 

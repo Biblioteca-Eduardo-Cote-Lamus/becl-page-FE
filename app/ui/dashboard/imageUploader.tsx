@@ -14,12 +14,13 @@ interface ImageUploaderProps {
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
   onImageSelect,
+  currentImage,
   className = '',
   isEditMode = false
 }) => {
-  const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [previewUrl, setPreviewUrl] = useState<string | null>(currentImage || null);
   const [isUploading, setIsUploading] = useState(false);
-  const [hasNewImage, setHasNewImage] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +43,8 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
+      const response = await fetch('/api/upload', {
         method: 'POST',
-        headers: {
-          "x-api-key": process.env.API_KEY || "",
-        },
         body: formData,
       });
 
@@ -54,10 +52,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         throw new Error('Error al subir la imagen');
       }
 
-      const { url } = await response.json();
-      setPreviewUrl(url);
-      setHasNewImage(true);
-      onImageSelect(url);
+      const { filename } = await response.json();
+      setPreviewUrl(filename);
+      onImageSelect(filename);
       toast.success('Imagen subida exitosamente', toastConfig.success);
     } catch (error) {
       console.error('Error:', error);
@@ -87,11 +84,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         />
       </div>
 
-      {/* Mostrar preview solo cuando hay una nueva imagen */}
-      {hasNewImage && previewUrl && (
+      {/* Mostrar preview de la imagen actual o la nueva */}
+      {(currentImage || previewUrl) && (
         <div className="mt-4">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}${previewUrl}`}
+            src={previewUrl || currentImage || ''}
             alt="Preview"
             className="max-w-xs rounded-lg shadow-md object-cover h-48 w-full"
             width={300}

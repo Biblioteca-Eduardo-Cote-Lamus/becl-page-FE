@@ -2,6 +2,7 @@
 
 import { Prestamo } from '@/app/lib/definitions';
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Componente para cada fila desplegable
 function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestamo, onStatusChange: () => void }) {
@@ -168,10 +169,12 @@ function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestam
                     className="relative w-44 h-32 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow duration-200"
                     onClick={() => setShowImageModal(true)}
                   >
-                    <img
+                    <Image
                       src={prestamo.foto_carne}
-                      alt="Foto de carné"
-                      className="w-full h-full object-contain bg-gray-50"
+                      alt={`Imagen de ${prestamo.nombre_docente}`}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain bg-gray-50 rounded-lg"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 flex items-center justify-center">
                       <svg 
@@ -299,9 +302,11 @@ function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestam
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <img
+            <Image
               src={prestamo.foto_carne}
-              alt="Foto de carné"
+              alt={`Imagen de ${prestamo.nombre_docente}`}
+              width={40}
+              height={40}
               className="max-w-full max-h-[85vh] object-contain rounded-lg"
             />
           </div>

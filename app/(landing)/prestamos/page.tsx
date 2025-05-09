@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import ReservaEspacio from "@/app/ui/dashboard/prestamos/reserva-espacio";
+import Image from 'next/image';
 
 interface FormData {
   nombre_docente: string;
@@ -537,9 +538,11 @@ export default function PrestamosForm() {
                   <div className="space-y-1 text-center">
                       {imagePreview ? (
                         <div className="relative">
-                          <img
+                          <Image
                             src={imagePreview}
                             alt="Vista previa"
+                            width={100}
+                            height={100}
                             className="mx-auto h-100 w-100 object-cover rounded-lg"
                           />
                           <div className="mt-2 flex justify-center">

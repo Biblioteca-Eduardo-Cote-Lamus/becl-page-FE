@@ -7,6 +7,12 @@ import ServiciosSection from "./ui/landing/servicios-section";
 import ExploraSection from "./ui/landing/explora-section";
 import AlertaNoticia from "./ui/landing/alerta_noticia";
 import CarruselLanding from "./ui/landing/carrusel_landing";
+import { NoticiasList } from "./ui/landing/noticias/NoticiasList";
+import dynamic from "next/dynamic";
+
+const SocialButtons = dynamic(() => import("./components/SocialButtons"), {
+  ssr: false,
+});
 
 export default async function Page() {
   if (process.env.NEXT_PHASE === "build") {
@@ -24,6 +30,11 @@ export default async function Page() {
       </header>
 
       <main className="flex min-h-screen flex-col animate-fade-in-up">
+        {/* Alerta de noticia importante - Moved to top */}
+        <div className="fixed inset-0 z-[100]">
+          <AlertaNoticia />
+        </div>
+
         {/* Sección de bienvenida */}
         <section className="relative h-screen w-full overflow-hidden">
           <CarruselLanding />
@@ -41,8 +52,17 @@ export default async function Page() {
           </div>
         </section>
 
-        {/* Alerta de noticia importante */}
-        <AlertaNoticia />
+        {/* Noticias Recientes */}
+        <section className="mt-32 pb-10 px-4 md:px-8">
+          <h2
+            className={`pb-10 text-center text-5xl text-secondaries_red-900 font-semibold ${montserrat.className}`}
+          >
+            Noticias Recientes
+          </h2>
+          <div className="max-w-7xl mx-auto">
+            <NoticiasList />
+          </div>
+        </section>
 
         {/* Novedades */}
         <section className="mt-32 pb-10">
@@ -51,7 +71,6 @@ export default async function Page() {
           >
             Novedades
           </h2>
-          {/*<EventosComponent />*/}
           <Carrusel />
         </section>
 
@@ -73,6 +92,7 @@ export default async function Page() {
         src="https://website-widgets.pages.dev/dist/sienna.min.js"
         defer
       ></script>
+      <SocialButtons />
     </>
   );
 }
