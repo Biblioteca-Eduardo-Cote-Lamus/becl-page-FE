@@ -43,6 +43,7 @@ export default function PrestamosForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,14 +82,14 @@ export default function PrestamosForm() {
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    
+      const { name, value, type } = e.target as HTMLInputElement;
+      
       if (type === "checkbox") {
-      const { checked } = e.target as HTMLInputElement;
+        const { checked } = e.target as HTMLInputElement;
         setFormData((prev) => ({ ...prev, [name]: checked }));
       } else if (type === "file") {
-      const fileInput = e.target as HTMLInputElement;
-      if (fileInput.files && fileInput.files[0]) {
+        const fileInput = e.target as HTMLInputElement;
+        if (fileInput.files && fileInput.files[0]) {
           const file = fileInput.files[0];
 
           // Validar tamaño del archivo
@@ -108,8 +109,7 @@ export default function PrestamosForm() {
           // Crear URL para previsualización
           const imageUrl = URL.createObjectURL(file);
           setImagePreview(imageUrl);
-
-          setFormData((prev) => ({ ...prev, [name]: file.name }));
+          setSelectedFile(file);
           setError(""); // Limpiar error si la validación es exitosa
         }
       } else {
@@ -156,7 +156,7 @@ export default function PrestamosForm() {
       setError("El número de asistentes debe ser mayor a 0");
       return false;
     }
-    if (!formData.foto_carne) {
+    if (!formData.foto_carne && !selectedFile) {
       setError("La foto del carné es requerida");
       return false;
     }
@@ -165,7 +165,7 @@ export default function PrestamosForm() {
       return false;
     }
     return true;
-  }, [formData]);
+  }, [formData, selectedFile]);
 
   const handleReservaChange = useCallback(
     (
@@ -236,6 +236,26 @@ export default function PrestamosForm() {
     }
 
     try {
+      // Subir la imagen primero si hay un archivo seleccionado
+      let imagePath = formData.foto_carne;
+      if (selectedFile) {
+        const imageFormData = new FormData();
+        imageFormData.append('file', selectedFile);
+
+        const uploadResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: imageFormData,
+        });
+
+        const uploadResult = await uploadResponse.json();
+        
+        if (!uploadResponse.ok) {
+          throw new Error(uploadResult.error || 'Error al subir la imagen');
+        }
+
+        imagePath = uploadResult.filename;
+      }
+
       // Validar si se seleccionó un espacio y horario
       if (formData.espacio_id) {
         // Primero verificar disponibilidad final
@@ -244,12 +264,12 @@ export default function PrestamosForm() {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            espacioId: formData.espacio_id,
-            fechaReserva: formData.fecha_reserva,
-            horaInicio: formData.hora_inicio,
+            body: JSON.stringify({
+              espacioId: formData.espacio_id,
+              fechaReserva: formData.fecha_reserva,
+              horaInicio: formData.hora_inicio,
               horaFin: formData.hora_fin,
-          }),
+            }),
           }
         );
         
@@ -262,11 +282,14 @@ export default function PrestamosForm() {
         }
       }
       
-      // Enviar los datos a nuestra API
+      // Enviar los datos a nuestra API con la ruta de la imagen actualizada
       const response = await fetch("/api/prestamos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          foto_carne: imagePath
+        }),
       });
       
       const result = await response.json();
@@ -519,32 +542,22 @@ export default function PrestamosForm() {
                             alt="Vista previa"
                             className="mx-auto h-100 w-100 object-cover rounded-lg"
                           />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              URL.revokeObjectURL(imagePreview);
-                              setImagePreview(null);
-                              setFormData((prev) => ({
-                                ...prev,
-                                foto_carne: "",
-                              }));
-                            }}
-                            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
-                          >
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
+                          <div className="mt-2 flex justify-center">
+                            <label
+                              htmlFor="foto_carne"
+                              className="px-4 py-2 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 text-white rounded-lg hover:from-secondaries_red-800 hover:to-secondaries_red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondaries_red-700 transform transition duration-200 hover:scale-105 cursor-pointer"
                             >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M6 18L18 6M6 6l12 12"
+                              Cambiar Imagen
+                              <input
+                                type="file"
+                                id="foto_carne"
+                                name="foto_carne"
+                                onChange={handleChange}
+                                accept="image/*"
+                                className="sr-only"
                               />
-                            </svg>
-                          </button>
+                            </label>
+                          </div>
                         </div>
                       ) : (
                         <>
@@ -560,25 +573,25 @@ export default function PrestamosForm() {
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             />
-                    </svg>
-                    <div className="flex text-sm text-gray-600">
+                          </svg>
+                          <div className="flex text-sm text-gray-600">
                             <label
                               htmlFor="foto_carne"
                               className="relative cursor-pointer bg-white rounded-md font-medium text-secondaries_red-700 hover:text-secondaries_red-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-secondaries_red-700"
                             >
-                        <span>Subir archivo</span>
-                        <input
-                          type="file"
-                          id="foto_carne"
-                          name="foto_carne"
-                          onChange={handleChange}
-                          accept="image/*"
-                          required
-                          className="sr-only"
-                        />
-                      </label>
-                      <p className="pl-1">o arrastrar y soltar</p>
-                    </div>
+                              <span>Subir archivo</span>
+                              <input
+                                type="file"
+                                id="foto_carne"
+                                name="foto_carne"
+                                onChange={handleChange}
+                                accept="image/*"
+                                required={!imagePreview}
+                                className="sr-only"
+                              />
+                            </label>
+                            <p className="pl-1">o arrastrar y soltar</p>
+                          </div>
                           <p className="text-xs text-gray-500">
                             PNG, JPG, GIF hasta 10MB
                           </p>

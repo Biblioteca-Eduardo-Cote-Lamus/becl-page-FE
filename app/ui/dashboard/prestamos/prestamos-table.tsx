@@ -7,6 +7,7 @@ import { useState } from 'react';
 function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestamo, onStatusChange: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showDenyModal, setShowDenyModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
   const [razonDenegacion, setRazonDenegacion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -161,7 +162,32 @@ function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestam
             </div>
             <div>
               <h4 className="text-sm font-medium text-gray-500">Foto Carné</h4>
-              <p className="text-base truncate">{prestamo.foto_carne || '-'}</p>
+              {prestamo.foto_carne ? (
+                <div className="mt-2">
+                  <div 
+                    className="relative w-44 h-32 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow duration-200"
+                    onClick={() => setShowImageModal(true)}
+                  >
+                    <img
+                      src={prestamo.foto_carne}
+                      alt="Foto de carné"
+                      className="w-full h-full object-contain bg-gray-50"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 flex items-center justify-center">
+                      <svg 
+                        className="w-6 h-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-200" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-base text-gray-500">No hay imagen</p>
+              )}
             </div>
           </div>
           <div className="mt-4">
@@ -254,6 +280,30 @@ function PrestamoAccordionItem({ prestamo, onStatusChange }: { prestamo: Prestam
                 {isSubmitting ? 'Procesando...' : 'Denegar'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para ver imagen */}
+      {showImageModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+          onClick={() => setShowImageModal(false)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] p-4">
+            <button
+              onClick={() => setShowImageModal(false)}
+              className="absolute top-2 right-2 text-white hover:text-gray-300 transition-colors duration-200"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <img
+              src={prestamo.foto_carne}
+              alt="Foto de carné"
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+            />
           </div>
         </div>
       )}
