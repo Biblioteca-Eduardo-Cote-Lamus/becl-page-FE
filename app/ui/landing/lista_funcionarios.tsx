@@ -1,8 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Funcionario, getFuncionarios } from "@/app/actions/funcionarios";
 import Image from "next/image";
+
+interface Funcionario {
+  id: string;
+  nombre: string;
+  cargo: string;
+  imagen: string;
+}
 
 const ListaFuncionarios = () => {
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
@@ -11,7 +17,8 @@ const ListaFuncionarios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getFuncionarios();
+        const response = await fetch('/api/personal');
+        const data = await response.json();
         setFuncionarios(data);
         setIsLoading(false);
       } catch (error) {
@@ -45,12 +52,12 @@ const ListaFuncionarios = () => {
             <div className="relative h-72 w-full flex items-center justify-center bg-gray-100 overflow-hidden">
               <div className="relative h-full w-full transition-transform duration-300 hover:scale-105">
                 <Image
-                  src={funcionario.imagen ? `/Imagenes_biblioteca/funcionarios/${funcionario.imagen}` : '/placeholder-person.jpg'}
+                  src={funcionario.imagen ? `/uploads/funcionarios/${funcionario.imagen}` : '/placeholder-person.jpg'}
                   alt={funcionario.nombre}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={funcionario.id <= 3}
+                  priority={parseInt(funcionario.id) <= 3}
                 />
               </div>
             </div>

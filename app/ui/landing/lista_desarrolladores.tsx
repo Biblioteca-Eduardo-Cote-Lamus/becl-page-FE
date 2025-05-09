@@ -2,11 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import {
-  Desarrollador,
-  getDesarrolladores,
-} from "@/app/actions/desarrolladores";
 import { FaLinkedin } from "react-icons/fa";
+
+interface Desarrollador {
+  id: number;
+  nombre: string;
+  cargo: string;
+  imagen: string;
+  linkedin?: string;
+}
 
 const ListaDesarrolladores = () => {
   const [desarrolladores, setDesarrolladores] = useState<Desarrollador[]>([]);
@@ -15,7 +19,8 @@ const ListaDesarrolladores = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getDesarrolladores();
+        const response = await fetch('/api/desarrolladores');
+        const data = await response.json();
         setDesarrolladores(data);
         setIsLoading(false);
       } catch (error) {
@@ -51,7 +56,7 @@ const ListaDesarrolladores = () => {
                 <Image
                   src={
                     desarrollador.imagen
-                      ? `/Imagenes_biblioteca/desarrolladores/${desarrollador.imagen}`
+                      ? `/uploads/desarrolladores/${desarrollador.imagen}`
                       : "/placeholder-person.jpg"
                   }
                   alt={desarrollador.nombre}
@@ -69,8 +74,8 @@ const ListaDesarrolladores = () => {
               <p className="text-gray-600 font-medium mb-4">
                 {desarrollador.cargo}
               </p>
-              <div className="flex justify-center">
-                {desarrollador.linkedin && (
+              {desarrollador.linkedin && (
+                <div className="flex justify-center">
                   <a
                     href={desarrollador.linkedin}
                     target="_blank"
@@ -79,8 +84,8 @@ const ListaDesarrolladores = () => {
                   >
                     <FaLinkedin className="w-4 h-4" />
                   </a>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
+import { readFile } from 'fs/promises';
 
 export async function GET(
   request: NextRequest,
@@ -13,16 +14,17 @@ export async function GET(
       return new NextResponse('Not found', { status: 404 });
     }
 
-    const fileBuffer = await fs.promises.readFile(filePath);
-    const fileExtension = path.extname(filePath).toLowerCase();
+    const fileBuffer = await readFile(filePath);
     
     // Determinar el tipo de contenido basado en la extensión del archivo
+    const ext = path.extname(filePath).toLowerCase();
     const contentType = {
       '.jpg': 'image/jpeg',
       '.jpeg': 'image/jpeg',
       '.png': 'image/png',
       '.gif': 'image/gif',
-    }[fileExtension] || 'application/octet-stream';
+      '.webp': 'image/webp',
+    }[ext] || 'application/octet-stream';
 
     return new NextResponse(fileBuffer, {
       headers: {
