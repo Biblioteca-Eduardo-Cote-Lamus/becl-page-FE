@@ -30,10 +30,8 @@ export default async function Page() {
       </header>
 
       <main className="flex min-h-screen flex-col animate-fade-in-up">
-        {/* Alerta de noticia importante - Moved to top */}
-        <div className="fixed inset-0 z-[100]">
-          <AlertaNoticia />
-        </div>
+        {/* Alerta de noticia importante */}
+        <AlertaNoticia />
 
         {/* Sección de bienvenida */}
         <section className="relative h-screen w-full overflow-hidden">

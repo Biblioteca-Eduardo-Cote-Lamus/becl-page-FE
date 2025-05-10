@@ -5,12 +5,15 @@ import { Noticias } from '@/app/lib/definitions';
 import { getNoticias } from '@/app/actions/noticias';
 import Image from 'next/image';
 import { X } from 'lucide-react';
+import { createPortal } from 'react-dom';
 
 export default function AlertaNoticia() {
   const [visibleNoticia, setVisibleNoticia] = useState<Noticias | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -29,61 +32,27 @@ export default function AlertaNoticia() {
     fetchData();
   }, []);
 
-  // Efecto para manejar el bloqueo del scroll
-  useEffect(() => {
-    if (visibleNoticia) {
-      // Guardar la posición actual del scroll
-      const scrollY = window.scrollY;
-      // Bloquear el scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-    } else {
-      // Restaurar el scroll
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
-    }
-
-    // Cleanup function
-    return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-    };
-  }, [visibleNoticia]);
-
   const handleClose = () => {
     setVisibleNoticia(null);
   };
 
-  if (isLoading || !visibleNoticia) {
+  if (!mounted || isLoading || !visibleNoticia) {
     return null;
   }
 
-  return (
+  const modalContent = (
     <div 
-      className="fixed bg-black bg-opacity-50 flex items-center justify-center z-[9999]"
+      className="fixed inset-0 bg-black/50 z-50"
       style={{ 
-        position: 'fixed', 
-        top: '5rem', // Altura del navbar
-        left: 0, 
-        right: 0,
-        height: 'calc(100vh - 5rem)', // Altura total menos el navbar
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        top: '5rem',
+        height: 'calc(100vh - 5rem)'
       }}
     >
       <div 
-        className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 transform transition-all animate-fade-in"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4 bg-white rounded-lg shadow-xl"
         style={{ 
           maxHeight: '80vh',
-          overflowY: 'auto',
-          position: 'relative',
-          zIndex: 10000
+          overflowY: 'auto'
         }}
       >
         <div className="relative">
@@ -130,4 +99,6 @@ export default function AlertaNoticia() {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
