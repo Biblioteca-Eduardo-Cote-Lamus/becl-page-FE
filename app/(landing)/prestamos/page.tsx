@@ -322,7 +322,7 @@ export default function PrestamosForm() {
       <div className="fixed left-4 ml-20 top-1/2 -translate-y-1/2 h-screen hidden 2xl:flex items-center">
         <div 
           ref={calendarRef}
-          className="w-[320px] bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl"
+          className="w-[320px] bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl animate-fade-in-up"
         >
           <div className="p-2 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900">
             <h3 className="text-white text-sm font-medium text-center">Calendario de Reservas</h3>
@@ -349,325 +349,325 @@ export default function PrestamosForm() {
 
       {/* Contenedor del formulario */}
       <div className="flex-1 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 px-6 py-8">
-              <h1 className="text-3xl font-bold text-center text-white">
-                Formulario de Préstamos
-              </h1>
-              <p className="mt-2 text-center text-blue-100">
-                Complete el formulario para solicitar un préstamo de espacio
-              </p>
-          </div>
-          
-          <div className="p-6 sm:p-8">
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                      <svg
-                        className="h-5 w-5 text-red-400"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                          clipRule="evenodd"
-                        />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm">{error}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in-up animation-delay-200">
+            <div className="bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 px-6 py-8">
+                <h1 className="text-3xl font-bold text-center text-white animate-fade-in-up animation-delay-400">
+                  Formulario de Préstamos
+                </h1>
+                <p className="mt-2 text-center text-blue-100 animate-fade-in-up animation-delay-600">
+                  Complete el formulario para solicitar un préstamo de espacio
+                </p>
+            </div>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Nombre Docente */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="nombre_docente"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Nombre del Docente *
-                  </label>
-                  <input
-                    type="text"
-                    id="nombre_docente"
-                    name="nombre_docente"
-                    value={formData.nombre_docente}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="Ingrese su nombre completo"
-                  />
-                </div>
-                
-                {/* Código Docente */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="codigo_docente"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Código del Docente *
-                  </label>
-                  <input
-                    type="number"
-                    id="codigo_docente"
-                    name="codigo_docente"
-                    value={formData.codigo_docente}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="Ingrese su código"
-                  />
-                </div>
-                
-                {/* Correo Docente */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="correo_docente"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Correo del Docente *
-                  </label>
-                  <input
-                    type="email"
-                    id="correo_docente"
-                    name="correo_docente"
-                    value={formData.correo_docente}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="ejemplo@correo.com"
-                  />
-                </div>
-                
-                {/* Nombre Actividad */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="nombre_actividad"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Nombre de la Actividad *
-                  </label>
-                  <input
-                    type="text"
-                    id="nombre_actividad"
-                    name="nombre_actividad"
-                    value={formData.nombre_actividad}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="Nombre de la actividad"
-                  />
-                </div>
-                
-                {/* Encargado Actividad */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="encargado_actividad"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Encargado de la Actividad *
-                  </label>
-                  <input
-                    type="text"
-                    id="encargado_actividad"
-                    name="encargado_actividad"
-                    value={formData.encargado_actividad}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="Nombre del encargado"
-                  />
-                </div>
-                
-                {/* Número Asistentes */}
-                <div className="space-y-2">
-                    <label
-                      htmlFor="numero_asistentes"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                    Número de Asistentes *
-                  </label>
-                  <input
-                    type="number"
-                    id="numero_asistentes"
-                    name="numero_asistentes"
-                    value={formData.numero_asistentes}
-                    onChange={handleChange}
-                    required
-                    min="1"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                    placeholder="Cantidad de asistentes"
-                  />
-                </div>
-              </div>
-              
-              {/* Personas Externas (Checkbox) */}
-              <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                <input
-                  type="checkbox"
-                  id="personas_externas"
-                  name="personas_externas"
-                  checked={formData.personas_externas}
-                  onChange={handleChange}
-                  className="h-5 w-5 text-secondaries_red-700 focus:ring-secondaries_red-700 border-gray-300 rounded transition duration-200"
-                />
-                  <label
-                    htmlFor="personas_externas"
-                    className="ml-3 block text-sm font-medium text-gray-700"
-                  >
-                  ¿Incluye personas externas?
-                </label>
-              </div>
-              
-              {/* Foto Carné */}
-              <div className="space-y-2">
-                  <label
-                    htmlFor="foto_carne"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                  Foto del Carné *
-                </label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-secondaries_red-700 transition duration-200">
-                  <div className="space-y-1 text-center">
-                      {imagePreview ? (
-                        <div className="relative">
-                          <Image
-                            src={imagePreview}
-                            alt="Vista previa"
-                            width={100}
-                            height={100}
-                            className="mx-auto h-100 w-100 object-cover rounded-lg"
+            <div className="p-6 sm:p-8">
+              {error && (
+                <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md animate-fade-in-up">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                        <svg
+                          className="h-5 w-5 text-red-400"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clipRule="evenodd"
                           />
-                          <div className="mt-2 flex justify-center">
-                            <label
-                              htmlFor="foto_carne"
-                              className="px-4 py-2 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 text-white rounded-lg hover:from-secondaries_red-800 hover:to-secondaries_red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondaries_red-700 transform transition duration-200 hover:scale-105 cursor-pointer"
-                            >
-                              Cambiar Imagen
-                              <input
-                                type="file"
-                                id="foto_carne"
-                                name="foto_carne"
-                                onChange={handleChange}
-                                accept="image/*"
-                                className="sr-only"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          <svg
-                            className="mx-auto h-12 w-12 text-gray-400"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 48 48"
-                          >
-                            <path
-                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          <div className="flex text-sm text-gray-600">
-                            <label
-                              htmlFor="foto_carne"
-                              className="relative cursor-pointer bg-white rounded-md font-medium text-secondaries_red-700 hover:text-secondaries_red-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-secondaries_red-700"
-                            >
-                              <span>Subir archivo</span>
-                              <input
-                                type="file"
-                                id="foto_carne"
-                                name="foto_carne"
-                                onChange={handleChange}
-                                accept="image/*"
-                                required={!imagePreview}
-                                className="sr-only"
-                              />
-                            </label>
-                            <p className="pl-1">o arrastrar y soltar</p>
-                          </div>
-                          <p className="text-xs text-gray-500">
-                            PNG, JPG, GIF hasta 10MB
-                          </p>
-                        </>
-                      )}
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm">{error}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
               
-              {/* Mensaje */}
-              <div className="space-y-2">
-                  <label
-                    htmlFor="mensaje"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                  Mensaje
-                </label>
-                <textarea
-                  id="mensaje"
-                  name="mensaje"
-                  rows={4}
-                  value={formData.mensaje}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
-                  placeholder="Escriba su mensaje aquí..."
-                />
-              </div>
-              
-              {/* Componente de Reserva de Espacio */}
-              <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-                  <h2 className="text-lg font-medium text-gray-900 mb-4">
-                    Reserva de Espacio
-                  </h2>
-                <ReservaEspacio onReservaChange={handleReservaChange} />
-              </div>
-              
-              {/* Submit Button */}
-              <div className="flex justify-center mt-8">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-8 py-3 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 text-white rounded-lg hover:from-secondaries_red-800 hover:to-secondaries_red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondaries_red-700 disabled:opacity-50 disabled:cursor-not-allowed transform transition duration-200 hover:scale-105"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center">
-                        <svg
-                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                      </svg>
-                      Enviando...
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in-up animation-delay-800">
+                  {/* Nombre Docente */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="nombre_docente"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Nombre del Docente *
+                    </label>
+                    <input
+                      type="text"
+                      id="nombre_docente"
+                      name="nombre_docente"
+                      value={formData.nombre_docente}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="Ingrese su nombre completo"
+                    />
+                  </div>
+                  
+                  {/* Código Docente */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="codigo_docente"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Código del Docente *
+                    </label>
+                    <input
+                      type="number"
+                      id="codigo_docente"
+                      name="codigo_docente"
+                      value={formData.codigo_docente}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="Ingrese su código"
+                    />
+                  </div>
+                  
+                  {/* Correo Docente */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="correo_docente"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Correo del Docente *
+                    </label>
+                    <input
+                      type="email"
+                      id="correo_docente"
+                      name="correo_docente"
+                      value={formData.correo_docente}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="ejemplo@correo.com"
+                    />
+                  </div>
+                  
+                  {/* Nombre Actividad */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="nombre_actividad"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Nombre de la Actividad *
+                    </label>
+                    <input
+                      type="text"
+                      id="nombre_actividad"
+                      name="nombre_actividad"
+                      value={formData.nombre_actividad}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="Nombre de la actividad"
+                    />
+                  </div>
+                  
+                  {/* Encargado Actividad */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="encargado_actividad"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Encargado de la Actividad *
+                    </label>
+                    <input
+                      type="text"
+                      id="encargado_actividad"
+                      name="encargado_actividad"
+                      value={formData.encargado_actividad}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="Nombre del encargado"
+                    />
+                  </div>
+                  
+                  {/* Número Asistentes */}
+                  <div className="space-y-2">
+                      <label
+                        htmlFor="numero_asistentes"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                      Número de Asistentes *
+                    </label>
+                    <input
+                      type="number"
+                      id="numero_asistentes"
+                      name="numero_asistentes"
+                      value={formData.numero_asistentes}
+                      onChange={handleChange}
+                      required
+                      min="1"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                      placeholder="Cantidad de asistentes"
+                    />
+                  </div>
+                </div>
+                
+                {/* Personas Externas (Checkbox) */}
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg animate-fade-in-up animation-delay-1000">
+                  <input
+                    type="checkbox"
+                    id="personas_externas"
+                    name="personas_externas"
+                    checked={formData.personas_externas}
+                    onChange={handleChange}
+                    className="h-5 w-5 text-secondaries_red-700 focus:ring-secondaries_red-700 border-gray-300 rounded transition duration-200"
+                  />
+                    <label
+                      htmlFor="personas_externas"
+                      className="ml-3 block text-sm font-medium text-gray-700"
+                    >
+                    ¿Incluye personas externas?
+                  </label>
+                </div>
+                
+                {/* Foto Carné */}
+                <div className="space-y-2 animate-fade-in-up animation-delay-1200">
+                    <label
+                      htmlFor="foto_carne"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                    Foto del Carné *
+                  </label>
+                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-secondaries_red-700 transition duration-200">
+                    <div className="space-y-1 text-center">
+                        {imagePreview ? (
+                          <div className="relative">
+                            <Image
+                              src={imagePreview}
+                              alt="Vista previa"
+                              width={100}
+                              height={100}
+                              className="mx-auto h-100 w-100 object-cover rounded-lg"
+                            />
+                            <div className="mt-2 flex justify-center">
+                              <label
+                                htmlFor="foto_carne"
+                                className="px-4 py-2 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 text-white rounded-lg hover:from-secondaries_red-800 hover:to-secondaries_red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondaries_red-700 transform transition duration-200 hover:scale-105 cursor-pointer"
+                              >
+                                Cambiar Imagen
+                                <input
+                                  type="file"
+                                  id="foto_carne"
+                                  name="foto_carne"
+                                  onChange={handleChange}
+                                  accept="image/*"
+                                  className="sr-only"
+                                />
+                              </label>
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <svg
+                              className="mx-auto h-12 w-12 text-gray-400"
+                              stroke="currentColor"
+                              fill="none"
+                              viewBox="0 0 48 48"
+                            >
+                              <path
+                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                            <div className="flex text-sm text-gray-600">
+                              <label
+                                htmlFor="foto_carne"
+                                className="relative cursor-pointer bg-white rounded-md font-medium text-secondaries_red-700 hover:text-secondaries_red-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-secondaries_red-700"
+                              >
+                                <span>Subir archivo</span>
+                                <input
+                                  type="file"
+                                  id="foto_carne"
+                                  name="foto_carne"
+                                  onChange={handleChange}
+                                  accept="image/*"
+                                  required={!imagePreview}
+                                  className="sr-only"
+                                />
+                              </label>
+                              <p className="pl-1">o arrastrar y soltar</p>
+                            </div>
+                            <p className="text-xs text-gray-500">
+                              PNG, JPG, GIF hasta 10MB
+                            </p>
+                          </>
+                        )}
                     </div>
-                  ) : (
-                      "Enviar Solicitud"
-                  )}
-                </button>
-              </div>
-            </form>
+                  </div>
+                </div>
+                
+                {/* Mensaje */}
+                <div className="space-y-2 animate-fade-in-up animation-delay-1400">
+                    <label
+                      htmlFor="mensaje"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                    Mensaje
+                  </label>
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    rows={4}
+                    value={formData.mensaje}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondaries_red-700 focus:border-transparent transition duration-200"
+                    placeholder="Escriba su mensaje aquí..."
+                  />
+                </div>
+                
+                {/* Componente de Reserva de Espacio */}
+                <div className="mt-8 p-6 bg-gray-50 rounded-lg animate-fade-in-up animation-delay-1600">
+                    <h2 className="text-lg font-medium text-gray-900 mb-4">
+                      Reserva de Espacio
+                    </h2>
+                  <ReservaEspacio onReservaChange={handleReservaChange} />
+                </div>
+                
+                {/* Submit Button */}
+                <div className="flex justify-center mt-8 animate-fade-in-up animation-delay-1800">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-3 bg-gradient-to-r from-secondaries_red-700 to-secondaries_red-900 text-white rounded-lg hover:from-secondaries_red-800 hover:to-secondaries_red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondaries_red-700 disabled:opacity-50 disabled:cursor-not-allowed transform transition duration-200 hover:scale-105"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                          <svg
+                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                        </svg>
+                        Enviando...
+                      </div>
+                    ) : (
+                        "Enviar Solicitud"
+                    )}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
